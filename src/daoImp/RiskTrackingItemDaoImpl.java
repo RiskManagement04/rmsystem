@@ -17,7 +17,7 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 	private static RiskTrackingItemDaoImpl riskTrackingItemDao=new RiskTrackingItemDaoImpl();
 	private static DaoHelper daoHelper=DaoHelperImpl.getBaseDaoInstance();
 	
-	private RiskTrackingItemDaoImpl(){
+	private  RiskTrackingItemDaoImpl(){
 		
 	}
 	
