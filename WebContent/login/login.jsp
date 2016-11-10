@@ -33,7 +33,7 @@
 	
 	<div class="row-fluid">
 		<div class="span2">
-		</div><
+		</div>
 		<div class="span6" style='padding-top: 120px;'>
 			<form class="form-horizontal" style='center' action="<%=request.getContextPath()+"/LoginServlet"%>" method='post'>
 				<div class="control-group">
@@ -45,7 +45,7 @@
 				<div class="control-group">
 					 <label class="control-label" for="inputPassword">密码</label>
 					<div class="controls">
-						<input id="inputPassword" name="inputPassward" type="password" required/>
+						<input id="inputPassword" name="inputPassward" type="password"  required/>
 					</div>
 				</div>
 				<div class="control-group">
