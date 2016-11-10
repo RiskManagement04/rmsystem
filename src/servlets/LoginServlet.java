@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.RiskItemListBean;
 import factory.DaoFactory;
 import model.User;
 
@@ -74,7 +75,11 @@ public class LoginServlet extends HttpServlet {
 				cookie.setMaxAge(Integer.MAX_VALUE);
 				response.addCookie(cookie);
 			}
-			
+					
+			session.setAttribute("LoginId",userId.trim());
+			request.setAttribute("login", userId.trim());
+			RiskItemListBean riskItemList=new RiskItemListBean();
+			DaoFactory.getRiskItemDao().findAllRiskItem(user.getUserId());
 			
 			context.getRequestDispatcher("/register/register.jsp").forward(request, response);
 			
