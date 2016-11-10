@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -34,23 +34,28 @@
 	<div class="row-fluid">
 		<div class="span2">
 		</div><
-		<div class="span6" style='margin:0 auto;'>
+		<div class="span6" style='padding-top: 120px;'>
 			<form class="form-horizontal" style='center' action="<%=request.getContextPath()+"/LoginServlet"%>" method='post'>
 				<div class="control-group">
 					 <label class="control-label" for="inputEmail">用户名</label>
 					<div class="controls">
-						<input id="inputEmail" type="text" />
+						<input id="inputEmail" name="inputEmail" type="text" required/>
 					</div>
 				</div>
 				<div class="control-group">
 					 <label class="control-label" for="inputPassword">密码</label>
 					<div class="controls">
-						<input id="inputPassword" type="password" />
+						<input id="inputPassword" name="inputPassward" type="password" required/>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						 <label class="checkbox"><input type="checkbox" /> Remember me</label> <button type="submit" class="btn">登陆</button>
+						 <label class="checkbox"><input type="checkbox" /> Remember me</label>
+						 <div>
+						 	 <button type="submit" class="btn">登录</button>
+						  	<button type="submit" class="btn">注册</button>
+						 </div>
+						 
 					</div>
 				</div>
 			</form>
