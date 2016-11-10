@@ -51,6 +51,7 @@ public class UserDaoImpl implements UserDao{
 			daoHelper.closeConnection(con);
 			daoHelper.closePreparedStatement(stmt);
 			daoHelper.closeResult(result);
+			
 		}
 		
 		return user;

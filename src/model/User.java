@@ -52,6 +52,7 @@ public class User implements Serializable{
 		return identity;
 	}
 	public String getIdentityString(){
+		
 		return convertIdentity(identity);
 	}
 	public void setIdentity(UserType identity) {
