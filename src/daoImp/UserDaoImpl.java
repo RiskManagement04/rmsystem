@@ -21,20 +21,27 @@ public class UserDaoImpl implements UserDao{
 	public static UserDaoImpl getInstance(){
 		return userDao;
 	}
-	
-	public String findPW(int studentid) {
+
+	@Override
+	public User findUser(String userId, String password) {
 		Connection con=daoHelper.getConnection();
 		PreparedStatement stmt=null;
 		ResultSet result=null;
-		String pw=null;
-		
+		User user=null;
+
 		try {
-			stmt = con.prepareStatement("select password from students where studentid=?");
-			stmt.setInt(1,studentid);
+			stmt = con.prepareStatement("select * from User where nickName=? and password=?");
+			stmt.setString(1, userId.trim());
+			stmt.setString(2, password.trim());
+			
 			result = stmt.executeQuery();
 			
 			if(result.next()){
-				pw=result.getString("password").trim();
+				int id=result.getInt("userId");
+				String trueName=result.getString("trueName").trim();
+				String identity=result.getString("identity").trim();
+				
+				user=new User(id,trueName,userId.trim(),password.trim(),identity);
 			}
 			
 		} catch (SQLException e) {
@@ -46,13 +53,8 @@ public class UserDaoImpl implements UserDao{
 			daoHelper.closeResult(result);
 		}
 		
-		return pw;
-	}
-
-	@Override
-	public User findUser(int userId, String password) {
-		System.out.println("进入UserDao");
-		return null;
+		return user;
+		
 	}
 
 
