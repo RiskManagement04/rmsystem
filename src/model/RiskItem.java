@@ -13,6 +13,7 @@ public class RiskItem implements Serializable{
 	private int riskItemId;
 	private int projectId;
 	private int submitterId;
+	private String submitterName;
 	private Date createDate;
 	private String riskName;
 	private String riskContent;
@@ -125,6 +126,14 @@ public class RiskItem implements Serializable{
 
 	public void setRiskStatus(RiskStatus riskStatus) {
 		this.riskStatus = riskStatus;
+	}
+
+	public String getSubmitterName() {
+		return submitterName;
+	}
+
+	public void setSubmitterName(String submitterName) {
+		this.submitterName = submitterName;
 	}
 	
 
