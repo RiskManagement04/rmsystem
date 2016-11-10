@@ -79,9 +79,15 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("LoginId",userId.trim());
 			request.setAttribute("login", userId.trim());
 			RiskItemListBean riskItemList=new RiskItemListBean();
-			DaoFactory.getRiskItemDao().findAllRiskItem(user.getUserId());
+			riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(user.getUserId()));
+			session.setAttribute("riskItemList",riskItemList);
 			
-			context.getRequestDispatcher("/register/register.jsp").forward(request, response);
+			try {
+				context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}			
 					

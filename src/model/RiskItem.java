@@ -21,6 +21,10 @@ public class RiskItem implements Serializable{
 	private int impact;//1,2,3
 	private RiskStatus riskStatus;
 	
+	public RiskItem(){
+		
+	}
+	
 	public RiskItem(int riskItemId,int projectId,int submitterId,Date createDate,String riskName,String riskContent,String trigger,
 			int possibility,int impact,String riskStatus){
 		this.riskItemId=riskItemId;
@@ -33,9 +37,9 @@ public class RiskItem implements Serializable{
 	    this.possibility=possibility;
 	    this.impact=impact;
 	    
-	    if(riskStatus.equals("PREDICTED")){
+	    if(riskStatus.equals("未发生")){
 	    	this.riskStatus=RiskStatus.PREDICTED;
-	    }else if(riskStatus.equals("HAPPENED")){
+	    }else if(riskStatus.equals("已发生")){
 	    	this.riskStatus=RiskStatus.HAPPENED;
 	    }else{
 	    	this.riskStatus=RiskStatus.SOLVED;

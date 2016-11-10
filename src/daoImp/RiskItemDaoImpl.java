@@ -9,7 +9,8 @@ import java.util.List;
 
 import dao.DaoHelper;
 import dao.RiskItemDao;
-import edu.nju.onlinecheck.model.Exercise;
+import model.RiskItem;
+import model.RiskStatus;
 
 public class RiskItemDaoImpl implements RiskItemDao{
 	
@@ -32,24 +33,33 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		ArrayList riskItemList=new ArrayList();
 		
 		try {
-			stmt = con.prepareStatement("select * from exercise where studentid=?");
-			stmt.setInt(1,studentid);
+			stmt = con.prepareStatement("select * from Developing d,RiskItem r where d.userId=? and d.projectId=r.projectId");
+			stmt.setInt(1,userId);
 			result = stmt.executeQuery();
 			
 			while(result.next()){
-				Exercise ex=new Exercise();
-				ex.setExerciseid(result.getInt("exerciseid"));
-				ex.setExercisename(result.getString("exercisename").trim());
+				RiskItem item=new RiskItem();
+				item.setCreateDate(result.getDate("createDate"));
+				item.setImpact(result.getInt("impact"));
+				item.setPossibility(result.getInt("possibility"));
+				item.setProjectId(result.getInt("projectId"));
+				item.setRiskContent(result.getString("riskContent").trim());
+				item.setRiskItemId(result.getInt("riskItemId"));
+				item.setRiskName(result.getString("riskName").trim());
 				
-				if(result.getDate("submitdate")!=null){
-					ex.setSubmitdate(result.getDate("submitdate"));
+				String status=result.getString("riskStatus").trim();
+				if(status.equals("PREDICTED")){
+					item.setRiskStatus(RiskStatus.PREDICTED);	
+				}else if(status.equals("HAPPENED")){
+					item.setRiskStatus(RiskStatus.HAPPENED);	
+				}else{
+					item.setRiskStatus(RiskStatus.SOLVED);	
 				}
-								
-				if(result.getObject("score")!=null){
-					ex.setScore(result.getDouble("score"));
-				}
-				
-				allExercise.add(ex);
+							
+				item.setSubmitterId(result.getInt("submitterId"));
+				item.setTrigger(result.getString("trigger").trim());
+
+				riskItemList.add(item);
 			}
 			
 		} catch (SQLException e) {
