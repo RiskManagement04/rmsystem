@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 
-		//查找cookie是否存在
+		//
 		boolean cookieFound = false;
 		Cookie cookie = null;
 		Cookie[] cookies = request.getCookies();
@@ -62,15 +62,15 @@ public class LoginServlet extends HttpServlet {
 		User user=DaoFactory.getUserDao().findUser(userId,password);
 			
 		if(user==null){
-			pw.print("<script>alert('用户名或密码错误，请重新登录！');location.href='./login/login.jsp'</script>");
+			pw.print("<script>alert('用户名或密码错误！');location.href='./login/login.jsp'</script>");
 		}else{
 			
-			if(cookieFound){//cookie存在
-				if(!cookie.getValue().trim().equals(userId.trim())){//cookie改变，则修改内容
+			if(cookieFound){//cookie瀛樺湪
+				if(!cookie.getValue().trim().equals(userId.trim())){//cookie
 					cookie.setValue(userId.trim());
 					response.addCookie(cookie);								
 				}	
-			}else{//cookie不存在
+			}else{//cookie涓嶅瓨鍦�
 				cookie = new Cookie("LoginCookie",userId.trim());
 				cookie.setMaxAge(Integer.MAX_VALUE);
 				response.addCookie(cookie);
