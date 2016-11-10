@@ -19,8 +19,9 @@ public class RiskItem implements Serializable{
 	private String trigger;
 	private int possibility;//1,2,3
 	private int impact;//1,2,3
-	private String riskStatus;
-	private 
+	private RiskStatus riskStatus;
+	
+	
 	
 
 }
