@@ -63,6 +63,19 @@ public class LoginServlet extends HttpServlet {
 		if(user==null){
 			pw.print("<script>alert('用户名或密码错误，请重新登录！');location.href='./login/login.jsp'</script>");
 		}else{
+			
+			if(cookieFound){//cookie存在
+				if(!cookie.getValue().trim().equals(userId.trim())){//cookie改变，则修改内容
+					cookie.setValue(userId.trim());
+					response.addCookie(cookie);								
+				}	
+			}else{//cookie不存在
+				cookie = new Cookie("LoginCookie",userId.trim());
+				cookie.setMaxAge(Integer.MAX_VALUE);
+				response.addCookie(cookie);
+			}
+			
+			
 			context.getRequestDispatcher("/register/register.jsp").forward(request, response);
 			
 		}			
