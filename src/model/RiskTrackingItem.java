@@ -12,6 +12,12 @@ public class RiskTrackingItem implements Serializable{
 	private String riskContent;
 	private String measures;
 	
+	
+	public RiskTrackingItem() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public RiskTrackingItem(int riskTrackingItemId, int riskItemId,
 			int trackerId, Date createTime, String riskStatus,
 			String riskContent, String measures) {
@@ -79,7 +85,9 @@ public class RiskTrackingItem implements Serializable{
 	public void setRiskStatus(RiskStatus riskStatus) {
 		this.riskStatus = riskStatus;
 	}
-
+	public void setRiskStatus(String riskStatus){
+		this.riskStatus=convertStatus(riskStatus);
+	}
 	public String getRiskContent() {
 		return riskContent;
 	}
