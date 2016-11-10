@@ -49,7 +49,6 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 				item.setMeasures(result.getString("measures"));
 				
 				trackingItemList.add(item);
-				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
