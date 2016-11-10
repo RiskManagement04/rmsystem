@@ -52,7 +52,7 @@
 					<div class="controls">
 						 <label class="checkbox"><input type="checkbox" /> Remember me</label>
 						 <div>
-						 	 <button type="submit" class="btn">登录</button>
+						 	 <button type="submit" class="btn">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;
 						  	<button type="submit" class="btn">注册</button>
 						 </div>
 						 
