@@ -7,19 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:useBean id="riskTrackingList"
+		type="bean.RiskTrackingItemListBean"
+		scope="session"></jsp:useBean>
+	<jsp:useBean id="riskTrackingItem" class="model.RiskTrackingItem"
+		scope="page"></jsp:useBean>
+		
 <div class="container-fluid" style="padding-top: 5%">
 	<div class="row-fluid">
 		<div class="span2">
 		</div>
 		<div class="span8">
 			<h3>
-				 风险条目列表
+				 跟踪条目列表
 			</h3>
 			<table class="table">
 				<thead>
 					<tr>
-						<th>风险跟踪编号</th>
-						<th>风险条目名称</th>
+						<th>序号</th>
+						<th>跟踪条目编号</th>
+						<th>跟踪条目名称</th>
 						<th>跟踪者名称</th>
 						<th>修改时间</th>
 						<th>风险状态</th>
@@ -28,17 +35,23 @@
 					</tr>
 				</thead>
 				<tbody>
+				<%
+					for(int i=0;i<riskTrackingList.getRiskTrackingItemList().size();i++){
+						pageContext.setAttribute("riskTrackingItem", riskTrackingList.getriskTrackingItem(i));
+				%>
 					<tr>
-						<th>1</th>
-						<th>1</th>
-						<th>1</th>
-						<th>1</th>
-						<th>1</th>
-						<th>1</th>
-						<th>1</th>
+						<th><%=i+1 %></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskTrackingItemId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
 					
 					</tr>
-					
+				<%
+					}
+				%>
 				</tbody>
 			</table>
 		</div>
