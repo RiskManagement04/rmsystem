@@ -48,7 +48,8 @@ public class RiskItemDaoImpl implements RiskItemDao{
 				item.setRiskItemId(result.getInt("riskItemId"));
 				item.setRiskName(result.getString("riskName").trim());
 				
-				String status=result.getString("riskStatus").trim();
+				String status=result.getString("riskStatus").trim();				
+				
 				if(status.equals("PREDICTED")){
 					item.setRiskStatus(RiskStatus.PREDICTED);	
 				}else if(status.equals("HAPPENED")){
