@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,12 +34,39 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//User user=DaoFactory.getUserDao().findUser(1, "a");
+		HttpSession session = request.getSession(false);
 		ServletContext context = getServletContext();
-		context.getRequestDispatcher("/register/register.jsp").forward(request, response);
+		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		PrintWriter pw=response.getWriter();
+
+		//查找cookie是否存在
+		boolean cookieFound = false;
+		Cookie cookie = null;
+		Cookie[] cookies = request.getCookies();
 		
+		if(cookies!=null){
+			for(int i=0;i<cookies.length;i++){
+				cookie=cookies[i];
+				if(cookie.getName().trim().equals("LoginCookie")){
+					cookieFound=true;
+					break;
+				}
+			}
+		}
+		
+		String userId=request.getParameter("inputEmail").trim();
+		String password = request.getParameter("inputPassword").trim();
+			
+		User user=DaoFactory.getUserDao().findUser(userId,password);
+			
+		if(user==null){
+			pw.print("<script>alert('用户名或密码错误，请重新登录！');location.href='./login/login.jsp'</script>");
+		}else{
+			context.getRequestDispatcher("/register/register.jsp").forward(request, response);
+			
+		}			
+					
 	}
 
 	/**

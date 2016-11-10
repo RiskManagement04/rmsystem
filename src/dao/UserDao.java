@@ -4,6 +4,6 @@ import model.User;
 
 public interface UserDao {
 	
-	public User findUser(int userId,String password);
+	public User findUser(String userId,String password);
 
 }
