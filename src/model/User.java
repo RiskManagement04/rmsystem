@@ -51,10 +51,19 @@ public class User implements Serializable{
 	public UserType getIdentity() {
 		return identity;
 	}
+	public String getIdentityString(){
+		return convertIdentity(identity);
+	}
 	public void setIdentity(UserType identity) {
 		this.identity = identity;
 	}
 	
-	
+	private String convertIdentity(UserType userType){
+		if(userType.equals(UserType.DEVELOPER)){
+			return "DEVELOPER";
+		}else{
+			return "MANAGER";
+		}
+	}
 
 }

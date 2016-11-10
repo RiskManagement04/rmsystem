@@ -59,8 +59,29 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public boolean addUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		java.sql.Connection con=daoHelper.getConnection();
+		java.sql.PreparedStatement statement=null;
+
+		boolean isSuccess=true;
+		try {
+			statement=con.prepareStatement("insert into user(trueName,nickName,password,identity) values(?,?,?,?)");
+			
+			statement.setString(1, user.getTrueName());
+			statement.setString(2,user.getNickName());
+			statement.setString(3, user.getPassword());
+			statement.setString(4, user.getIdentityString());
+			isSuccess=statement.execute();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeConnection(con);
+			daoHelper.closePreparedStatement(statement);
+			
+		}
+		return isSuccess;
 	}
 
 
