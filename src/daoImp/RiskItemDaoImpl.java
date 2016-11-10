@@ -33,7 +33,8 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		ArrayList riskItemList=new ArrayList();
 		
 		try {
-			stmt = con.prepareStatement("select * from Developing d,RiskItem r where d.userId=? and d.projectId=r.projectId");
+			stmt = con.prepareStatement("select * from Developing d,RiskItem r,User u where d.userId=? and d.projectId=r.projectId and"
+					+ " r.submitterId=u.userId");
 			stmt.setInt(1,userId);
 			result = stmt.executeQuery();
 			
@@ -42,7 +43,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 				item.setCreateDate(result.getDate("createDate"));
 				item.setImpact(result.getInt("impact"));
 				item.setPossibility(result.getInt("possibility"));
-				item.setProjectId(result.getInt("projectId"));
+				item.setProjectId(result.getInt("r.projectId"));
 				item.setRiskContent(result.getString("riskContent").trim());
 				item.setRiskItemId(result.getInt("riskItemId"));
 				item.setRiskName(result.getString("riskName").trim());
@@ -58,6 +59,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 							
 				item.setSubmitterId(result.getInt("submitterId"));
 				item.setTrigger(result.getString("trigger").trim());
+				item.setSubmitterName(result.getString("u.trueName").trim());
 
 				riskItemList.add(item);
 			}
