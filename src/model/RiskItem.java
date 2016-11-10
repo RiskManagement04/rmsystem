@@ -135,6 +135,19 @@ public class RiskItem implements Serializable{
 	public void setSubmitterName(String submitterName) {
 		this.submitterName = submitterName;
 	}
-	
+
+	public String getRiskStatusString() {
+		// TODO Auto-generated method stub
+		return convertRiskStatus(riskStatus);
+	}
+	private String convertRiskStatus(RiskStatus status){
+		if(status.equals(RiskStatus.PREDICTED)){
+			return "未发生";
+		}else if(status.equals(RiskStatus.HAPPENED)){
+			return "已发生";
+		}else{
+			return "已解决";
+		}
+	}
 
 }
