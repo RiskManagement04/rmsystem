@@ -3,9 +3,9 @@
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
- <script src="bootstrap/jquery-1.11.3.js"></script>
- <script src="bootstrap/js/bootstrap.js"></script>
+ <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+ <script src="../bootstrap/jquery-1.11.3.js"></script>
+ <script src="../bootstrap/js/bootstrap.js"></script>
 
 <title>登录</title>
 </head>
@@ -30,13 +30,14 @@
 	}	
 %>
 <div class="container-fluid">
+	
 	<div class="row-fluid">
 		<div class="span2">
-		</div>
-		<div class="span6">
-			<form class="form-horizontal">
+		</div><
+		<div class="span6" style='margin:0 auto;'>
+			<form class="form-horizontal" style='center' action="<%=request.getContextPath()+"/LoginServlet"%>" method='post'>
 				<div class="control-group">
-					 <label class="control-label" for="inputEmail">邮箱</label>
+					 <label class="control-label" for="inputEmail">用户名</label>
 					<div class="controls">
 						<input id="inputEmail" type="text" />
 					</div>
