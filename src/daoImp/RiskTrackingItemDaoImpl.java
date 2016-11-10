@@ -69,7 +69,7 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 
 		boolean isSuccess=true;
 		try {
-			statement=con.prepareStatement("insert into risktrackingitem(riskItemId,trackerId,createTime,riskStatus,riskContent,measures) values(?,?,?,?,?,?");
+			statement=con.prepareStatement("insert into risktrackingitem(riskItemId,trackerId,createTime,riskStatus,riskContent,measures) values(?,?,?,?,?,?)");
 			statement.setInt(1, item.getRiskItemId());
 			statement.setInt(2,item.getTrackerId());
 			statement.setDate(3, item.getCreateTime());
