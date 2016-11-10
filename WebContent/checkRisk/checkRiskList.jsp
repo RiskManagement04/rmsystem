@@ -41,7 +41,7 @@
 						<th>1</th>
 						<th>1</th>
 						<th>1</th>
-						<th>1</th>
+						<th>1 </th>
 						<th>1</th>
 						<th>1</th>
 						<th>1</th>

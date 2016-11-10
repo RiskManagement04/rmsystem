@@ -13,7 +13,7 @@
 		</div>
 		<div class="span8">
 			<h3>
-				风险条目列表
+				 风险条目列表
 			</h3>
 			<table class="table">
 				<thead>
