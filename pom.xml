@@ -158,7 +158,7 @@
         <version>2.6</version>
         <configuration>
           <warSourceDirectory>WebContent</warSourceDirectory>
-          <warname>demo</warname>
+          <warName>demo</warName>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
