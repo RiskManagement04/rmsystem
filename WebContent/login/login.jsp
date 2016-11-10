@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
  <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
  <script src="../bootstrap/jquery-1.11.3.js"></script>
  <script src="../bootstrap/js/bootstrap.js"></script>
@@ -27,7 +27,8 @@
 				break;
 			}
 		}
-	}	
+	}
+	
 %>
 <div class="container-fluid">
 	
@@ -35,7 +36,7 @@
 		<div class="span2">
 		</div>
 		<div class="span6" style='padding-top: 120px;'>
-			<form class="form-horizontal" style='center' action="<%=request.getContextPath()+"/LoginServlet"%>" method='post'>
+			<form class="form-horizontal" style='center' method='POST' action='../LoginServlet'>
 				<div class="control-group">
 					 <label class="control-label" for="inputEmail">用户名</label>
 					<div class="controls">
@@ -52,7 +53,7 @@
 					<div class="controls">
 						 <label class="checkbox"><input type="checkbox" /> Remember me</label>
 						 <div>
-						 	 <button type="submit" class="btn">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 	 <input type="submit" class="btn" value='登录'/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						  	<button type="submit" class="btn">注册  </button>
 						 </div>
 						 

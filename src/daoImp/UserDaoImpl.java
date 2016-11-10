@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public User findUser(int userId, String password) {
-		// TODO Auto-generated method stub
+		System.out.println("进入UserDao");
 		return null;
 	}
 

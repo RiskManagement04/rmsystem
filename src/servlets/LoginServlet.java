@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,22 +33,11 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setCharacterEncoding("utf-8");
-		PrintWriter pw=response.getWriter();
-		//HttpSession session = request.getSession(true);
-		
-		int loginId=Integer.parseInt(request.getParameter("loginid").trim());
-		String loginPassword=request.getParameter("loginpassword").trim();
-		
-		User user=DaoFactory.getUserDao().findUser(loginId, loginPassword);
-		
-		//µÇÂ¼Ê§°Ü
-		if(user==null){
-			pw.print("<script>alert('ÓÃ»§Ãû»òÃÜÂë´íÎó£¡');location.href='./login/login.jsp'</script>");
-		}else{
-			System.out.println("µÇÂ¼");
-		}
+
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//User user=DaoFactory.getUserDao().findUser(1, "a");
+		ServletContext context = getServletContext();
+		context.getRequestDispatcher("/register/register.jsp").forward(request, response);
 		
 	}
 
