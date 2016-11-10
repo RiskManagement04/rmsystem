@@ -104,7 +104,7 @@
 						<th><jsp:getProperty name="riskItem" property="createDate"/></th>
 						<th>
 							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
-								<input name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
+								<input type="hidden" name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
 								<input type="submit" class="btn" value='跟踪记录'/>
 							</form>
 						</th>
