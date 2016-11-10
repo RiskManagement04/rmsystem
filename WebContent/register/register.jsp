@@ -17,7 +17,7 @@
 		<div class="span4">
 		</div>
 		<div class="span4" style='padding-top: 15%;'>
-			<form class="form-horizontal" style='center' action="<%=request.getContextPath()+"/RegisterServlet"%>" method='post'>
+			<form class="form-horizontal" style='center' method='POST' action="<%=request.getContextPath()+"/RegisterServlet"%>">
 				<div class="control-group">
 					 <label class="control-label" for="inputEmail">用户名</label>
 					<div class="controls">
@@ -46,7 +46,7 @@
 						
 						 <div>
 						 	<a href="<%=request.getContextPath()+"/login/login.jsp"%>"><input type='button' value="返回" class="btn"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						  	<a href="<%=request.getContextPath()+"/register/register.jsp"%>"><input type='button' value="注册" class="btn"/></a>
+						  	<input type='submit' value="注册" class="btn"/>
 						  
 						 </div>
 						 
