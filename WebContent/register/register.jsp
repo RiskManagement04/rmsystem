@@ -2,37 +2,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+ <script src="../bootstrap/jquery-1.11.3.js"></script>
+ <script src="../bootstrap/js/bootstrap.js"></script>
+
 <title>注册</title>
 </head>
 <body>
 
-	<table width=650>
-		<tr>
-			<td>
-				<form name="registerform" id="registerform" action="<%=request.getContextPath()+"/RegisterServlet"%>" method="post">
-					<table border="0">
-						<tr>
-          					<td>用户ID</td>
-          					<td><input type="text" name="registerid" width=200 required></td>
-       				    </tr>
-						<tr>
-          					<td>密码</td>
-          					<td><input type="password" name="registerpw" width=200></td>
-       				    </tr>
-       				    <tr>
-       				    	<td>
-       				    		<input type="submit" value="注册">
-       				    	</td>
-       				    	<td>
-       				    		<a href="<%=request.getContextPath()+"/login/login.jsp"%>">返回</a>
-       				    	</td>
-       				    </tr>
-					</table>
-			    </form>
-			</td>
-		</tr>
-	</table>
+	<div class="container-fluid">
+	
+	<div class="row-fluid">
+		<div class="span4">
+		</div>
+		<div class="span4" style='padding-top: 15%;'>
+			<form class="form-horizontal" style='center' action="<%=request.getContextPath()+"/RegisterServlet"%>" method='post'>
+				<div class="control-group">
+					 <label class="control-label" for="inputEmail">用户名</label>
+					<div class="controls">
+						<input id="inputEmail" name="inputEmail" type="text" required/>
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="inputEmail">姓名</label>
+					<div class="controls">
+						<input id="inputEmail" name="inputEmail" type="text" required/>
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="inputPassword">密码</label>
+					<div class="controls">
+						<input id="inputPassword" name="inputPassword" type="password"  required/>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<input id="developer" type="radio" checked="checked" name="1" />开发人员 &nbsp;&nbsp;<input id="manager" type="radio"  name="1"/>项目经理
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						
+						 <div>
+						 	<a href="<%=request.getContextPath()+"/login/login.jsp"%>"><input type='button' value="返回" class="btn"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						  	<a href="<%=request.getContextPath()+"/register/register.jsp"%>"><input type='button' value="注册" class="btn"/></a>
+						  
+						 </div>
+						 
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="span4">
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
