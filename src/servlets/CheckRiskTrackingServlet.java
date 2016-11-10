@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import bean.RiskTrackingItemListBean;
+import factory.DaoFactory;
 
 /**
  * Servlet implementation class CheckRiskTrackingServlet
@@ -41,7 +45,17 @@ public class CheckRiskTrackingServlet extends HttpServlet {
 		String id=request.getParameter("riskItemId").trim();
 		int riskItemId=Integer.parseInt(id);
 		
+		List riskTrackingList=DaoFactory.getRiskTrackingItemDao().findRiskTrackingItem(riskItemId);
+		RiskTrackingItemListBean riskTrackingItemList=new RiskTrackingItemListBean();
+		riskTrackingItemList.setRiskTrackingItemList(riskTrackingList);
+		session.setAttribute("riskTrackingList",riskTrackingList);
 		
+		try {
+			context.getRequestDispatcher("/checkRisk/followRisk.jsp").forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
