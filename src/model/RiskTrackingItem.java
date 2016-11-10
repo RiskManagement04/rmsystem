@@ -25,7 +25,7 @@ public class RiskTrackingItem implements Serializable{
 		this.measures = measures;
 	}
 	
-	private RiskStatus convertStatus(String strStatus){
+	private  RiskStatus convertStatus(String strStatus){
 		if(strStatus.equals("未发生")){
 			return RiskStatus.PREDICTED;
 					
