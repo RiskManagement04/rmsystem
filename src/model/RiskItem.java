@@ -21,7 +21,9 @@ public class RiskItem implements Serializable{
 	private int impact;//1,2,3
 	private RiskStatus riskStatus;
 	
-	
+	public RiskItem(int riskItemId){
+		
+	}
 	
 
 }
