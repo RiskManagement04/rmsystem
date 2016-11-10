@@ -40,7 +40,14 @@ public class LoginServlet extends HttpServlet {
 		int loginId=Integer.parseInt(request.getParameter("loginid").trim());
 		String loginPassword=request.getParameter("loginpassword").trim();
 		
-		User user=DaoFactory.getUserDao().toString();
+		User user=DaoFactory.getUserDao().findUser(loginId, loginPassword);
+		
+		//µÇÂ¼Ê§°Ü
+		if(user==null){
+			pw.print("<script>alert('ÓÃ»§Ãû»òÃÜÂë´íÎó£¡');location.href='./login/login.jsp'</script>");
+		}else{
+			System.out.println("µÇÂ¼");
+		}
 		
 	}
 

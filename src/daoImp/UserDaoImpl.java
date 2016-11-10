@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import dao.DaoHelper;
 import dao.UserDao;
+import model.User;
 
 public class UserDaoImpl implements UserDao{
 	
@@ -46,6 +47,12 @@ public class UserDaoImpl implements UserDao{
 		}
 		
 		return pw;
+	}
+
+	@Override
+	public User findUser(int userId, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
