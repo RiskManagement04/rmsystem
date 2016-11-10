@@ -66,11 +66,29 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 	public boolean addRiskTrackingItem(RiskTrackingItem item) {
 		java.sql.Connection con=daoHelper.getConnection();
 		java.sql.PreparedStatement statement=null;
-//		ResultSet result=null;
-//		ArrayList<RiskTrackingItem> trackingItemList=new ArrayList<RiskTrackingItem>();
-		
-		
-		return false;
+
+		boolean isSuccess=true;
+		try {
+			statement=con.prepareStatement("insert into risktrackingitem(riskItemId,trackerId,createTime,riskStatus,riskContent,measures) values(?,?,?,?,?,?");
+			statement.setInt(1, item.getRiskItemId());
+			statement.setInt(2,item.getTrackerId());
+			statement.setDate(3, item.getCreateTime());
+			statement.setString(4, item.getRiskStatusString());
+			statement.setString(5,item.getRiskContent());
+			statement.setString(6, item.getMeasures());
+			
+			isSuccess=statement.execute();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeConnection(con);
+			daoHelper.closePreparedStatement(statement);
+			
+		}
+		return isSuccess;
 	}
 
 }

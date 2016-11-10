@@ -1,7 +1,8 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+
 
 public class RiskTrackingItem implements Serializable{
 	private int riskTrackingItemId;
@@ -46,6 +47,20 @@ public class RiskTrackingItem implements Serializable{
 			
 	}
 
+	private  String convertStatus(RiskStatus strStatus){
+		if(strStatus.equals(RiskStatus.PREDICTED)){
+			return "未发生";
+					
+		}else if(strStatus.equals(RiskStatus.HAPPENED)){
+			return "已发生";
+			
+		}else if(strStatus.equals(RiskStatus.SOLVED)){
+			return "已解决";
+		}else{
+			return null;
+		}
+			
+	}
 	public int getRiskTrackingItemId() {
 		return riskTrackingItemId;
 	}
@@ -81,7 +96,9 @@ public class RiskTrackingItem implements Serializable{
 	public RiskStatus getRiskStatus() {
 		return riskStatus;
 	}
-
+	public String getRiskStatusString(){
+		return convertStatus(riskStatus);
+	}
 	public void setRiskStatus(RiskStatus riskStatus) {
 		this.riskStatus = riskStatus;
 	}
@@ -91,7 +108,7 @@ public class RiskTrackingItem implements Serializable{
 	public String getRiskContent() {
 		return riskContent;
 	}
-
+	
 	public void setRiskContent(String riskContent) {
 		this.riskContent = riskContent;
 	}
