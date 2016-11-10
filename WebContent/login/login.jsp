@@ -33,9 +33,9 @@
 <div class="container-fluid">
 	
 	<div class="row-fluid">
-		<div class="span2">
+		<div class="span4">
 		</div>
-		<div class="span6" style='padding-top: 120px;'>
+		<div class="span4" style='padding-top: 15%;'>
 			<form class="form-horizontal" style='center' method='POST' action='../LoginServlet'>
 				<div class="control-group">
 					 <label class="control-label" for="inputEmail">用户名</label>
@@ -51,10 +51,9 @@
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						 <label class="checkbox"><input type="checkbox" /> Remember me</label>
 						 <div>
 						 	 <input type="submit" class="btn" value='登录'/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						  	<button type="submit" class="btn">注册  </button>
+						  	<a href="<%=request.getContextPath()+"/register/register.jsp"%>"><input type='button' value="注册" class="btn"/></a>
 						 </div>
 						 
 					</div>
