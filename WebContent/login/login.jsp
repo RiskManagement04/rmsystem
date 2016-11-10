@@ -45,14 +45,14 @@
 				<div class="control-group">
 					 <label class="control-label" for="inputPassword">密码</label>
 					<div class="controls">
-						<input id="inputPassword" name="inputPassward" type="password"  required/>
+						<input id="inputPassword" name="inputPassword" type="password"  required/>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
 						 <label class="checkbox"><input type="checkbox" /> Remember me</label>
 						 <div>
-						 	 <button type="submit" class="btn">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						 	 <button type="submit" class="btn">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						  	<button type="submit" class="btn">注册  </button>
 						 </div>
 						 
