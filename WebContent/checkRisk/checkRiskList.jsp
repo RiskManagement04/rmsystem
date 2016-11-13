@@ -47,7 +47,89 @@
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
 			<form action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
-				<input type="submit"  class="iwk2 btn btn-add" value='新 增'/><i></i>
+
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-left:50px;margin-top:10px">新建</a>			
+				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
+					<div>
+						<div>
+							<div class="modal-header">
+								 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">
+									风险条目
+								</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
+										<div class="control-group" style="margin:0px auto;text-align:center">
+											 <label class="control-label" for="inputPassword" style="float:left">项目名称</label>
+											<div class="controls">
+												<select class="selectpicker" name="projectName">
+												  <option>Mustard</option>
+												  <option>Ketchup</option>
+												  <option>Relish</option>
+												</select>
+											</div>
+										</div>
+										
+										<div class="control-group" style="margin:0px auto;text-align:center">
+											 <label class="control-label" for="inputEmail"style="float:left">风险名称              </label>
+											<div class="controls">
+												<input id="inputEmail" type="text" name="riskName"/>
+											</div>
+										</div>
+										<div class="control-group" style="margin:0px auto;text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">风险内容    </label>
+											<div class="controls">
+												<input id="inputPassword" type="password" name="riskContent"/>
+											</div>
+										</div>
+										<div class="control-group"style="margin:0px auto;text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">风险触发器</label>
+											<div class="controls">
+												<input id="inputPassword" type="password" style="margin-left:-12px" name="trigger"/>
+											</div>
+										</div>
+										<div class="control-group"style="margin:0px auto;text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">可能性 </label>
+											<div class="controls">
+												<select class="selectpicker" style="margin-left:12px" name="possibility">
+												  <option value="high">高</option>
+												  <option value="middle">中</option>
+												  <option value="low">低</option>
+												</select>
+											</div>
+										</div>
+										<div class="control-group"style="margin:0px auto;text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">影响程度</label>
+											<div class="controls">
+												<select class="selectpicker"name="impact">
+													<option value="high">高</option>
+												  <option value="middle">中</option>
+												  <option value="low">低</option>
+												</select>
+											</div>
+										</div>
+										<div class="control-group"style="margin:0px auto;text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">风险状态</label>
+											<div class="controls">
+												<select class="selectpicker" name="riskStatus">
+												  <option value="predicted">未发生</option>
+												  <option value="happened">已发生</option>
+												  <option value="solved">已解决</option>
+												</select>
+											</div>
+										</div>																				
+								</form>
+							</div>
+							<div class="modal-footer">
+								 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
+								 <button type="submit" class="btn btn-primary">保存</button>
+							</div>
+						</div>
+						
+					</div>
+					
+				</div>
 			</form>
 			</div>
 				<table class="table">
