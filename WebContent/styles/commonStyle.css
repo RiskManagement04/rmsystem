@@ -1,5 +1,25 @@
 @CHARSET "UTF-8";
 
+html {
+   font-family: STHeitiSC-Light,'寰蒋闆呴粦','瀹嬩綋','鏂板畫浣�',sans-serif;
+  font-size:14px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  color:#000000;
+  height: 100%;
+  overflow:hidden;
+}
+a:active,a:hover,a:focus,a:visited{
+	text-decoration:none;
+}
+body {
+	
+	font-family: STHeitiSC-Light,'寰蒋闆呴粦','瀹嬩綋','鏂板畫浣�',sans-serif;
+  margin: 0;
+  height: 100%;
+  overflow:auto;
+}
+
 .guideList{
 	width:190px;
 	position:absolute;
@@ -213,61 +233,13 @@
     margin: 9px 0 0 10px;
     float: left;
 }
-.blue_header .notice{
-	float: right;
-    width: 80px;
-    text-align: center;
-    position: relative;
-    cursor:pointer;
-    margin-right:23px;
-    color:#444;
-    font-size:14px;
-}
-.blue_header .notice:hover {
-	background:#efefef;
-}
-.blue_header .notice>.badge{
-    position: absolute;
-    top: 21px;
-    left: 60px;
-}
-.blue_header .search_box{
-	float:right;
-    height: 36px;
-    width: 212px;
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    margin: 12px 24px 0 0;
-    line-height: normal;
-}
-.blue_header .search_box button{
-	width: 57px;
-    border: none;
-    background: none;
-    height: 34px;
-    color:#9a9a9a;
-}
-.blue_header .search_box button:after{
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: 400;
-    content: "\e259";
-    float: right;
-    margin-right: 1px;
-}
-.blue_header .search_box input{
-    border: 1px solid #fff;
-    height: 20px;
-    border-left: 1px solid #e0e0e0;
-    padding: 0 5px;
-    width: 122px;
-    outline: none;
-    color: #9a9a9a;
-}
-.blue_header .glyphicon-search{
-    color:#cfcfcf;
-    float: right;
-    margin: 7px 5px 0 0;
-    font-size: 18px;
-    cursor:pointer;
-}
+
+ .project-warp {
+     padding:0px,40px;
+     overflow-x: hidden;
+     float:;
+ }
+ 
+  .project-warp。header label{
+    margin-left:1000px;
+  }

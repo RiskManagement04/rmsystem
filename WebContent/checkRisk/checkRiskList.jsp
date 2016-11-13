@@ -34,7 +34,7 @@
 	
 	<div class="project-warp">
 		<div class="header">
-			<label>风险列表</label>
+			<label> 风险列表</label>
 		</div>
 	
 		<div  class="iwk-table-wrap">
