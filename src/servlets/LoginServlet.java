@@ -37,7 +37,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		ServletContext context = getServletContext();
-		response.setCharacterEncoding("utf-8");
+		//response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 
@@ -65,12 +66,12 @@ public class LoginServlet extends HttpServlet {
 			pw.print("<script>alert('用户名或密码错误！');location.href='./login/login.jsp'</script>");
 		}else{
 			
-			if(cookieFound){//cookie瀛樺湪
+			if(cookieFound){//cookie鐎涙ê婀�
 				if(!cookie.getValue().trim().equals(userId.trim())){//cookie
 					cookie.setValue(userId.trim());
 					response.addCookie(cookie);								
 				}	
-			}else{//cookie涓嶅瓨鍦�
+			}else{//cookie娑撳秴鐡ㄩ崷锟�
 				cookie = new Cookie("LoginCookie",userId.trim());
 				cookie.setMaxAge(Integer.MAX_VALUE);
 				response.addCookie(cookie);
