@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao{
 
 		boolean isSuccess=true;
 		try {
-			statement=con.prepareStatement("insert into user(trueName,nickName,password,identity) values(?,?,?,?)");
+			statement=con.prepareStatement("insert into User(trueName,nickName,password,identity) values(?,?,?,?)");
 			
 			statement.setString(1, user.getTrueName());
 			statement.setString(2,user.getNickName());
