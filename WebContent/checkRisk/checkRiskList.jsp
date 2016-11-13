@@ -12,36 +12,6 @@
 		<script src='<%=request.getContextPath()+"/styles/bootstrap/js/bootstrap.min.js"%>'></script>
 <title>风险列表</title>
 
-<script type="text/javascript">
-function openWindow()
-{
-	var url='<%=request.getContextPath()+"/checkRisk/AddRiskItem.jsp"%>'; //转向网页的地址;
-    var name='新增风险条目';                        //网页名称，可为空;
-    var iWidth=610;                          //弹出窗口的宽度;
-    var iHeight=600;                       //弹出窗口的高度;
-    //获得窗口的垂直位置
-    var iTop = (window.screen.availHeight-30-iHeight)/2;
-    //获得窗口的水平位置
-    var iLeft = (window.screen.availWidth-10-iWidth)/2;
-    var params='width='+iWidth
-               +',height='+iHeight
-               +',top='+iTop
-               +',left='+iLeft
-               +',channelmode=no'//是否使用剧院模式显示窗口。默认为 no
-               +',directories=no'//是否添加目录按钮。默认为 yes
-               +',fullscreen=no' //是否使用全屏模式显示浏览器
-               +',location=no'//是否显示地址字段。默认是 yes
-               +',menubar=no'//是否显示菜单栏。默认是 yes
-               +',resizable=no'//窗口是否可调节尺寸。默认是 yes
-               +',scrollbars=no'//是否显示滚动条。默认是 yes
-               +',status=no'//是否添加状态栏。默认是 yes
-               +',titlebar=no'//默认是 yes
-               +',toolbar=no'//默认是 yes
-               ;
-  window.open(url, name,params);
-}
-</script>
-
 </head>
 <body>
 	<jsp:useBean id="riskItemList"
@@ -76,8 +46,9 @@ function openWindow()
 	
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
-				<button type="button"  class="iwk2 btn btn-add" onclick="openWindow()"><i></i>新增</button>
-				
+			<form action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
+				<input type="submit"  class="iwk2 btn btn-add" value='新 增'/><i></i>
+			</form>
 			</div>
 				<table class="table">
 				<thead>
