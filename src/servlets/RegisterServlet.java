@@ -6,10 +6,15 @@ import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import factory.DaoFactory;
+import model.User;
+import model.UserType;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -41,12 +46,49 @@ public class RegisterServlet extends HttpServlet {
 		String nickname=request.getParameter("inputEmail").trim();
 		String password=request.getParameter("inputPassword").trim();
 		String trueName=request.getParameter("inputName").trim();
-		String identity="";
+		String identity=request.getParameter("1").trim();
+		String userType=null;
 		
-		if(request.getParameter("1")!=null){
-			identity="DEVELOPER";
-		}else if(request.getParameter("2")!=null){
-			
+		if(identity.equals("developer")){
+			userType="DEVELOPER";
+		}else if(identity.equals("manager")){
+			userType="MANAGER";
+		}
+		
+		boolean isSuccess=DaoFactory.getUserDao().addUser(new User(0,trueName,nickname,password,userType));
+		if(!isSuccess){
+			pw.print("<script>alert('×¢²áÓÃ»§Ê§°Ü£¡');location.href='./register/register.jsp'</script>"); 
+		}
+		
+		//ÐÞ¸Äcookie
+		boolean cookieFound = false;
+		Cookie cookie = null;
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies!=null){
+			for(int i=0;i<cookies.length;i++){
+				cookie=cookies[i];
+				if(cookie.getName().trim().equals("LoginCookie")){
+					cookieFound=true;
+					break;
+				}
+			}
+		}
+		
+		if(cookieFound){
+			cookie.setValue(nickname);
+			response.addCookie(cookie);	
+		}else{
+			cookie = new Cookie("LoginCookie",nickname);
+			cookie.setMaxAge(Integer.MAX_VALUE);
+			response.addCookie(cookie);
+		}
+		
+		try {
+			context.getRequestDispatcher("/login/login.jsp").forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
