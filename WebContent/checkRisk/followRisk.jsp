@@ -116,7 +116,7 @@
 
 			</form>
 			</div>
-			<table class="table">
+			<table class="table" style="margin-left:50px;margin-right:80px;">
 				<thead>
 					<tr>
 						<th>序号</th>
