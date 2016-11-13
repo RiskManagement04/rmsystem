@@ -62,8 +62,25 @@ public class UserDaoImpl implements UserDao{
 	public boolean addUser(User user) {
 		java.sql.Connection con=daoHelper.getConnection();
 		java.sql.PreparedStatement statement=null;
-
+		ResultSet result=null;
+		
 		boolean isSuccess=true;
+		
+		try {
+			statement = con.prepareStatement("select * from User where nickName=?");
+			statement.setString(1, user.getNickName().trim());
+			result = statement.executeQuery();
+			
+			if(result.next()){
+				return false;
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		daoHelper.closeResult(result);
+		daoHelper.closePreparedStatement(statement);
+		
 		try {
 			statement=con.prepareStatement("insert into User(trueName,nickName,password,identity) values(?,?,?,?)");
 			
@@ -72,8 +89,7 @@ public class UserDaoImpl implements UserDao{
 			statement.setString(3, user.getPassword());
 			statement.setString(4, user.getIdentityString());
 			isSuccess=statement.execute();
-			
-			
+						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
