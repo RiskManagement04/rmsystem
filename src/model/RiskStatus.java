@@ -2,7 +2,7 @@ package model;
 
 public enum RiskStatus {
 
-	PREDICTED,//Ф°╙Е▐▒Г■÷
-	HAPPENED,//Е╥╡Е▐▒Г■÷
-	SOLVED//Е╥╡Х╖ёЕ├Ё
+	PREDICTED,//н╢╥╒иЗ
+	HAPPENED,//ря╥╒иЗ
+	SOLVED//ря╫Б╬Ж
 }

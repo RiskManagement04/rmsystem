@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import factory.DaoFactory;
+import model.RiskItem;
+import model.RiskStatus;
 
 /**
  * Servlet implementation class AddRiskItemServlet
@@ -37,8 +42,53 @@ public class AddRiskItemServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
+			
+		int riskItemId=0;
+		int projectId=0;
+		int submitterId=(Integer)session.getAttribute("LoginId");
+		String submitterName=null;
+		java.sql.Date createDate=new java.sql.Date(System.currentTimeMillis());
+		String riskName=request.getParameter("riskName").trim();
+		String riskContent=request.getParameter("riskContent").trim();
+		String trigger=request.getParameter("trigger").trim();
+		int possibility=0;
+		if(request.getParameter("possibility").trim().equals("high")){
+			possibility=3;
+		}else if(request.getParameter("possibility").trim().equals("middle")){
+			possibility=2;
+		}else if(request.getParameter("possibility").trim().equals("low")){
+			possibility=1;
+		}
 		
-		int userId=(Integer)session.getAttribute("LoginId");
+		int impact=0;
+		if(request.getParameter("impact").trim().equals("high")){
+			impact=3;
+		}else if(request.getParameter("impact").trim().equals("middle")){
+			impact=2;
+		}else if(request.getParameter("impact").trim().equals("low")){
+			impact=1;
+		}		
+		
+		RiskStatus riskStatus=null;
+		if(request.getParameter("riskStatus").trim().equals("predicted")){
+			riskStatus=RiskStatus.PREDICTED;
+		}else if(request.getParameter("riskStatus").trim().equals("happened")){
+			riskStatus=RiskStatus.HAPPENED;
+		}else if(request.getParameter("riskStatus").trim().equals("solved")){
+			riskStatus=RiskStatus.SOLVED;
+		}
+		
+		RiskItem item=new RiskItem(riskItemId,projectId,submitterId,createDate,riskName,riskContent,trigger,
+				possibility,impact,riskStatus);
+		
+		boolean isSuccess=DaoFactory.getRiskItemDao().addRiskItem(item);
+		if(!isSuccess){
+			pw.print("<script>alert('增加风险条目失败！')</script>"); 
+		}else{
+			pw.print("<script>alert('增加风险条目成功！');location.href='./checkRisk/checkRiskList.jsp'</script>");
+		}
+		
+		
 	}
 
 	/**

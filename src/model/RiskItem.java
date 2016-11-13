@@ -38,13 +38,28 @@ public class RiskItem implements Serializable{
 	    this.possibility=possibility;
 	    this.impact=impact;
 	    
-	    if(riskStatus.equals("未发生")){
+	    if(riskStatus.equals("PREDICTED")){
 	    	this.riskStatus=RiskStatus.PREDICTED;
-	    }else if(riskStatus.equals("已发生")){
+	    }else if(riskStatus.equals("HAPPENED")){
 	    	this.riskStatus=RiskStatus.HAPPENED;
 	    }else{
 	    	this.riskStatus=RiskStatus.SOLVED;
 	    }
+	    
+	}
+	
+	public RiskItem(int riskItemId,int projectId,int submitterId,Date createDate,String riskName,String riskContent,String trigger,
+			int possibility,int impact,RiskStatus riskStatus){
+		this.riskItemId=riskItemId;
+	    this.projectId=projectId;
+	    this.submitterId=submitterId;
+	    this.createDate=createDate;
+	    this.riskName=riskName;
+	    this.riskContent=riskContent;
+	    this.trigger=trigger;
+	    this.possibility=possibility;
+	    this.impact=impact;
+	    this.riskStatus=riskStatus;
 	    
 	}
 
@@ -142,11 +157,11 @@ public class RiskItem implements Serializable{
 	}
 	private String convertRiskStatus(RiskStatus status){
 		if(status.equals(RiskStatus.PREDICTED)){
-			return "未发生";
+			return "鏈彂鐢�";
 		}else if(status.equals(RiskStatus.HAPPENED)){
-			return "已发生";
+			return "宸插彂鐢�";
 		}else{
-			return "已解决";
+			return "宸茶В鍐�";
 		}
 	}
 
