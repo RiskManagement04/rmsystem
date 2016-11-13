@@ -22,6 +22,7 @@
 	<div class="row-fluid">
 		<div class="span2">
 		</div>
+		
 		<div class="span8">
 			<h3>
 				风险条目列表

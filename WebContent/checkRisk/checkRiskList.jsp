@@ -27,8 +27,8 @@
 			  </ul>
 			</div>
 			<div class="uname_wrap dropdown clearfix">
-				  <a href="javascript:;" class="dropdown-toggle uname" data-toggle="dropdown">
-					  <!--img alt="" src="https://file.iworker.cn/inside/avatar/id:5827da69bb6630687f626214"-->
+				  <a href="javascript:;"  class="dropdown-toggle uname" data-toggle="dropdown">
+					  <!--img  alt="" src="https://file.iworker.cn/inside/avatar/id:5827da69bb6630687f626214"-->
 					  <span class="name">biubiu</span>
 					  <span class="glyphicon glyphicon-menu-down"></span>
 				  </a>
