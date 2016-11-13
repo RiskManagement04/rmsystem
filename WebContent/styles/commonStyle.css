@@ -150,7 +150,7 @@
     max-width: 387px;
     overflow: hidden;
     padding-right: 25px;
-    height:60px;
+    height:60px; 
 }
 .blue_header .cname .caret{
     position: absolute;
