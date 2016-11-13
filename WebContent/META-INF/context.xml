@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-  <Resource name="jdbc/riskmanagement" auth="Container" type="javax.sql.DataSource"
+  <Resource name="jdbc/sonar" auth="Container" type="javax.sql.DataSource"
                maxActive="50" maxIdle="30" maxWait="10000" logAbandoned="true" 
-               username="root" password="" driverClassName="com.mysql.jdbc.Driver"
-               url="jdbc:mysql://localhost:3306/riskmanagement?autoReconnect=true"/>
+               username="sonar" password="sonar" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://114.115.223.228:3306/sonar?autoReconnect=true"/>
 </Context>
