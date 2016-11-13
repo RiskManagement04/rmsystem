@@ -34,16 +34,13 @@
 	
 	<div class="project-warp">
 		<div class="header">
-			<label> 风险列表</label>
+			<label style="margin-left:60px; margin-top:20px;  font-size:26px;"> 风险列表</label>
 		</div>
 	
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
 				<button type="button"  class="iwk2 btn btn-add" ><i></i>新增</button>
-				<button type="button"  class="iwk2 btn btn-close" post-type="close" style="display: none"><i></i>关闭</button>
-				<button type="button"  class="iwk2 btn btn-remove" post-type="remove" style="display: none"><i></i>删除</button>
-				<button type="button"  class="iwk2 btn btn-restart" post-type="restart" style="display: none"><i></i>重启</button>
-				<button type="button"  class="iwk2 btn fr btn-table-filter" ><i></i>筛选</button>
+				
 			</div>
 			<table id="table_project_list" class="iwk-table" ></table>
 			<div id="page_project" class="iwk-table-pager"></div>
