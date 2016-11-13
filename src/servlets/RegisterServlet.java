@@ -34,10 +34,20 @@ public class RegisterServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession(false);
 		ServletContext context = getServletContext();
-		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
+		String nickname=request.getParameter("inputEmail").trim();
+		String password=request.getParameter("inputPassword").trim();
+		String trueName=request.getParameter("inputName").trim();
+		String identity="";
+		
+		if(request.getParameter("1")!=null){
+			identity="DEVELOPER";
+		}else if(request.getParameter("2")!=null){
+			
+		}
 		
 	}
 
