@@ -48,7 +48,7 @@ public class CheckRiskTrackingServlet extends HttpServlet {
 		List riskTrackingList=DaoFactory.getRiskTrackingItemDao().findRiskTrackingItem(riskItemId);
 		RiskTrackingItemListBean riskTrackingItemList=new RiskTrackingItemListBean();
 		riskTrackingItemList.setRiskTrackingItemList(riskTrackingList);
-		session.setAttribute("riskTrackingList",riskTrackingList);
+		session.setAttribute("riskTrackingList",riskTrackingItemList);
 		
 		try {
 			context.getRequestDispatcher("/checkRisk/followRisk.jsp").forward(request, response);
