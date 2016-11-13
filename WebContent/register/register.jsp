@@ -12,56 +12,7 @@
 </head>
 	<body style="background-image: url('../img/login.jpg'); background-attachment: fixed;">
 
-
-	<!-- div class="container-fluid">
-	
-	<div class="row-fluid">
-		<div class="span4">
-		</div>
-		<div class="span4" style='padding-top: 15%;'>
-			<form class="form-horizontal" style='center' method='POST' action="<%=request.getContextPath()+"/RegisterServlet"%>">
-				<div class="control-group">
-					 <label class="control-label" for="inputEmail">用户名</label>
-					<div class="controls">
-						<input id="inputEmail" name="inputEmail" type="text" required/>
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputEmail">姓名</label>
-					<div class="controls">
-						<input id="inputEmail" name="inputEmail" type="text" required/>
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">密码</label>
-					<div class="controls">
-						<input id="inputPassword" name="inputPassword" type="password"  required/>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<input id="developer" type="radio" checked="checked" name="1" />开发人员 &nbsp;&nbsp;<input id="manager" type="radio"  name="1"/>项目经理
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						
-						 <div>
-						 	<a href="<%=request.getContextPath()+"/login/login.jsp"%>"><input type='button' value="返回" class="btn"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						  	<input type='submit' value="注册" class="btn"/>
-						  
-						 </div>
-						 
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="span4">
-		</div>
-	</div>
-</div-->
-<div class = "Container">
-			
+		<div class = "Container">	
 			
 			<div class="login" >
 				
@@ -76,10 +27,10 @@
 					<label>密码</label>
 					<input type="password" name="inputPassword" required/>
 					<br/>
-					<input id="developer" type="radio" checked="checked" name="1" />开发人员 &nbsp;&nbsp;<input id="manager" type="radio"  name="2"/>项目经理
+					<input id="developer" type="radio" checked="checked" name="1" value="developer"/>开发人员 &nbsp;&nbsp;<input id="manager" type="radio"  name="1" value="manager"/>项目经理
 					<br/>
 					<a href="<%=request.getContextPath()+"/login/login.jsp"%>"><input type='button' value="返回" class="btn"/></a>
-					<input type="submit" value="注册" class ="logButton"  name='register'"></input>
+					<input type="submit" value="注册" class ="logButton"  name='register'></input>
 
 				</form>
 			</div>
