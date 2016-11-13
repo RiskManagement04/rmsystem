@@ -3,13 +3,15 @@
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+ <link rel="stylesheet" type="text/css" href="../styles/bootstrap/css/bootstrap.css">
+ <link rel="stylesheet" type="text/css" href="../styles/loginRegisterStyle.css" />
  <script src="../bootstrap/jquery-1.11.3.js"></script>
  <script src="../bootstrap/js/bootstrap.js"></script>
 
 <title>登录</title>
 </head>
-<body>
+<body style="background-image: url('../img/login.jpg'); background-attachment: fixed;">
+
 
 <%
 	session = request.getSession(true);
@@ -30,7 +32,7 @@
 	}
 	
 %>
-<div class="container-fluid">
+<!-- div class="container-fluid">
 	
 	<div class="row-fluid">
 		<div class="span4">
@@ -63,7 +65,31 @@
 		<div class="span4">
 		</div>
 	</div>
-</div>
+</div-->
 
+<div class="container">
+			<!-- <div class="slogan">
+			<h2>快来加入<br/>我们吧</h2>
+
+			
+			</div> -->
+			
+			<div class="login">
+				
+				<form action='../LoginServlet' method="post">
+					<h3 style='color:white;font-weight:bold'>登录</h3>
+					<label>昵称</label>
+					<input type="text" name="name" />
+					<br/><br/>
+					<label>密码</label>
+					<input type="password" name="password" />
+					<br/><br/>
+					<input type="submit" value="登录" class ="logButton" "></input>
+					<br/><br/>
+					<label>还没有账号？<a href="<%=request.getContextPath()+"/register/register.jsp"%>">立即注册</a></label>
+				</form>
+			</div>
+			
+		</div>
 </body>
 </html>

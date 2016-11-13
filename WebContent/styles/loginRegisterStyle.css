@@ -1,0 +1,53 @@
+body .container{
+	position:absolute;
+	left:0;
+	top:0;
+	width : 100%;
+	height : 100%;
+	border :0;
+}
+h2 {
+	padding-top : 18%;
+	padding-left :30%;
+	color:black;
+	font-size:60px;
+	text-indent : -15%;
+	text-decoration : blink;
+}
+ h3 {
+	font-size : 20px;
+ }
+.slogan {
+	margin : 0;
+	height :100%;
+	width : 50%;
+	float : left;
+}
+
+.login {
+	margin-top :200px;
+	margin-right :200px;
+	height : 50%;
+	width : 25%;
+	float : right;
+	border-left : 100px;
+	padding-top : 20px;
+	padding-left : 20px;
+	background-color: rgba(0, 0, 0, 0.2);
+	
+	border-radius:5%;
+}
+.logButton{
+	width : 230px;
+	height : 35px;
+	line-height :18px;
+	border : 0;
+	margin : 3px 0 0 10px;
+	background-color : black;
+	color :white;
+	/*圆角按钮设置*/
+	-moz-border-radius: 15px;      /* Gecko browsers */
+    -webkit-border-radius: 15px;   /* Webkit browsers */
+    border-radius:15px; 
+	
+}
