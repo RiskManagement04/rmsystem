@@ -1,124 +1,55 @@
-<%@page import="model.RiskStatus"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
- <script src="../bootstrap/jquery-1.11.3.js"></script>
- <script src="../bootstrap/js/bootstrap.js"></script>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="../styles/commonStyle.css"/>
 <title>风险列表</title>
 </head>
 <body>
-	<jsp:useBean id="riskItemList"
-		type="bean.RiskItemListBean"
-		scope="session"></jsp:useBean>
-	<jsp:useBean id="riskItem" class="model.RiskItem"
-		scope="page"></jsp:useBean>
-		
-	<div class="container-fluid" style="padding-top: 5%">
-	<div class="row-fluid">
-		<div class="span2">
-		</div>
-		<div class="span8">
-			<h3>
-				风险条目列表
-			</h3>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>风险序号</th>
-						<th>风险编号</th>
-						<th>风险名称</th>
-						<th>风险描述</th>
-						<th>可能性</th>
-						<th>影响程度</th>
-						<th>触发器</th>
-						<th>提交者</th>
-						<th>风险状态</th>
-						<th>创建时间</th>
-						<th>跟踪目录</th>
-					</tr>
-				</thead>
-				<tbody>
-				<%
-					for(int i=0;i<riskItemList.getRiskItemList().size();i++){
-						pageContext.setAttribute("riskItem", riskItemList.getRiskItem(i));
-				%>
-					<tr>
-						<th><%=i+1 %></th>
-						<th><jsp:getProperty name="riskItem" property="riskItemId"/></th>
-						<th><jsp:getProperty name="riskItem" property="riskName"/></th>
-						<th><jsp:getProperty name="riskItem" property="riskContent"/></th>
-					<%
-						if(riskItemList.getRiskItem(i).getPossibility()==1){
-					%>
-						<th>低</th>
-					<%
-						}else if(riskItemList.getRiskItem(i).getPossibility()==2){
-					%>
-						<th>中</th>
-					<%
-						}else{
-					%>
-						<th>高</th>
-					<%
-						}
-					%>
-					
-					<%
-						if(riskItemList.getRiskItem(i).getImpact()==1){
-					%>
-						<th>低</th>
-					<%
-						}else if(riskItemList.getRiskItem(i).getImpact()==2){
-					%>
-						<th>中</th>
-					<%
-						}else{
-					%>
-						<th>高</th>
-					<%
-						}
-					%>
-						<th><jsp:getProperty name="riskItem" property="trigger"/></th>
-						<th><jsp:getProperty name="riskItem" property="submitterName"/></th>
-						
-					<%
-						if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.PREDICTED){
-					%>
-						<th>未发生</th>
-					<%
-						}else if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.HAPPENED){
-					%>
-						<th>已发生</th>
-					<%
-						}else{
-					%>
-						<th>已解决</th>
-					<%
-						}
-					%>											
-						<th><jsp:getProperty name="riskItem" property="createDate"/></th>
-						<th>
-							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
-								<input type="hidden" name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
-								<input type="submit" class="btn" value='跟踪记录'/>
-							</form>
-						</th>
-					</tr>
-				<%
-					}
-				%>
-				</tbody>
-			</table>
-		</div>
-		<div class="span2">
-		</div>
+<div class="guideList">
+	<div class="network_logo">
+		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
+	<ul class="nav nohover auto_overflow">
+			<li class="home focus"><i></i><a href="inside/dashboard" onclick="" class="inside/dashboard">首页</a></li>
+	</ul>
 </div>
 
+
+<div class="blue_body">
+	<div class="blue_header">
+			<div class="cname_wrap dropdown clearfix">
+			  <a href="javascript:;" class="dropdown-toggle cname" id="header_cname" >
+			 风险管理		  </a>
+			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">
+			  </ul>
+			</div>
+			<div class="uname_wrap dropdown clearfix">
+				  <a href="javascript:;" class="dropdown-toggle uname" data-toggle="dropdown">
+					  <!--img alt="" src="https://file.iworker.cn/inside/avatar/id:5827da69bb6630687f626214"-->
+					  <span class="name">biubiu</span>
+					  <span class="glyphicon glyphicon-menu-down"></span>
+				  </a>
+				  <ul class="dropdown-menu dropdown-menu-right">
+				     	<li>
+					 		<a href="javascript:;" onclick="personal.go_center()">进入个人中心</a>
+					 	</li>
+					 	<li>
+						  <a href="https://www.iworker.cn/inside/user/settings" title="我的设置" class="item">我的设置</a>
+					  	</li>
+					  	<li>
+						  <a href="javascript:;" onclick="iwk_notify.open_send_modal();" class="item">开启桌面推送</a>
+					  	</li>
+					 	<li>
+					 		<a  href="https://www.iworker.cn/signout">退出</a>
+					 	</li>
+				  </ul>
+			</div>
+			
+	</div>
+	
+</div>
 </body>
 </html>

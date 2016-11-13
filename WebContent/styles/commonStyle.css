@@ -1,0 +1,272 @@
+@CHARSET "UTF-8";
+
+.guideList{
+	width:190px;
+	position:absolute;
+	height:100%;
+	background:#f4f4f4;
+	z-index: 99;
+	top:0;
+	left:0;
+}
+.guideList .network_logo{
+	width: 132px;
+    height: 90px;
+    margin: 15px auto;
+}
+.guideList .network_logo img{
+    max-height: 90px;
+    max-width: 132px;
+    display: block;
+    margin: 0 auto;
+}
+.guideList .nav li{
+	 list-style-type:none; 
+}
+.guideList .nav li a{
+    line-height: 40px;
+    font-size: 16px;
+    padding: 0 15px 0 76px;
+    width: 190px;
+    height: 40px;
+    display: block;
+    text-decoration: none;
+}
+.guideList .nav li.focus>a{
+	color:#fff;
+}
+.guideList .nav li.focus{
+	background:#4a90e2;
+}
+.guideList .nav li.home.focus i{
+	background-position:-305px 0;
+}
+.guideList .nav li.schedule.focus i{
+	background-position:-339px 0;
+}
+.guideList .nav li.flow.focus i{
+	background-position:-373px 0;
+}
+.guideList .nav li.customer.focus i{
+	background-position:-407px 0;
+}
+.guideList .nav li.project.focus i{
+	background-position:-441px 0;
+}
+.guideList .nav li.document.focus i{
+	background-position:-475px 0;
+}
+.guideList .nav li.group.focus i{
+	background-position:-509px 0;
+}
+.guideList .nav li.member.focus i{
+	background-position:-543px 0;
+}
+.guideList .nav li.admin.focus i{
+    background-position:-577px 0;
+}
+.guideList .nav li.sale.focus i{
+    background-position:-808px 0;
+}
+.guideList .nav li.set.focus i{
+    background-position:-845px 0;
+}
+.guideList .nav li.app.focus i{
+    background-position:-1162px 0;
+}
+
+.guideList .nav li>i{
+    width: 32px;
+    height: 32px;
+    top: 4px;
+    left: 28px;
+    background: url(../../imgs/iwk.png);
+    position: absolute;
+    z-index: 2;
+}
+.guideList .nav li.active>a{
+	color:#000000;
+	background-color:#fff;
+}
+.guideList .nav .home i{
+	background-position:0 0;
+}
+.guideList .nav .schedule i{
+	background-position:-34px 0;
+}
+.guideList .nav .flow i{
+	background-position:-68px 0;
+}
+.guideList .nav .customer i{
+	background-position:-102px 0;
+}
+.guideList .nav .project i{
+	background-position:-136px 0;
+}
+.guideList .nav .document i{
+	background-position:-170px 0;
+}
+.guideList .nav .group i{
+	background-position:-204px 0;
+}
+.guideList .nav .member i{
+	background-position:-238px 0;
+}
+.guideList .nav .admin i{
+    background-position:-272px 0;
+}
+.guideList .nav .sale i{
+    background-position:-734px -1px;
+}
+.guideList .nav .set i{
+    background-position:-740px 0px;
+}
+.guideList .nav .app i{
+    background-position:-1133px 0px;
+}
+
+.blue_body{
+    margin-left: 190px;
+    position: relative;
+    height: 100%;
+    min-width: 1020px;
+}
+
+.blue_header{
+	height:60px;
+	line-height:60px;
+	border-bottom:1px solid #e6e6e6;
+}
+.blue_header .cname_wrap{
+	margin: 0 0 0 50px;
+	float:left;
+}
+.blue_header .cname_wrap>a{
+	text-decoration: none;
+}
+.blue_header .cname{
+	font-size:20px;
+    float: left;
+    max-width: 387px;
+    overflow: hidden;
+    padding-right: 25px;
+    height:60px;
+}
+.blue_header .cname .caret{
+    position: absolute;
+    top: 23px;
+    right: 0;
+    width: 14px;
+}
+.blue_header .dropdown-menu > li > a {
+    padding: 5px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 30px;
+    width: 248px;
+    white-space: nowrap;
+}
+.blue_header .input-group{
+	float: right;
+	width: 239px;
+    margin: 13px 24px 0 0;
+}
+.blue_header .uname_wrap{
+    margin-right: 17px;
+    float: right;
+    padding: 14px 0;
+}
+.blue_header .setting_company_tag{
+	margin: 1px 0 0 10px;
+    color: white !important;
+    font-weight: bold;
+    float: right;
+    background-color: #F00;
+    background-image: -moz-linear-gradient(top, #FF0800 0%, #B50600 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FF0800), color-stop(1, #B50600));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0800', endColorstr='#b50600', GradientType=0) !important;
+    background-image: -ms-linear-gradient(top, #FF0800 0%, #B50600 100%);
+    height: 16px;
+    line-height: 16px;
+    border-radius: 3px;
+    padding: 0 3px;
+    text-align: center;
+}
+.blue_header .uname>img{
+    width: 32px;
+    height: 32px;
+    border-radius: 2px;
+    float: left;
+    margin-right: 10px;
+}
+.blue_header .uname .name{
+    float: left;
+    line-height: 32px;
+    height: 32px;
+    max-width: 65px;
+    overflow: hidden;
+}
+.blue_header .glyphicon-menu-down{
+    font-size: 14px;
+    color: #bbbbbb;
+    margin: 9px 0 0 10px;
+    float: left;
+}
+.blue_header .notice{
+	float: right;
+    width: 80px;
+    text-align: center;
+    position: relative;
+    cursor:pointer;
+    margin-right:23px;
+    color:#444;
+    font-size:14px;
+}
+.blue_header .notice:hover {
+	background:#efefef;
+}
+.blue_header .notice>.badge{
+    position: absolute;
+    top: 21px;
+    left: 60px;
+}
+.blue_header .search_box{
+	float:right;
+    height: 36px;
+    width: 212px;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    margin: 12px 24px 0 0;
+    line-height: normal;
+}
+.blue_header .search_box button{
+	width: 57px;
+    border: none;
+    background: none;
+    height: 34px;
+    color:#9a9a9a;
+}
+.blue_header .search_box button:after{
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    content: "\e259";
+    float: right;
+    margin-right: 1px;
+}
+.blue_header .search_box input{
+    border: 1px solid #fff;
+    height: 20px;
+    border-left: 1px solid #e0e0e0;
+    padding: 0 5px;
+    width: 122px;
+    outline: none;
+    color: #9a9a9a;
+}
+.blue_header .glyphicon-search{
+    color:#cfcfcf;
+    float: right;
+    margin: 7px 5px 0 0;
+    font-size: 18px;
+    cursor:pointer;
+}
