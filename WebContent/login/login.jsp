@@ -3,8 +3,8 @@
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <link rel="stylesheet" type="text/css" href="../styles/bootstrap/css/bootstrap.css">
- <link rel="stylesheet" type="text/css" href="../styles/loginRegisterStyle.css" />
+ <link rel="stylesheet" type="text/css" href='<%=request.getContextPath()+"/styles/bootstrap/css/bootstrap.css"%>'>
+ <link rel="stylesheet" type="text/css" href='<%=request.getContextPath()+"/styles/loginRegisterStyle.css"%>'>
  <script src="../bootstrap/jquery-1.11.3.js"></script>
  <script src="../bootstrap/js/bootstrap.js"></script>
 
