@@ -1,77 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href='<%=request.getContextPath()+"/styles/commonStyle.css"%>'/>
+<link rel="stylesheet" type="text/css" href='<%=request.getContextPath()+"/styles/bootstrap/css/bootstrap.css"%>'/>
+
+		<script src='<%=request.getContextPath()+"/styles/bootstrap/jquery-1.11.3.js"%>'></script>
+		<script src='<%=request.getContextPath()+"/styles/bootstrap/js/bootstrap.min.js"%>'></script>
+<title>风险列表</title>
 </head>
 <body>
-	<jsp:useBean id="riskTrackingList"
-		type="bean.RiskTrackingItemListBean"
-		scope="session"></jsp:useBean>
-	<jsp:useBean id="riskTrackingItem" class="model.RiskTrackingItem"
-		scope="page"></jsp:useBean>
-		
-<div class="container-fluid" style="padding-top: 5%">
-	<div class="row-fluid">
-		<div class="span2">
-		</div>
-		<div class="span8">
-			<h3>
-				 跟踪条目列表
-			</h3>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>序号</th>
-						<th>跟踪条目编号</th>
-						<th>跟踪者名称</th>
-						<th>修改时间</th>
-						<th>风险状态</th>
-						<th>风险描述</th>
-						<th>应对措施</th>						
-					</tr>
-				</thead>
-				<tbody>
-				<%
-					for(int i=0;i<riskTrackingList.getRiskTrackingItemList().size();i++){
-						pageContext.setAttribute("riskTrackingItem", riskTrackingList.getriskTrackingItem(i));
-				%>
-					<tr>
-						<th><%=i+1 %></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskTrackingItemId"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
-						<%
-						if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.PREDICTED){							
-						%>
-						<th>未发生</th>
-						<%
-						}else if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.HAPPENED){
-						%>
-						<th>已发生</th>
-						<%
-						}else{
-						%>
-						<th>未解决</th>
-						<%
-						}
-						%>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskContent"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
-					
-					</tr>
-				<%
-					}
-				%>
-				</tbody>
-			</table>
-		</div>
-		<div class="span2">
-		</div>
+<div class="guideList">
+	<div class="network_logo">
+		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
+	<ul class="nav nohover auto_overflow">
+			<li class="home focus"><i></i><a href="inside/dashboard" onclick="" class="inside/dashboard">首页</a></li>
+	</ul>
 </div>
+
+
+<div class="blue_body">
+	<div class="blue_header">
+			<div class="cname_wrap dropdown clearfix">
+			  <a href="javascript:;" class="dropdown-toggle cname" id="header_cname" >
+			 风险跟踪管理		  </a>
+			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">
+			  </ul>
+			</div>						
+	</div>	
+	
+	<div class="project-warp">
+		<div class="header">
+			<label style="margin-left:60px; margin-top:20px;  font-size:26px;"> 风险跟踪列表</label>
+		</div>
+	
+		<div  class="iwk-table-wrap">
+			<div class="edit-buttons">
+				<button type="button"  class="iwk2 btn btn-add" ><i></i>新增</button>
+				
+			</div>
+			<table id="table_project_list" class="iwk-table" ></table>
+			<div id="page_project" class="iwk-table-pager"></div>
+		</div>
+
+
+	</div>
+	
+</div>
+
 
 </body>
 </html>
