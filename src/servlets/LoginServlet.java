@@ -66,12 +66,12 @@ public class LoginServlet extends HttpServlet {
 			pw.print("<script>alert('用户名或密码错误！');location.href='./login/login.jsp'</script>"); 
 		}else{
 			
-			if(cookieFound){//cookie鐎涙ê婀�
+			if(cookieFound){//cookie閻庢稒锚濠�锟�
 				if(!cookie.getValue().trim().equals(userId.trim())){//cookie
 					cookie.setValue(userId.trim());
 					response.addCookie(cookie);								
 				}	
-			}else{//cookie娑撳秴鐡ㄩ崷锟�
+			}else{//cookie濞戞挸绉撮悺銊╁捶閿燂拷
 				cookie = new Cookie("LoginCookie",userId.trim());
 				cookie.setMaxAge(Integer.MAX_VALUE);
 				response.addCookie(cookie);
