@@ -47,7 +47,9 @@
 			<div class="edit-buttons">
 			<form action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
 
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-left:50px;margin-top:10px">新建</a>			
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-left:50px;margin-top:10px;margin-bottom:10px;float:left">新建</a>		
+				<a id="modal-188393" href="<%=request.getContextPath()+"/checkRisk/checkRiskList.jsp"%>" role="button" class="btn" style="margin-left:50px;margin-top:10px; margin-bottom:10px;float:left">返回</a>			
+					
 				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
@@ -111,6 +113,7 @@
 					</div>
 					
 				</div>
+
 			</form>
 			</div>
 			<table class="table">
