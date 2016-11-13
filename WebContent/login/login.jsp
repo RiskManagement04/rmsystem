@@ -32,58 +32,20 @@
 	}
 	
 %>
-<!-- div class="container-fluid">
-	
-	<div class="row-fluid">
-		<div class="span4">
-		</div>
-		<div class="span4" style='padding-top: 15%;'>
-			<form class="form-horizontal" style='center' method='POST' action='../LoginServlet'>
-				<div class="control-group">
-					 <label class="control-label" for="inputEmail">用户名</label>
-					<div class="controls">
-						<input id="inputEmail" name="inputEmail" type="text" required/>
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">密码</label>
-					<div class="controls">
-						<input id="inputPassword" name="inputPassword" type="password"  required/>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						 <div>
-						 	 <input type="submit" class="btn" value='登录'/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						  	<a href="<%=request.getContextPath()+"/register/register.jsp"%>"><input type='button' value="注册" class="btn"/></a>
-						 </div>
-						 
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="span4">
-		</div>
-	</div>
-</div-->
+
 
 <div class="container">
-			<!-- <div class="slogan">
-			<h2>快来加入<br/>我们吧</h2>
-
-			
-			</div> -->
-			
+		
 			<div class="login">
 				
 				<form action='../LoginServlet' method="post">
 					<h3 style='color:white;font-weight:bold'>登录</h3>
-					<label>昵称</label>
-					<input type="text" name="name" />
-					<br/><br/>
+					<label>用户名</label>
+					<input id="inputEmail" name="inputEmail" type="text" required/>
+					<br/>
 					<label>密码</label>
-					<input type="password" name="password" />
-					<br/><br/>
+					<input type="password" name="inputPassword" />
+					<br/>
 					<input type="submit" value="登录" class ="logButton" "></input>
 					<br/><br/>
 					<label>还没有账号？<a href="<%=request.getContextPath()+"/register/register.jsp"%>">立即注册</a></label>
