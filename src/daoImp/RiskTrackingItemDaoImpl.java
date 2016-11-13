@@ -25,12 +25,12 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 		return riskTrackingItemDao;
 	}
 	@Override
-	public List<RiskTrackingItem> findRiskTrackingItem(int riskItemId) {
+	public List findRiskTrackingItem(int riskItemId) {
 		// TODO Auto-generated method stub
 		java.sql.Connection con=daoHelper.getConnection();
 		java.sql.PreparedStatement statement=null;
 		ResultSet result=null;
-		ArrayList<RiskTrackingItem> trackingItemList=new ArrayList<RiskTrackingItem>();
+		ArrayList trackingItemList=new ArrayList();
 		
 		try {
 			statement=con.prepareStatement("select * from risktrackingitem where riskTrackingItemId=?");

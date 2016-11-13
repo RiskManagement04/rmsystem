@@ -26,7 +26,6 @@
 					<tr>
 						<th>序号</th>
 						<th>跟踪条目编号</th>
-						<th>跟踪条目名称</th>
 						<th>跟踪者名称</th>
 						<th>修改时间</th>
 						<th>风险状态</th>
@@ -42,11 +41,25 @@
 					<tr>
 						<th><%=i+1 %></th>
 						<th><jsp:getProperty name="riskTrackingItem" property="riskTrackingItemId"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskItemId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="trackerId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
+						<%
+						if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.PREDICTED){							
+						%>
+						<th>未发生</th>
+						<%
+						}else if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.HAPPENED){
+						%>
+						<th>已发生</th>
+						<%
+						}else{
+						%>
+						<th>未解决</th>
+						<%
+						}
+						%>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskContent"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
 					
 					</tr>
 				<%
