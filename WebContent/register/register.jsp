@@ -74,7 +74,7 @@
 					<input id="inputEmail" name="inputName" type="text" required/>
 					<br/>
 					<label>密码</label>
-					<input type="password" name="inputPassword" />
+					<input type="password" name="inputPassword" required/>
 					<br/>
 					<input id="developer" type="radio" checked="checked" name="1" />开发人员 &nbsp;&nbsp;<input id="manager" type="radio"  name="1"/>项目经理
 					<br/>
