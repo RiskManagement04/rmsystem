@@ -1,3 +1,4 @@
+<%@page import="model.RiskStatus"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,12 +44,18 @@ function openWindow()
 
 </head>
 <body>
+	<jsp:useBean id="riskItemList"
+		type="bean.RiskItemListBean"
+		scope="session"></jsp:useBean>
+	<jsp:useBean id="riskItem" class="model.RiskItem"
+		scope="page"></jsp:useBean>
+		
 <div class="guideList">
 	<div class="network_logo">
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li class="home focus"><i></i><a href="inside/dashboard" onclick="" class="inside/dashboard">首页</a></li>
+			<li class="home focus"><i></i><a  class="inside/dashboard">首页</a></li>
 	</ul>
 </div>
 
@@ -72,7 +79,94 @@ function openWindow()
 				<button type="button"  class="iwk2 btn btn-add" onclick="openWindow()"><i></i>新增</button>
 				
 			</div>
-			<table id="table_project_list" class="iwk-table" ></table>
+				<table class="table">
+				<thead>
+					<tr>
+						<th>风险序号</th>
+						<th>风险编号</th>
+						<th>风险名称</th>
+						<th>风险描述</th>
+						<th>可能性</th>
+						<th>影响程度</th>
+						<th>触发器</th>
+						<th>提交者</th>
+						<th>风险状态</th>
+						<th>创建时间</th>
+						<th>跟踪目录</th>
+					</tr>
+				</thead>
+				<tbody>
+				<%
+					for(int i=0;i<riskItemList.getRiskItemList().size();i++){
+						pageContext.setAttribute("riskItem", riskItemList.getRiskItem(i));
+				%>
+					<tr>
+						<th><%=i+1 %></th>
+						<th><jsp:getProperty name="riskItem" property="riskItemId"/></th>
+						<th><jsp:getProperty name="riskItem" property="riskName"/></th>
+						<th><jsp:getProperty name="riskItem" property="riskContent"/></th>
+					<%
+						if(riskItemList.getRiskItem(i).getPossibility()==1){
+					%>
+						<th>低</th>
+					<%
+						}else if(riskItemList.getRiskItem(i).getPossibility()==2){
+					%>
+						<th>中</th>
+					<%
+						}else{
+					%>
+						<th>高</th>
+					<%
+						}
+					%>
+					
+					<%
+						if(riskItemList.getRiskItem(i).getImpact()==1){
+					%>
+						<th>低</th>
+					<%
+						}else if(riskItemList.getRiskItem(i).getImpact()==2){
+					%>
+						<th>中</th>
+					<%
+						}else{
+					%>
+						<th>高</th>
+					<%
+						}
+					%>
+						<th><jsp:getProperty name="riskItem" property="trigger"/></th>
+						<th><jsp:getProperty name="riskItem" property="submitterName"/></th>
+						
+					<%
+						if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.PREDICTED){
+					%>
+						<th>未发生</th>
+					<%
+						}else if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.HAPPENED){
+					%>
+						<th>已发生</th>
+					<%
+						}else{
+					%>
+						<th>已解决</th>
+					<%
+						}
+					%>											
+						<th><jsp:getProperty name="riskItem" property="createDate"/></th>
+						<th>
+							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
+								<input type="hidden" name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
+								<input type="submit" class="btn" value='跟踪记录'/>
+							</form>
+						</th>
+					</tr>
+				<%
+					}
+				%>
+				</tbody>
+			</table>
 			<div id="page_project" class="iwk-table-pager"></div>
 		</div>
 	</div>

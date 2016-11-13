@@ -9,8 +9,9 @@ html {
   height: 100%;
   overflow:hidden;
 }
-a:active,a:hover,a:focus,a:visited{
+a:active,a:focus,a:visited,a:hover{
 	text-decoration:none;
+	color:#4a90e2;
 }
 body {
 	
@@ -47,53 +48,17 @@ body {
     line-height: 40px;
     font-size: 16px;
     padding: 0 15px 0 76px;
-    width: 190px;
     height: 40px;
     display: block;
     text-decoration: none;
 }
 .guideList .nav li.focus>a{
-	color:#fff;
+	color:#f4f4f4;
 }
 .guideList .nav li.focus{
 	background:#4a90e2;
 }
-.guideList .nav li.home.focus i{
-	background-position:-305px 0;
-}
-.guideList .nav li.schedule.focus i{
-	background-position:-339px 0;
-}
-.guideList .nav li.flow.focus i{
-	background-position:-373px 0;
-}
-.guideList .nav li.customer.focus i{
-	background-position:-407px 0;
-}
-.guideList .nav li.project.focus i{
-	background-position:-441px 0;
-}
-.guideList .nav li.document.focus i{
-	background-position:-475px 0;
-}
-.guideList .nav li.group.focus i{
-	background-position:-509px 0;
-}
-.guideList .nav li.member.focus i{
-	background-position:-543px 0;
-}
-.guideList .nav li.admin.focus i{
-    background-position:-577px 0;
-}
-.guideList .nav li.sale.focus i{
-    background-position:-808px 0;
-}
-.guideList .nav li.set.focus i{
-    background-position:-845px 0;
-}
-.guideList .nav li.app.focus i{
-    background-position:-1162px 0;
-}
+
 
 .guideList .nav li>i{
     width: 32px;
@@ -106,44 +71,12 @@ body {
 }
 .guideList .nav li.active>a{
 	color:#000000;
-	background-color:#fff;
+	background-color:#4a90e2;
 }
 .guideList .nav .home i{
 	background-position:0 0;
 }
-.guideList .nav .schedule i{
-	background-position:-34px 0;
-}
-.guideList .nav .flow i{
-	background-position:-68px 0;
-}
-.guideList .nav .customer i{
-	background-position:-102px 0;
-}
-.guideList .nav .project i{
-	background-position:-136px 0;
-}
-.guideList .nav .document i{
-	background-position:-170px 0;
-}
-.guideList .nav .group i{
-	background-position:-204px 0;
-}
-.guideList .nav .member i{
-	background-position:-238px 0;
-}
-.guideList .nav .admin i{
-    background-position:-272px 0;
-}
-.guideList .nav .sale i{
-    background-position:-734px -1px;
-}
-.guideList .nav .set i{
-    background-position:-740px 0px;
-}
-.guideList .nav .app i{
-    background-position:-1133px 0px;
-}
+
 
 .blue_body{
     margin-left: 190px;
