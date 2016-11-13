@@ -10,7 +10,7 @@
 
 <title>登录</title>
 </head>
-<body style="background-image: url('../img/login.jpg'); background-attachment: fixed;">
+<body style="background-image: url('<%=request.getContextPath()+"/img/login.jpg"%>'); background-attachment: fixed;">
 
 
 <%
@@ -38,7 +38,7 @@
 		
 			<div class="login">
 				
-				<form action='../LoginServlet' method="post">
+				<form action="<%=request.getContextPath()+"/LoginServlet"%>" method="post">
 					<h3 style='color:white;font-weight:bold'>登录</h3>
 					<label>用户名</label>
 					<input id="inputEmail" name="inputEmail" type="text" required/>
