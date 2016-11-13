@@ -1,4 +1,4 @@
-<%@page import="model.RiskStatus"%>
+<%@page import="model.*,factory.DaoFactory,java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,7 +33,7 @@
 	<div class="blue_header">
 			<div class="cname_wrap dropdown clearfix">
 			  <a href="javascript:;" class="dropdown-toggle cname" id="header_cname" >
-			 风险管理		  </a>
+			  软件项目风险管理</a>
 			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">
 			  </ul>
 			</div>						
@@ -41,7 +41,7 @@
 	
 	<div class="project-warp">
 		<div class="header">
-			<label style="margin-left:60px; margin-top:20px;  font-size:26px;"> 风险列表</label>
+			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 风险列表</label>
 		</div>
 	
 		<div  class="iwk-table-wrap">
@@ -58,15 +58,23 @@
 									风险条目
 								</h4>
 							</div>
+							<%
+								int userId=(Integer)session.getAttribute("LoginId");
+								List<Project> projectList=DaoFactory.getProjectDao().getProjectByUser(userId);
+							%>
 							<div class="modal-body">
 								<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
 										<div class="control-group" style="margin:0px auto;text-align:center">
 											 <label class="control-label" for="inputPassword" style="float:left">项目名称</label>
 											<div class="controls">
 												<select class="selectpicker" name="projectName">
-												  <option>Mustard</option>
-												  <option>Ketchup</option>
-												  <option>Relish</option>
+												<%
+												for(int i=0;i<projectList.size();i++){
+												%>
+													<option value='<%=projectList.get(i).getProjectId()%>'><%=projectList.get(i).getProjectName() %></option>
+												<%
+												}
+												%>
 												</select>
 											</div>
 										</div>
@@ -80,13 +88,13 @@
 										<div class="control-group" style="margin:0px auto;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险内容    </label>
 											<div class="controls">
-												<input id="inputPassword" type="password" name="riskContent"/>
+												<input id="inputPassword" type="text" name="riskContent"/>
 											</div>
 										</div>
 										<div class="control-group"style="margin:0px auto;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险触发器</label>
 											<div class="controls">
-												<input id="inputPassword" type="password" style="margin-left:-12px" name="trigger"/>
+												<input id="inputPassword" type="text" style="margin-left:-12px" name="trigger"/>
 											</div>
 										</div>
 										<div class="control-group"style="margin:0px auto;text-align:center">
@@ -132,10 +140,10 @@
 				</div>
 			</form>
 			</div>
-				<table class="table">
+				<table class="table" style="margin-left:50px;">
 				<thead>
 					<tr>
-						<th>风险序号</th>
+						<th>序号</th>
 						<th>风险编号</th>
 						<th>风险名称</th>
 						<th>风险描述</th>
@@ -145,7 +153,7 @@
 						<th>提交者</th>
 						<th>风险状态</th>
 						<th>创建时间</th>
-						<th>跟踪目录</th>
+						<th style="padding-right:60px">跟踪目录</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -208,10 +216,10 @@
 						}
 					%>											
 						<th><jsp:getProperty name="riskItem" property="createDate"/></th>
-						<th>
+						<th style="padding-right:60px">
 							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
 								<input type="hidden" name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
-								<input type="submit" class="btn" value='跟踪记录'/>
+								<input type="submit" class="btn" value='详细'/>
 							</form>
 						</th>
 					</tr>

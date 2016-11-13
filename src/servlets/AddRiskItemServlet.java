@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.RiskItemListBean;
 import factory.DaoFactory;
 import model.RiskItem;
 import model.RiskStatus;
@@ -44,7 +45,7 @@ public class AddRiskItemServlet extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 			
 		int riskItemId=0;
-		int projectId=0;
+		int projectId=Integer.parseInt(request.getParameter("projectName"));
 		int submitterId=(Integer)session.getAttribute("LoginId");
 		String submitterName=null;
 		java.sql.Date createDate=new java.sql.Date(System.currentTimeMillis());
@@ -83,8 +84,11 @@ public class AddRiskItemServlet extends HttpServlet {
 		
 		boolean isSuccess=DaoFactory.getRiskItemDao().addRiskItem(item);
 		if(!isSuccess){
-			pw.print("<script>alert('增加风险条目失败！')</script>"); 
+			pw.print("<script>alert('增加风险条目失败！');location.href='./checkRisk/checkRiskList.jsp'</script>"); 
 		}else{
+			RiskItemListBean riskItemList=new RiskItemListBean();
+			riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(submitterId));
+			session.setAttribute("riskItemList",riskItemList);
 			pw.print("<script>alert('增加风险条目成功！');location.href='./checkRisk/checkRiskList.jsp'</script>");
 		}
 		

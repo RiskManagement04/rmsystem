@@ -157,11 +157,11 @@ public class RiskItem implements Serializable{
 	}
 	private String convertRiskStatus(RiskStatus status){
 		if(status.equals(RiskStatus.PREDICTED)){
-			return "鏈彂鐢�";
+			return "PREDICTED";
 		}else if(status.equals(RiskStatus.HAPPENED)){
-			return "宸插彂鐢�";
+			return "HAPPENED";
 		}else{
-			return "宸茶В鍐�";
+			return "SOLVED";
 		}
 	}
 
