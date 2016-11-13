@@ -33,7 +33,7 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 		ArrayList trackingItemList=new ArrayList();
 		
 		try {
-			statement=con.prepareStatement("select * from risktrackingitem where riskTrackingItemId=?");
+			statement=con.prepareStatement("select * from RiskTrackingItem,User where riskItemId=? and trackerId=userId");
 			statement.setInt(1, riskItemId);
 			
 			result=statement.executeQuery();
@@ -47,6 +47,7 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 				item.setRiskStatus(result.getString("riskStatus"));
 				item.setRiskContent(result.getString("riskContent"));
 				item.setMeasures(result.getString("measures"));
+				item.setTrackerName(result.getString("trueName"));
 				
 				trackingItemList.add(item);
 			}

@@ -8,6 +8,7 @@ public class RiskTrackingItem implements Serializable{
 	private int riskTrackingItemId;
 	private int riskItemId;
 	private int trackerId;
+	private String trackerName;
 	private Date createTime;
 	private RiskStatus riskStatus;
 	private String riskContent;
@@ -119,6 +120,14 @@ public class RiskTrackingItem implements Serializable{
 
 	public void setMeasures(String measures) {
 		this.measures = measures;
+	}
+
+	public String getTrackerName() {
+		return trackerName;
+	}
+
+	public void setTrackerName(String trackerName) {
+		this.trackerName = trackerName;
 	}
 	
 	

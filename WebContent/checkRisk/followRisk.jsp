@@ -41,7 +41,7 @@
 					<tr>
 						<th><%=i+1 %></th>
 						<th><jsp:getProperty name="riskTrackingItem" property="riskTrackingItemId"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="trackerId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
 						<th><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
 						<%
 						if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.PREDICTED){							

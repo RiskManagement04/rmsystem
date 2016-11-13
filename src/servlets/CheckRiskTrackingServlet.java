@@ -41,7 +41,7 @@ public class CheckRiskTrackingServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
-		
+	
 		String id=request.getParameter("riskItemId").trim();
 		int riskItemId=Integer.parseInt(id);
 		
