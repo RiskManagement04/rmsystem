@@ -38,7 +38,7 @@ public class AddRiskItemServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
-		Int userId=session.getAttribute("LoginId");
+		int userId=(Integer)session.getAttribute("LoginId");
 	}
 
 	/**
