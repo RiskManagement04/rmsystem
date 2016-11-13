@@ -57,7 +57,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		boolean isSuccess=DaoFactory.getUserDao().addUser(new User(0,trueName,nickname,password,userType));
 		if(!isSuccess){
-			pw.print("<script>alert('注册用户失败！');location.href='./register/register.jsp'</script>"); 
+			pw.print("<script>alert('用户名已存在！注册失败！');location.href='./register/register.jsp'</script>"); 
 		}
 		
 		//修改cookie
