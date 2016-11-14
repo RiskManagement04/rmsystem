@@ -100,7 +100,7 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 
 		boolean isSuccess=true;
 		try {
-			statement=con.prepareStatement("delete  from risktrackingitem where riskItemId=?");
+			statement=con.prepareStatement("delete  from RiskTrackingItem where riskItemId=?");
 			statement.setInt(1,riskItemId);
 		
 			

@@ -122,7 +122,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 
 		boolean isSuccess=true;
 		try {
-			statement=con.prepareStatement("delete from riskitem where riskItemId=?");
+			statement=con.prepareStatement("delete from RiskItem where riskItemId=?");
 			statement.setInt(1,riskItemId);
 			isSuccess=statement.execute();
 			
