@@ -92,5 +92,30 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 		}
 		return isSuccess;
 	}
+	
+	@Override
+	public boolean deleteRiskTrackingItem(int riskItemId) {
+		java.sql.Connection con=daoHelper.getConnection();
+		java.sql.PreparedStatement statement=null;
+
+		boolean isSuccess=true;
+		try {
+			statement=con.prepareStatement("delete  from risktrackingitem where riskItemId=?");
+			statement.setInt(1,riskItemId);
+		
+			
+			isSuccess=statement.execute();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeConnection(con);
+			daoHelper.closePreparedStatement(statement);
+			
+		}
+		return isSuccess;
+	}
 
 }

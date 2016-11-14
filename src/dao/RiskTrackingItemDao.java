@@ -9,4 +9,6 @@ public interface RiskTrackingItemDao {
 	public List findRiskTrackingItem(int riskItemId);
 	
 	public boolean addRiskTrackingItem(RiskTrackingItem item);
+	
+	public boolean deleteRiskTrackingItem(int riskItemId);
 }
