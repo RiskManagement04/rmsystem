@@ -9,10 +9,6 @@
 <link rel="stylesheet" type="text/css" href='<%=request.getContextPath()+"/styles/bootstrap/css/bootstrap.css"%>'/>
 <style type="text/css">
 
-.bg {background-image:url("../img/delete_icon.jpg") no-repeat;
-	width:100px;
-	height:100px;
-	}
 
 </style>
 
@@ -203,7 +199,7 @@
 						<th>
 						<form action="<%=request.getContextPath()+"/DeleteRiskItemServlet"%>" method="post">		
 							<input type="hidden" value='<%=riskItemList.getRiskItem(i).getRiskItemId() %>' name="deleteRiskItemId"/>				
-							<input type="submit" class="btn btn-default btn-sm bg" value='' src="/img/delete_icon.jpg"/>
+							<input type="submit" class="btn btn-default btn-sm bg" value='删除' src="/img/delete_icon.jpg"/>
 						</form>
 						</th>
 						<%
