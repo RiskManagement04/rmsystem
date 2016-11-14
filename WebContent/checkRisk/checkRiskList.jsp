@@ -7,6 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href='<%=request.getContextPath()+"/styles/commonStyle.css"%>'/>
 <link rel="stylesheet" type="text/css" href='<%=request.getContextPath()+"/styles/bootstrap/css/bootstrap.css"%>'/>
+<style type="text/css">
+
+.bg {background-image:url("../img/delete_icon.jpg") no-repeat;
+	width:100px;
+	height:100px;
+	}
+
+</style>
 
 		<script src='<%=request.getContextPath()+"/styles/bootstrap/jquery-1.11.3.js"%>'></script>
 		<script src='<%=request.getContextPath()+"/styles/bootstrap/js/bootstrap.min.js"%>'></script>
@@ -195,7 +203,7 @@
 						<th>
 						<form action="<%=request.getContextPath()+"/DeleteRiskItemServlet"%>" method="post">		
 							<input type="hidden" value='<%=riskItemList.getRiskItem(i).getRiskItemId() %>' name="deleteRiskItemId"/>				
-							<input type="submit" class="btn btn-default btn-sm" value='删除'/>
+							<input type="submit" class="btn btn-default btn-sm bg" value='' src="/img/delete_icon.jpg"/>
 						</form>
 						</th>
 						<%
