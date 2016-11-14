@@ -4,10 +4,10 @@ import dao.ProjectDao;
 import dao.RiskItemDao;
 import dao.RiskTrackingItemDao;
 import dao.UserDao;
-import daoImp.ProjectDaoImpl;
-import daoImp.RiskItemDaoImpl;
-import daoImp.RiskTrackingItemDaoImpl;
-import daoImp.UserDaoImpl;
+import daoimp.ProjectDaoImpl;
+import daoimp.RiskItemDaoImpl;
+import daoimp.RiskTrackingItemDaoImpl;
+import daoimp.UserDaoImpl;
 
 public class DaoFactory {	
 	public static UserDao getUserDao(){

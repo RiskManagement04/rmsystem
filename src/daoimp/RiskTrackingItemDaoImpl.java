@@ -1,4 +1,4 @@
-package daoImp;
+package daoimp;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

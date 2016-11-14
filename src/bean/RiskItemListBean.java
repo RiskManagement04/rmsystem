@@ -12,7 +12,7 @@ public class RiskItemListBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List riskItemList;
+	private List riskItemList=null;
 
 	
 	public List getRiskItemList() {
