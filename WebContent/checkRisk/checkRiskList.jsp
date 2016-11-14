@@ -163,6 +163,13 @@
 				<table class="table table-striped" style="margin-left:50px">
 				<thead>
 					<tr>
+						<%
+						if(user.getIdentity()==UserType.MANAGER){
+						%>
+						<th>删除</th>
+						<%
+						}
+						%>
 						<th>序号</th>
 						<th>项目</th>
 						<th>风险名称</th>
@@ -182,7 +189,17 @@
 						pageContext.setAttribute("riskItem", riskItemList.getRiskItem(i));
 				%>
 					<tr style="font-weight:normal;">
-
+						<%
+						if(user.getIdentity()==UserType.MANAGER){
+						%>
+						<th>
+						<button type="button" class="btn btn-default btn-sm">
+          					<span class="glyphicon glyphicon-remove"></span> Remove
+        				</button>
+						</th>
+						<%
+						}
+						%>
 						<th style="font-weight:normal;"><%=i+1 %></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="projectName"/></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskName"/></th>
