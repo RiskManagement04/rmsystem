@@ -31,14 +31,16 @@
 <div class="blue_body">
 	<div class="blue_header">
 			<div class="cname_wrap dropdown clearfix">
-			  <a class="dropdown-toggle cname .disabled" id="header_cname" >
+			  <a class="dropdown-toggle cname" id="header_cname" >
 			 软件项目风险管理		  </a>
-			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">
-			  </ul>
-			  <a href='<%=request.getContextPath()+"/login/login.jsp"%>'>退出</a>
-			</div>						
+			 
+			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">		   
+			  </ul>		  
+			</div>	
+		<div style="float: right;margin-right:20px">
+			<a href='<%=request.getContextPath()+"/login/login.jsp"%>' style="float: right;margin-right:20px">退出</a>
+		</div>						
 	</div>	
-	
 	<div class="project-warp">
 		<div class="header">
 			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 风险跟踪列表</label>
