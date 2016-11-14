@@ -31,24 +31,24 @@
 <div class="blue_body">
 	<div class="blue_header">
 			<div class="cname_wrap dropdown clearfix">
-			  <a href="javascript:;" class="dropdown-toggle cname" id="header_cname" >
-			 风险跟踪管理		  </a>
+			  <a class="dropdown-toggle cname .disabled" id="header_cname" >
+			 软件项目风险管理		  </a>
 			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">
 			  </ul>
+			  <a href='<%=request.getContextPath()+"/login/login.jsp"%>'>退出</a>
 			</div>						
 	</div>	
 	
 	<div class="project-warp">
 		<div class="header">
-			<label style="margin-left:60px; margin-top:20px;  font-size:26px;"> 风险跟踪列表</label>
+			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 风险跟踪列表</label>
 		</div>
 	
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
-			<form action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
-
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-left:50px;margin-top:10px;margin-bottom:10px;float:left">新建</a>		
-				<a id="modal-188393" href="<%=request.getContextPath()+"/checkRisk/checkRiskList.jsp"%>" role="button" class="btn" style="margin-left:50px;margin-top:10px; margin-bottom:10px;float:left">返回</a>			
+	
+				<a id="modal-188393" href="<%=request.getContextPath()+"/checkRisk/checkRiskList.jsp"%>" role="button" class="btn" style="margin-right:60px;margin-top:10px; margin-bottom:10px;float:right;color:black">返回</a>			
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:60px;margin-top:10px;margin-bottom:10px;float:right">新增</a>	
 					
 				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
@@ -59,28 +59,9 @@
 									风险跟踪条目
 								</h4>
 							</div>
-							<div class="modal-body">
-								<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskTrackingServlet"%>" method="post">
-										<div class="control-group" style="margin:0px auto;text-align:center">
-											 <label class="control-label" for="inputPassword" style="float:left">风险名称</label>
-											<div class="controls">
-												<select class="selectpicker" name="riskItemName">
-												  <option>Mustard</option>
-												  <option>Ketchup</option>
-												  <option>Relish</option>
-												</select>
-											</div>
-										</div>
-										
-										<div class="control-group" style="margin:0px auto;text-align:center">
-											 <label class="control-label" for="inputEmail"style="float:left">跟踪者名称            </label>
-											<div class="controls">
-												<input id="inputEmail" type="text" name="trackerName"/>
-											</div>
-										</div>
-										
-										
-										<div class="control-group"style="margin:0px auto;text-align:center">
+							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskTrackingServlet"%>" method="post">
+							<div class="modal-body">										
+										<div class="control-group"style="text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险状态</label>
 											<div class="controls">
 												<select class="selectpicker" name="riskStatus">
@@ -90,42 +71,41 @@
 												</select>
 											</div>
 										</div>	
-										<div class="control-group" style="margin:0px auto;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">风险内容    </label>
+										<div class="control-group" style="margin-top:10px;text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">风险描述    </label>
 											<div class="controls">
-												<input id="inputPassword" type="password" name="riskContent"/>
+												<input id="inputPassword" type="text" name="riskContent"/>
 											</div>
 										</div>	
-										<div class="control-group" style="margin:0px auto;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">采取措施   </label>
+										<div class="form-group" style="margin-top:10px;text-align:center">
+											 <label class="control-label" for="name" style="float:left">采取措施   </label>
 											<div class="controls">
-												<input id="inputPassword" type="password" name="measures"/>
+												<textarea class="form-control" rows="5" name="measures"></textarea>
 											</div>
 										</div>																			
-								</form>
 							</div>
 							<div class="modal-footer">
 								 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
 								 <button type="submit" class="btn btn-primary">保存</button>
 							</div>
+							</form>
 						</div>
 						
 					</div>
 					
 				</div>
 
-			</form>
 			</div>
-			<table class="table" style="margin-left:50px;margin-right:80px;">
+			<table class="table" style="margin-left:50px">
 				<thead>
 					<tr>
 						<th>序号</th>
-						<th>跟踪条目编号</th>
+						<th>风险名称</th>
 						<th>跟踪者名称</th>
 						<th>修改时间</th>
 						<th>风险状态</th>
 						<th>风险描述</th>
-						<th>应对措施</th>						
+						<th style="padding-right:60px">应对措施</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -135,7 +115,7 @@
 				%>
 					<tr>
 						<th><%=i+1 %></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskTrackingItemId"/></th>
+						<th><jsp:getProperty name="riskTrackingItem" property="riskItemName"/></th>
 						<th><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
 						<th><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
 						<%
@@ -154,7 +134,7 @@
 						}
 						%>
 						<th><jsp:getProperty name="riskTrackingItem" property="riskContent"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
+						<th style="padding-right:60px"><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
 					
 					</tr>
 				<%

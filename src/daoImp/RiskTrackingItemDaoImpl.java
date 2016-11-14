@@ -33,21 +33,23 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 		ArrayList trackingItemList=new ArrayList();
 		
 		try {
-			statement=con.prepareStatement("select * from RiskTrackingItem,User where riskItemId=? and trackerId=userId");
+			statement=con.prepareStatement("select * from RiskTrackingItem r,User u,RiskItem risk where r.riskItemId=? and r.trackerId=u.userId "
+					+ "and r.riskItemId=risk.riskItemId");
 			statement.setInt(1, riskItemId);
 			
 			result=statement.executeQuery();
 			
 			while(result.next()){
 				RiskTrackingItem item=new RiskTrackingItem();
-				item.setRiskTrackingItemId(result.getInt("riskTrackingItemId"));
-				item.setRiskItemId(result.getInt("riskItemId"));
-				item.setTrackerId(result.getInt("trackerId"));
-				item.setCreateTime(result.getDate("createTime"));
-				item.setRiskStatus(result.getString("riskStatus"));
-				item.setRiskContent(result.getString("riskContent"));
-				item.setMeasures(result.getString("measures"));
-				item.setTrackerName(result.getString("trueName"));
+				item.setRiskTrackingItemId(result.getInt("r.riskTrackingItemId"));
+				item.setRiskItemId(result.getInt("r.riskItemId"));
+				item.setTrackerId(result.getInt("r.trackerId"));
+				item.setCreateTime(result.getDate("r.createTime"));
+				item.setRiskStatus(result.getString("r.riskStatus").trim());
+				item.setRiskContent(result.getString("r.riskContent").trim());
+				item.setMeasures(result.getString("r.measures").trim());
+				item.setTrackerName(result.getString("u.trueName").trim());
+				item.setRiskItemName(result.getString("risk.riskName").trim());
 				
 				trackingItemList.add(item);
 			}
@@ -69,7 +71,7 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 
 		boolean isSuccess=true;
 		try {
-			statement=con.prepareStatement("insert into risktrackingitem(riskItemId,trackerId,createTime,riskStatus,riskContent,measures) values(?,?,?,?,?,?)");
+			statement=con.prepareStatement("insert into RiskTrackingItem(riskItemId,trackerId,createTime,riskStatus,riskContent,measures) values(?,?,?,?,?,?)");
 			statement.setInt(1, item.getRiskItemId());
 			statement.setInt(2,item.getTrackerId());
 			statement.setDate(3, item.getCreateTime());
@@ -77,7 +79,7 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 			statement.setString(5,item.getRiskContent());
 			statement.setString(6, item.getMeasures());
 			
-			isSuccess=statement.execute();
+			statement.execute();
 			
 			
 		} catch (SQLException e) {

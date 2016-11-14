@@ -36,8 +36,8 @@ public class RiskItemDaoImpl implements RiskItemDao{
 			
 
 						
-			stmt = con.prepareStatement("select * from Developing d,RiskItem r,User u where d.userId=? and d.projectId=r.projectId and"
-					+ " r.submitterId=u.userId");
+			stmt = con.prepareStatement("select * from Developing d,RiskItem r,User u,Project p where d.userId=? and d.projectId=r.projectId and"
+					+ " r.submitterId=u.userId and d.projectId=p.projectId");
 			stmt.setInt(1,userId);
 			result = stmt.executeQuery();
 			
@@ -64,6 +64,8 @@ public class RiskItemDaoImpl implements RiskItemDao{
 				item.setSubmitterId(result.getInt("submitterId"));
 				item.setTrigger(result.getString("trigger").trim());
 				item.setSubmitterName(result.getString("u.trueName").trim());
+				
+				item.setProjectName(result.getString("p.projectName").trim());
 
 				riskItemList.add(item);
 			}

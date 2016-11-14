@@ -12,6 +12,7 @@ public class RiskItem implements Serializable{
 	
 	private int riskItemId;
 	private int projectId;
+	private String projectName;
 	private int submitterId;
 	private String submitterName;
 	private Date createDate;
@@ -27,7 +28,7 @@ public class RiskItem implements Serializable{
 	}
 	
 	public RiskItem(int riskItemId,int projectId,int submitterId,Date createDate,String riskName,String riskContent,String trigger,
-			int possibility,int impact,String riskStatus){
+			int possibility,int impact,String riskStatus,String projectName){
 		this.riskItemId=riskItemId;
 	    this.projectId=projectId;
 	    this.submitterId=submitterId;
@@ -37,6 +38,7 @@ public class RiskItem implements Serializable{
 	    this.trigger=trigger;
 	    this.possibility=possibility;
 	    this.impact=impact;
+	    this.projectName=projectName;
 	    
 	    if(riskStatus.equals("PREDICTED")){
 	    	this.riskStatus=RiskStatus.PREDICTED;
@@ -49,7 +51,7 @@ public class RiskItem implements Serializable{
 	}
 	
 	public RiskItem(int riskItemId,int projectId,int submitterId,Date createDate,String riskName,String riskContent,String trigger,
-			int possibility,int impact,RiskStatus riskStatus){
+			int possibility,int impact,RiskStatus riskStatus,String projectName){
 		this.riskItemId=riskItemId;
 	    this.projectId=projectId;
 	    this.submitterId=submitterId;
@@ -149,6 +151,14 @@ public class RiskItem implements Serializable{
 
 	public void setSubmitterName(String submitterName) {
 		this.submitterName = submitterName;
+	}
+	
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 	public String getRiskStatusString() {

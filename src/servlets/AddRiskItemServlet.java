@@ -79,8 +79,9 @@ public class AddRiskItemServlet extends HttpServlet {
 			riskStatus=RiskStatus.SOLVED;
 		}
 		
+		String projectName="";
 		RiskItem item=new RiskItem(riskItemId,projectId,submitterId,createDate,riskName,riskContent,trigger,
-				possibility,impact,riskStatus);
+				possibility,impact,riskStatus,projectName);
 		
 		boolean isSuccess=DaoFactory.getRiskItemDao().addRiskItem(item);
 		if(!isSuccess){

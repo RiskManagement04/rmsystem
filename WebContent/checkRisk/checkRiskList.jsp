@@ -25,7 +25,7 @@
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li class="home focus"><i></i><a  class="inside/dashboard">首页</a></li>
+			<li class="home focus"><i></i><a href="#" class="inside/dashboard">首页</a></li>
 	</ul>
 </div>
 
@@ -46,9 +46,8 @@
 	
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
-			<form action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
 
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-left:50px;margin-top:10px">新建</a>			
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:10px; margin-bottom:10px;float:right;">新增</a>			
 				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
@@ -62,9 +61,10 @@
 								int userId=(Integer)session.getAttribute("LoginId");
 								List<Project> projectList=DaoFactory.getProjectDao().getProjectByUser(userId);
 							%>
+							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
 							<div class="modal-body">
-								<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
-										<div class="control-group" style="margin:0px auto;text-align:center">
+								
+										<div class="control-group" style="text-align:center">
 											 <label class="control-label" for="inputPassword" style="float:left">项目名称</label>
 											<div class="controls">
 												<select class="selectpicker" name="projectName">
@@ -79,35 +79,35 @@
 											</div>
 										</div>
 										
-										<div class="control-group" style="margin:0px auto;text-align:center">
+										<div class="control-group" style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputEmail"style="float:left">风险名称              </label>
 											<div class="controls">
 												<input id="inputEmail" type="text" name="riskName"/>
 											</div>
 										</div>
-										<div class="control-group" style="margin:0px auto;text-align:center">
+										<div class="control-group" style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险内容    </label>
 											<div class="controls">
 												<input id="inputPassword" type="text" name="riskContent"/>
 											</div>
 										</div>
-										<div class="control-group"style="margin:0px auto;text-align:center">
+										<div class="control-group"style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险触发器</label>
 											<div class="controls">
-												<input id="inputPassword" type="text" style="margin-left:-12px" name="trigger"/>
+												<input id="inputPassword" type="text" name="trigger"/>
 											</div>
 										</div>
-										<div class="control-group"style="margin:0px auto;text-align:center">
+										<div class="control-group"style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">可能性 </label>
 											<div class="controls">
-												<select class="selectpicker" style="margin-left:12px" name="possibility">
+												<select class="selectpicker" name="possibility">
 												  <option value="high">高</option>
 												  <option value="middle">中</option>
 												  <option value="low">低</option>
 												</select>
 											</div>
 										</div>
-										<div class="control-group"style="margin:0px auto;text-align:center">
+										<div class="control-group"style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">影响程度</label>
 											<div class="controls">
 												<select class="selectpicker"name="impact">
@@ -117,7 +117,7 @@
 												</select>
 											</div>
 										</div>
-										<div class="control-group"style="margin:0px auto;text-align:center">
+										<div class="control-group"style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险状态</label>
 											<div class="controls">
 												<select class="selectpicker" name="riskStatus">
@@ -127,24 +127,25 @@
 												</select>
 											</div>
 										</div>																				
-								</form>
+								
 							</div>
 							<div class="modal-footer">
 								 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
 								 <button type="submit" class="btn btn-primary">保存</button>
 							</div>
+							</form>
 						</div>
 						
 					</div>
 					
 				</div>
-			</form>
+			
 			</div>
 				<table class="table" style="margin-left:50px;">
 				<thead>
 					<tr>
 						<th>序号</th>
-						<th>风险编号</th>
+						<th>项目</th>
 						<th>风险名称</th>
 						<th>风险描述</th>
 						<th>可能性</th>
@@ -163,7 +164,7 @@
 				%>
 					<tr>
 						<th><%=i+1 %></th>
-						<th><jsp:getProperty name="riskItem" property="riskItemId"/></th>
+						<th><jsp:getProperty name="riskItem" property="projectName"/></th>
 						<th><jsp:getProperty name="riskItem" property="riskName"/></th>
 						<th><jsp:getProperty name="riskItem" property="riskContent"/></th>
 					<%

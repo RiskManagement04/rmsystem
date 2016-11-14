@@ -49,6 +49,7 @@ public class CheckRiskTrackingServlet extends HttpServlet {
 		RiskTrackingItemListBean riskTrackingItemList=new RiskTrackingItemListBean();
 		riskTrackingItemList.setRiskTrackingItemList(riskTrackingList);
 		session.setAttribute("riskTrackingList",riskTrackingItemList);
+		session.setAttribute("riskItemIdOfDetails", riskItemId);
 		
 		try {
 			context.getRequestDispatcher("/checkRisk/followRisk.jsp").forward(request, response);

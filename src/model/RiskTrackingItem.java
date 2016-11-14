@@ -7,6 +7,7 @@ import java.sql.Date;
 public class RiskTrackingItem implements Serializable{
 	private int riskTrackingItemId;
 	private int riskItemId;
+	private String riskItemName;
 	private int trackerId;
 	private String trackerName;
 	private Date createTime;
@@ -22,7 +23,7 @@ public class RiskTrackingItem implements Serializable{
 
 	public RiskTrackingItem(int riskTrackingItemId, int riskItemId,
 			int trackerId, Date createTime, String riskStatus,
-			String riskContent, String measures) {
+			String riskContent, String measures,String riskItemName) {
 		super();
 		this.riskTrackingItemId = riskTrackingItemId;
 		this.riskItemId = riskItemId;
@@ -31,16 +32,31 @@ public class RiskTrackingItem implements Serializable{
 		this.riskStatus = convertStatus(riskStatus);
 		this.riskContent = riskContent;
 		this.measures = measures;
+		this.riskItemName=riskItemName;
+	}
+	
+	public RiskTrackingItem(int riskTrackingItemId, int riskItemId,
+			int trackerId, Date createTime, RiskStatus riskStatus,
+			String riskContent, String measures,String riskItemName) {
+		super();
+		this.riskTrackingItemId = riskTrackingItemId;
+		this.riskItemId = riskItemId;
+		this.trackerId = trackerId;
+		this.createTime = createTime;
+		this.riskStatus = riskStatus;
+		this.riskContent = riskContent;
+		this.measures = measures;
+		this.riskItemName=riskItemName;
 	}
 	
 	private  RiskStatus convertStatus(String strStatus){
-		if(strStatus.equals("未发生")){
+		if(strStatus.equals("PREDICTED")){
 			return RiskStatus.PREDICTED;
 					
-		}else if(strStatus.equals("已发生")){
+		}else if(strStatus.equals("HAPPENED")){
 			return RiskStatus.HAPPENED;
 			
-		}else if(strStatus.equals("已解决")){
+		}else if(strStatus.equals("SOLVED")){
 			return RiskStatus.SOLVED;
 		}else{
 			return null;
@@ -50,13 +66,13 @@ public class RiskTrackingItem implements Serializable{
 
 	private  String convertStatus(RiskStatus strStatus){
 		if(strStatus.equals(RiskStatus.PREDICTED)){
-			return "未发生";
+			return "PREDICTED";
 					
 		}else if(strStatus.equals(RiskStatus.HAPPENED)){
-			return "已发生";
+			return "HAPPENED";
 			
 		}else if(strStatus.equals(RiskStatus.SOLVED)){
-			return "已解决";
+			return "SOLVED";
 		}else{
 			return null;
 		}
@@ -128,6 +144,14 @@ public class RiskTrackingItem implements Serializable{
 
 	public void setTrackerName(String trackerName) {
 		this.trackerName = trackerName;
+	}
+
+	public String getRiskItemName() {
+		return riskItemName;
+	}
+
+	public void setRiskItemName(String riskItemName) {
+		this.riskItemName = riskItemName;
 	}
 	
 	
