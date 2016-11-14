@@ -83,6 +83,7 @@ public class AddRiskItemServlet extends HttpServlet {
 		RiskItem item=new RiskItem(riskItemId,projectId,submitterId,createDate,riskName,riskContent,trigger,
 				possibility,impact,riskStatus,projectName);
 		
+		//增加
 		boolean isSuccess=DaoFactory.getRiskItemDao().addRiskItem(item);
 		if(!isSuccess){
 			pw.print("<script>alert('增加风险条目失败！');location.href='./checkRisk/checkRiskList.jsp'</script>"); 
