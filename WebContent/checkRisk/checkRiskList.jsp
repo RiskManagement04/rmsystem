@@ -36,6 +36,9 @@
 			  软件项目风险管理</a>
 			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">
 			  </ul>
+			</div>	
+			<div style="float: right;margin-right:20px">
+				<a href='<%=request.getContextPath()+"/login/login.jsp"%>' style="float: right;margin-right:20px">退出</a>
 			</div>						
 	</div>	
 	
