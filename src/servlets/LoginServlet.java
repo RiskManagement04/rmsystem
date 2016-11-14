@@ -78,6 +78,7 @@ public class LoginServlet extends HttpServlet {
 			}
 					
 			session.setAttribute("LoginId",user.getUserId()); 
+			session.setAttribute("LoginUser", user);
 			request.setAttribute("login", user.getUserId());
 			RiskItemListBean riskItemList=new RiskItemListBean();
 			riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(user.getUserId()));

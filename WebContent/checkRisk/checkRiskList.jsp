@@ -39,7 +39,23 @@
 			</div>	
 			<div style="float: right;margin-right:20px">
 				<a href='<%=request.getContextPath()+"/login/login.jsp"%>' style="float: right;margin-right:20px">退出</a>
-			</div>						
+			</div>	
+			<div style="float: right;margin-right:40px;font-size: 14pt; color: #4a90e2">
+				<%
+				User user=(User)session.getAttribute("LoginUser");
+				if(user.getIdentity()==UserType.DEVELOPER){
+				%>
+					<small>开发人员：</small>
+				<%
+				}else{
+				%>
+					<small>项目经理：</small>
+				<%
+				}
+				%>
+				
+				<small><%=user.getTrueName() %></small>
+			</div>					
 	</div>	
 	
 	<div class="project-warp">
@@ -144,7 +160,7 @@
 				</div>
 			
 			</div>
-				<table class="table" style="margin-left:50px;">
+				<table class="table table-striped" style="margin-left:50px">
 				<thead>
 					<tr>
 						<th>序号</th>
@@ -165,23 +181,24 @@
 					for(int i=0;i<riskItemList.getRiskItemList().size();i++){
 						pageContext.setAttribute("riskItem", riskItemList.getRiskItem(i));
 				%>
-					<tr>
-						<th><%=i+1 %></th>
-						<th><jsp:getProperty name="riskItem" property="projectName"/></th>
-						<th><jsp:getProperty name="riskItem" property="riskName"/></th>
-						<th><jsp:getProperty name="riskItem" property="riskContent"/></th>
+					<tr style="font-weight:normal;">
+
+						<th style="font-weight:normal;"><%=i+1 %></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="projectName"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskName"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskContent"/></th>
 					<%
 						if(riskItemList.getRiskItem(i).getPossibility()==1){
 					%>
-						<th>低</th>
+						<th style="font-weight:normal;">低</th>
 					<%
 						}else if(riskItemList.getRiskItem(i).getPossibility()==2){
 					%>
-						<th>中</th>
+						<th style="font-weight:normal;">中</th>
 					<%
 						}else{
 					%>
-						<th>高</th>
+						<th style="font-weight:normal;">高</th>
 					<%
 						}
 					%>
@@ -189,38 +206,38 @@
 					<%
 						if(riskItemList.getRiskItem(i).getImpact()==1){
 					%>
-						<th>低</th>
+						<th style="font-weight:normal;">低</th>
 					<%
 						}else if(riskItemList.getRiskItem(i).getImpact()==2){
 					%>
-						<th>中</th>
+						<th style="font-weight:normal;">中</th>
 					<%
 						}else{
 					%>
-						<th>高</th>
+						<th style="font-weight:normal;">高</th>
 					<%
 						}
 					%>
-						<th><jsp:getProperty name="riskItem" property="trigger"/></th>
-						<th><jsp:getProperty name="riskItem" property="submitterName"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="submitterName"/></th>
 						
 					<%
 						if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.PREDICTED){
 					%>
-						<th>未发生</th>
+						<th style="font-weight:normal;">未发生</th>
 					<%
 						}else if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.HAPPENED){
 					%>
-						<th>已发生</th>
+						<th style="font-weight:normal;">已发生</th>
 					<%
 						}else{
 					%>
-						<th>已解决</th>
+						<th style="font-weight:normal;">已解决</th>
 					<%
 						}
 					%>											
-						<th><jsp:getProperty name="riskItem" property="createDate"/></th>
-						<th style="padding-right:60px">
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="createDate"/></th>
+						<th style="margin-right:60px;font-weight:normal">
 							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
 								<input type="hidden" name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
 								<input type="submit" class="btn" value='详细'/>
