@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.RiskItemListBean;
+import factory.DaoFactory;
+
 /**
  * Servlet implementation class DeleteRiskItemServlet
  */
@@ -38,6 +41,12 @@ public class DeleteRiskItemServlet extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		
 		int deleteRiskItemId=Integer.parseInt(request.getParameter("deleteRiskItemId"));
+		DaoFactory.getRiskItemDao().deleteRiskItem(deleteRiskItemId);
+		
+		int userId=(Integer)session.getAttribute("LoginId");
+		RiskItemListBean riskItemList=new RiskItemListBean();
+		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(userId));
+		session.setAttribute("riskItemList",riskItemList);
 		
 		pw.print("<script>location.href='./checkRisk/checkRiskList.jsp'</script>"); 
 	}
