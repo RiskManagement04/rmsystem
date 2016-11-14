@@ -193,9 +193,10 @@
 						if(user.getIdentity()==UserType.MANAGER){
 						%>
 						<th>
-						<button type="button" class="btn btn-default btn-sm">
-          					<span class="glyphicon glyphicon-remove"></span> Remove
-        				</button>
+						<form action="<%=request.getContextPath()+"/DeleteRiskItemServlet"%>" method="post">		
+							<input type="hidden" value='<%=riskItemList.getRiskItem(i).getRiskItemId() %>' name="deleteRiskItemId"/>				
+							<input type="submit" class="btn btn-default btn-sm" value='删除'/>
+						</form>
 						</th>
 						<%
 						}

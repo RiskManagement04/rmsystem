@@ -98,7 +98,7 @@
 				</div>
 
 			</div>
-			<table class="table" style="margin-left:50px">
+			<table class="table table-striped" style="margin-left:50px">
 				<thead>
 					<tr>
 						<th>序号</th>
@@ -116,27 +116,27 @@
 						pageContext.setAttribute("riskTrackingItem", riskTrackingList.getriskTrackingItem(i));
 				%>
 					<tr>
-						<th><%=i+1 %></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskItemName"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
-						<th><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
+						<th style="font-weight:normal;"><%=i+1 %></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="riskItemName"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
 						<%
 						if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.PREDICTED){							
 						%>
-						<th>未发生</th>
+						<th style="font-weight:normal;">未发生</th>
 						<%
 						}else if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.HAPPENED){
 						%>
-						<th>已发生</th>
+						<th style="font-weight:normal;">已发生</th>
 						<%
 						}else{
 						%>
-						<th>未解决</th>
+						<th style="font-weight:normal;">未解决</th>
 						<%
 						}
 						%>
-						<th><jsp:getProperty name="riskTrackingItem" property="riskContent"/></th>
-						<th style="padding-right:60px"><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="riskContent"/></th>
+						<th style="padding-right:60px;font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
 					
 					</tr>
 				<%
