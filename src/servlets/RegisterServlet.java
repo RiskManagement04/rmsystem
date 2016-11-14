@@ -56,11 +56,12 @@ public class RegisterServlet extends HttpServlet {
 		}
 		
 		boolean isSuccess=DaoFactory.getUserDao().addUser(new User(0,trueName,nickname,password,userType));
+		/*
 		if(!isSuccess){
 			pw.print("<script>alert('用户名已存在！注册失败！');location.href='./register/register.jsp'</script>"); 
 			return;
 		}
-		
+		*/
 		//修改cookie
 		boolean cookieFound = false;
 		Cookie cookie = null;

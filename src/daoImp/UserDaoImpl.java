@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao{
 		ResultSet result=null;
 		
 		boolean isSuccess=true;
-		
+	
 		try {
 			statement = con.prepareStatement("select * from User where nickName=?");
 			statement.setString(1, user.getNickName().trim());
@@ -80,7 +80,7 @@ public class UserDaoImpl implements UserDao{
 		}
 		daoHelper.closeResult(result);
 		daoHelper.closePreparedStatement(statement);
-		
+	
 		try {
 			statement=con.prepareStatement("insert into User(trueName,nickName,password,identity) values(?,?,?,?)");
 			
