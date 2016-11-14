@@ -67,12 +67,12 @@ public class AddRiskTrackingServlet extends HttpServlet {
 		boolean isSuccess=DaoFactory.getRiskTrackingItemDao().addRiskTrackingItem(item);
 		
 		if(!isSuccess){
-			pw.print("<script>alert('增加风险跟踪条目失败！');location.href='./checkRisk/followRisk.jsp'</script>"); 
+			pw.print("location.href='./checkRisk/followRisk.jsp'</script>"); 
 		}else{
 			RiskTrackingItemListBean list=new RiskTrackingItemListBean();
 			list.setRiskTrackingItemList(DaoFactory.getRiskTrackingItemDao().findRiskTrackingItem(riskItemId));
 			session.setAttribute("riskTrackingList",list);
-			pw.print("<script>alert('增加风险跟踪条目成功！');location.href='./checkRisk/followRisk.jsp'</script>");
+			pw.print("location.href='./checkRisk/followRisk.jsp'</script>");
 		}
 	}
 
