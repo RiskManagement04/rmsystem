@@ -84,26 +84,12 @@ public class RiskItemDaoImpl implements RiskItemDao{
 
 	@Override
 	public boolean addRiskItem(RiskItem riskItem) {
-		System.out.println(riskItem.getProjectId()+"");
-		System.out.println(riskItem.getSubmitterId()+"");
-		System.out.println(riskItem.getCreateDate()+"");
-		System.out.println(riskItem.getRiskName()+"");
-		System.out.println(riskItem.getRiskContent()+"");
-		System.out.println(riskItem.getTrigger()+"");
-		System.out.println(riskItem.getPossibility()+"");
-		System.out.println(riskItem.getImpact()+"");
-		System.out.println(riskItem.getRiskStatusString()+"");
-		
-		
+			
 		java.sql.Connection con=daoHelper.getConnection();
 		java.sql.PreparedStatement statement=null;
 
 		boolean isSuccess=true;
 		try {
-			
-			statement=con.prepareStatement("set names utf8");
-			statement.execute();
-			statement.close();
 			
 			statement=con.prepareStatement("insert into RiskItem(projectId,submitterId,createDate,riskName,riskContent,`trigger`,possibility,impact,riskStatus) values(?,?,?,?,?,?,?,?,?)");
 			statement.setInt(1,riskItem.getProjectId());

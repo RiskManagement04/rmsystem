@@ -25,7 +25,7 @@
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li class="home focus"><i></i><a href="#" class="inside/dashboard">首页</a></li>
+			<li class="home focus"><i></i><a href="#" style="color: #f4f4f4;background-color: #4a90e2;">首页</a></li>
 	</ul>
 </div>
 
