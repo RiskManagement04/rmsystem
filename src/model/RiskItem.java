@@ -22,6 +22,7 @@ public class RiskItem implements Serializable{
 	private int possibility;//1,2,3
 	private int impact;//1,2,3
 	private RiskStatus riskStatus;
+	private String measures;
 	
 	public RiskItem(){
 		

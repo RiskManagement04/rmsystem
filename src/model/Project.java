@@ -12,11 +12,17 @@ public class Project implements Serializable{
 	private int projectId;
 	private String projectName;
 	private int managerId;
+	private String projectContent;
 	
-	public Project(int projectId,String projectName,int managerId){
+	public Project(){
+		
+	}
+	
+	public Project(int projectId,String projectName,int managerId,String projectContent){
 		this.projectId=projectId;
 		this.projectName=projectName;
 		this.managerId=managerId;
+		this.projectContent=projectContent;
 	}
 	
 	public int getProjectId() {
@@ -36,6 +42,14 @@ public class Project implements Serializable{
 	}
 	public void setManagerId(int managerId) {
 		this.managerId = managerId;
+	}
+
+	public String getProjectContent() {
+		return projectContent;
+	}
+
+	public void setProjectContent(String projectContent) {
+		this.projectContent = projectContent;
 	}
 	
 	
