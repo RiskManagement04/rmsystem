@@ -87,9 +87,10 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 			e.printStackTrace();
 		}finally{
 			daoHelper.closeConnection(con);
-			daoHelper.closePreparedStatement(statement);
-			
+			daoHelper.closePreparedStatement(statement);			
 		}
+		
+		
 		return isSuccess;
 	}
 	
