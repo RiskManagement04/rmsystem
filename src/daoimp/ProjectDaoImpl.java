@@ -58,4 +58,10 @@ public class ProjectDaoImpl implements ProjectDao{
 		return list;
 	}
 
+	@Override
+	public boolean addProject(Project project) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
