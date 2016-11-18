@@ -81,7 +81,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		
 		return riskItemList;
 	}
-
+/*
 	@Override
 	public boolean addRiskItem(RiskItem riskItem) {
 			
@@ -114,7 +114,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		}
 		return isSuccess;
 	}
-	
+*/	
 	@Override
 	public boolean deleteRiskItem(int riskItemId) {
 		java.sql.Connection con=daoHelper.getConnection();

@@ -68,8 +68,15 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 	}
 
 	@Override
-	public boolean addRiskItem(int riskAgendaId, RiskItem riskItem) {
-		// TODO Auto-generated method stub
+	public boolean addRiskItem(int riskAgendaId, RiskItem riskItem) throws SQLException {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement statement=null;
+		ResultSet result=null;
+		boolean isSuccess=true;
+		
+		statement=con.prepareStatement("insert into RiskItem(projectId,submitterId,createDate,riskName,riskContent,"
+				+ "`trigger`,possibility,impact,riskStatus) values(?,?,?)");
+		
 		return false;
 	}
 
