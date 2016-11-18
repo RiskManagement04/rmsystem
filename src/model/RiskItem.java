@@ -173,7 +173,7 @@ public class RiskItem implements Serializable{
 		// TODO Auto-generated method stub
 		return convertRiskStatus(riskStatus);
 	}
-	private String convertRiskStatus(RiskStatus status){
+	public String convertRiskStatus(RiskStatus status){
 		if(status.equals(RiskStatus.PREDICTED)){
 			return "PREDICTED";
 		}else if(status.equals(RiskStatus.HAPPENED)){
