@@ -60,7 +60,12 @@ public class AddRiskAgendaServlet extends HttpServlet {
 			pw.print("<script>location.href='./checkRisk/checkRiskAgendaList.jsp'</script>"); 
 		}else{
 			RiskAgendaListBean riskAgendaList=new RiskAgendaListBean();
-			riskAgendaList.setRiskAgendaList(DaoFactory.getRiskAgendaDao().findRiskAgendaByUser(submitterId));
+			try {
+				riskAgendaList.setRiskAgendaList(DaoFactory.getRiskAgendaDao().findRiskAgendaByUser(submitterId));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			session.setAttribute("riskAgendaList",riskAgendaList);
 			pw.print("<script>location.href='./checkRisk/checkRiskAgendaList.jsp'</script>");
 		}

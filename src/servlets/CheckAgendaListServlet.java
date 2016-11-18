@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.RiskAgendaListBean;
 import bean.RiskItemListBean;
 import model.RiskAgenda;
 import model.RiskItem;
@@ -22,13 +24,13 @@ import factory.DaoFactory;
  * Servlet implementation class CheckRiskAgendaServlet
  */
 @WebServlet("/CheckRiskAgendaServlet")
-public class CheckRiskAgendaServlet extends HttpServlet {
+public class CheckAgendaListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckRiskAgendaServlet() {
+    public CheckAgendaListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,28 +45,27 @@ public class CheckRiskAgendaServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
-		int agendaId=Integer.parseInt(request.getParameter("agendaId").trim());
 		
 		int userId=(Integer)session.getAttribute("LoginId");
-		List riskAgendaList= DaoFactory.getRiskAgendaDao().findRiskAgendaByUser(userId);
-		
-		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();
-		for(int i=0;i<riskAgendaList.size();i++){
-			RiskAgenda riskAgenda=(RiskAgenda)riskAgendaList.get(i);
-			if(riskAgenda.getAgendaId()==agendaId){
-				riskItemList=riskAgenda.getRisks();
-				break;
-			}
+		List riskAgendaList=new ArrayList<>();
+		try {
+			riskAgendaList = DaoFactory.getRiskAgendaDao().findRiskAgendaByUser(userId);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		RiskItemListBean riskItemListBean=new RiskItemListBean();
-		riskItemListBean.setRiskItemList(riskItemList);
-		session.setAttribute("RiskItemList", riskItemListBean);
+		
+		
+		
+		RiskAgendaListBean agendaListBean=new RiskAgendaListBean();
+		agendaListBean.setRiskAgendaList(riskAgendaList);
+		session.setAttribute("RiskAgendaList", agendaListBean);
 		
 		/**
 		 * 跳转到查看计划下风险的jsp页面
 		 */
 		try {
-			context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
+			context.getRequestDispatcher("/checkRisk/riskAgendaList.jsp").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
