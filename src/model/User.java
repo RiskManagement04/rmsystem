@@ -10,6 +10,10 @@ public class User implements Serializable{
 	private String password;
 	private UserType identity;
 	
+	public User(){
+		
+	}
+	
 	public User(int userId,String trueName,String nickName,String password,String identity){
 		this.userId=userId;
 		this.trueName=trueName;
@@ -59,12 +63,20 @@ public class User implements Serializable{
 		this.identity = identity;
 	}
 	
-	private String convertIdentity(UserType userType){
+	public String convertIdentity(UserType userType){
 		if(userType.equals(UserType.DEVELOPER)){
 			return "DEVELOPER";
 		}else{
 			return "MANAGER";
 		}
+	}
+	
+	public UserType convertIdentityFromString(String userType){
+		if(userType.trim().equals("DEVELOPER")){
+			return UserType.DEVELOPER;
+		}else{
+			return UserType.MANAGER;
+		}		
 	}
 
 }

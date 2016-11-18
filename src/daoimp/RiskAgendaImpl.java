@@ -14,6 +14,7 @@ import model.RiskAgenda;
 import model.RiskItem;
 import model.RiskStatus;
 import model.RiskType;
+import model.User;
 
 public class RiskAgendaImpl implements RiskAgendaDao{
 	
@@ -99,31 +100,61 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 			
 			while(result2.next()){
 				RiskItem item=new RiskItem();
-				int riskItemId=result.getInt("r.riskItemId");
+				int riskItemId=result2.getInt("r.riskItemId");
 				item.setRiskItemId(riskItemId);
-				int projectId=result.getInt("r.projectId");
+				int projectId=result2.getInt("r.projectId");
 				item.setProjectId(projectId);
-				int submitterId=result.getInt("r.submitterId");
+				int submitterId=result2.getInt("r.submitterId");
 				item.setSubmitterId(submitterId);
-				Date createDate=result.getDate("r.createDate");
+				Date createDate=result2.getDate("r.createDate");
 				item.setCreateDate(createDate);
-				String riskName=result.getString("r.riskName").trim();
+				String riskName=result2.getString("r.riskName").trim();
 				item.setRiskName(riskName);
-				String riskContent=result.getString("r.riskContent").trim();
+				String riskContent=result2.getString("r.riskContent").trim();
 				item.setRiskContent(riskContent);
-				String trigger=result.getString("r.trigger").trim();
+				String trigger=result2.getString("r.trigger").trim();
 				item.setTrigger(trigger);
-				int possibility=result.getInt("r.possibility");
+				int possibility=result2.getInt("r.possibility");
 				item.setPossibility(possibility);
-				int impact=result.getInt("r.impact");
+				int impact=result2.getInt("r.impact");
 				item.setImpact(impact);
-				String riskStatus=result.getString("r.riskStatus").trim();
+				String riskStatus=result2.getString("r.riskStatus").trim();
 				item.setRiskStatus(item.convertRiskStatusfromString(riskStatus));
-				String measures=result.getString("r.measures").trim();
+				String measures=result2.getString("r.measures").trim();
 				item.setMeasures(measures);
-				String riskType=result.getString("r.riskType").trim();
+				String riskType=result2.getString("r.riskType").trim();
 				item.setRiskType(item.convertRiskTypefromString(riskType));
 				
+				//根据riskItem的编号查找跟踪者
+				PreparedStatement statement3=null;
+				ResultSet result3=null;
+				ArrayList<User> trackers=new ArrayList<User>();
+				statement3=con.prepareStatement("select * from Tracking t,User u where t.riskItemId=? and "
+						+ "t.userId=u.userId");
+				
+				statement3.setInt(1, riskItemId);				
+				result3 = statement3.executeQuery();
+				
+				while(result3.next()){
+					User user=new User();
+					int trackerId=result3.getInt("u.userId");
+					user.setUserId(trackerId);
+					String trueName=result3.getString("u.trueName").trim();
+					user.setTrueName(trueName);
+					String nickName=result3.getString("u.nickName").trim();
+					user.setNickName(nickName);
+					String password=result3.getString("u.password").trim();
+					user.setPassword(password);
+					String identity=result3.getString("u.identity").trim();
+					user.setIdentity(user.convertIdentityFromString(identity));
+					
+					trackers.add(user);
+				}
+				
+				daoHelper.closeResult(result3);
+				daoHelper.closePreparedStatement(statement3);
+				
+				item.setTrackers(trackers);
 				risks.add(item);
 				
 			}//里层while结束
@@ -164,6 +195,7 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		daoHelper.closePreparedStatement(statement);
 		
 		if(!isSuccess){
+			daoHelper.closeConnection(con);
 			return "风险条目名称已存在！";
 		}else{
 			//插入到风险条目表
@@ -172,16 +204,16 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 			statement.setInt(1, riskItem.getProjectId());
 			statement.setInt(2, riskItem.getSubmitterId());
 			statement.setDate(3, riskItem.getCreateDate());
-			statement.setString(4, riskItem.getRiskName());
-			statement.setString(5, riskItem.getRiskContent());
-			statement.setString(6, riskItem.getTrigger());
+			statement.setString(4, riskItem.getRiskName().trim());
+			statement.setString(5, riskItem.getRiskContent().trim());
+			statement.setString(6, riskItem.getTrigger().trim());
 			statement.setInt(7, riskItem.getPossibility());
 			statement.setInt(8, riskItem.getImpact());
 			
 			RiskStatus status=riskItem.getRiskStatus();			
 			statement.setString(9, riskItem.convertRiskStatus(status));
 			
-			statement.setString(10, riskItem.getMeasures());
+			statement.setString(10, riskItem.getMeasures().trim());
 			
 			RiskType type=riskItem.getRiskType();
 			statement.setString(11, riskItem.convertRiskTypeToString(type));
@@ -210,19 +242,41 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 			statement.setInt(2, riskItemId);
 			statement.execute();
 			
-			daoHelper.closePreparedStatement(statement);		
+			daoHelper.closePreparedStatement(statement);
+			
+			//插入到风险条目和跟踪者关系表
+			statement=con.prepareStatement("insert into Tracking values(?,?)");
+			
+			ArrayList<User> trackers=riskItem.getTrackers();
+			for(int i=0;i<trackers.size();i++){
+				User u=trackers.get(i);
+				statement.setInt(1, riskItemId);
+				statement.setInt(2, u.getUserId());
+				
+				statement.addBatch();
+			}
+			statement.executeBatch();
+			
+			daoHelper.closePreparedStatement(statement);
+			daoHelper.closeConnection(con);
 			return "新增风险条目成功！";
 		}
 		
 	}
 
 	@Override
-	public boolean deleteRiskItem(int riskAgendaId, int riskItemId) {
+	public boolean deleteRiskItem(int riskAgendaId, int riskItemId) throws SQLException {
 		Connection con=daoHelper.getConnection();
 		PreparedStatement statement=null;
 		
-		
-		return false;
+		statement = con.prepareStatement("delete from AgendaToRisk where agendaId=? and riskItemId=?");
+		statement.setInt(1, riskAgendaId);
+		statement.setInt(2, riskItemId);
+		statement.execute();
+
+		daoHelper.closePreparedStatement(statement);
+		daoHelper.closeConnection(con);
+		return true;
 	}
 
 }
