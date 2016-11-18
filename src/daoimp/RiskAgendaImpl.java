@@ -79,6 +79,7 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		while(result.next()){
 			RiskAgenda agenda=new RiskAgenda();
 			
+			agenda.setUserId(userId);
 			int agendaId=result.getInt("agendaId");
 			agenda.setAgendaId(agendaId);
 			String agendaName=result.getString("agendaName").trim();
@@ -123,9 +124,21 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 				String riskType=result.getString("r.riskType").trim();
 				item.setRiskType(item.convertRiskTypefromString(riskType));
 				
-			}
+				risks.add(item);
+				
+			}//里层while结束
 			
-		}
+			daoHelper.closeResult(result2);
+			daoHelper.closePreparedStatement(statement2);
+			
+			agenda.setRisks(risks);
+			agendaList.add(agenda);
+			
+		}//外层while结束
+		
+		daoHelper.closeResult(result);
+		daoHelper.closePreparedStatement(statement);
+		daoHelper.closeConnection(con);
 		
 		return agendaList;
 	}
