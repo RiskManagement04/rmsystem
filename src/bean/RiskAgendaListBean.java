@@ -21,7 +21,7 @@ public class RiskAgendaListBean implements Serializable{
 	}
 
 	
-	public void seRiskAgendaList(List riskAgendaList) {
+	public void setRiskAgendaList(List riskAgendaList) {
 		this.riskAgendaList = riskAgendaList;
 	}
 	
