@@ -2,7 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,22 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.RiskAgendaListBean;
 import bean.RiskItemListBean;
-import factory.DaoFactory;
 import model.RiskAgenda;
+import model.RiskItem;
+import factory.DaoFactory;
 
 /**
- * Servlet implementation class AddRiskAgenda
+ * Servlet implementation class CheckRiskAgendaServlet
  */
-@WebServlet("/AddRiskAgenda")
-public class AddRiskAgendaServlet extends HttpServlet {
+@WebServlet("/CheckRiskAgendaServlet")
+public class CheckRiskAgendaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddRiskAgendaServlet() {
+    public CheckRiskAgendaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,31 +39,35 @@ public class AddRiskAgendaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		ServletContext context = getServletContext();
-		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
-		int agendaId=0;
-		String agendaName=request.getParameter("agendaName").trim();
-		java.sql.Date createDate=new java.sql.Date(System.currentTimeMillis());
-		int submitterId=(Integer)session.getAttribute("LoginId");
-		String submitterName="";
-		RiskAgenda agenda=new RiskAgenda(agendaName, createDate, submitterId, submitterName);
+		int agendaId=Integer.parseInt(request.getParameter("agendaId").trim());
 		
-		boolean isSuccess=false;
+		int userId=(Integer)session.getAttribute("LoginId");
+		List riskAgendaList= DaoFactory.getRiskAgendaDao().findRiskAgendaByUser(userId);
+		
+		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();
+		for(int i=0;i<riskAgendaList.size();i++){
+			RiskAgenda riskAgenda=(RiskAgenda)riskAgendaList.get(i);
+			if(riskAgenda.getAgendaId()==agendaId){
+				riskItemList=riskAgenda.getRisks();
+				break;
+			}
+		}
+		RiskItemListBean riskItemListBean=new RiskItemListBean();
+		riskItemListBean.setRiskItemList(riskItemList);
+		session.setAttribute("RiskItemList", riskItemListBean);
+		
+		/**
+		 * 跳转到查看计划下风险的jsp页面
+		 */
 		try {
-			isSuccess = DaoFactory.getRiskAgendaDao().addRiskAgenda(agenda);
-		} catch (SQLException e) {
+			context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
+		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		if(!isSuccess){
-			pw.print("<script>location.href='./checkRisk/checkRiskAgendaList.jsp'</script>"); 
-		}else{
-			RiskAgendaListBean riskAgendaList=new RiskAgendaListBean();
-			riskAgendaList.setRiskAgendaList(DaoFactory.getRiskAgendaDao().findRiskAgendaByUser(submitterId));
-			session.setAttribute("riskAgendaList",riskAgendaList);
-			pw.print("<script>location.href='./checkRisk/checkRiskAgendaList.jsp'</script>");
 		}
 	}
 
@@ -70,7 +75,7 @@ public class AddRiskAgendaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		// TODO Auto-generated method stub
 	}
 
 }

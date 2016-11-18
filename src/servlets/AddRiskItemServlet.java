@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -91,16 +92,23 @@ public class AddRiskItemServlet extends HttpServlet {
 		RiskItem item=new RiskItem(riskItemId,projectId,submitterId,createDate,riskName,riskContent,trigger,
 				possibility,impact,riskStatus,projectName, measures, riskType);
 		
-		//����
-		boolean isSuccess=DaoFactory.getRiskItemDao().addRiskItem(item);
-		if(!isSuccess){
-			pw.print("<script>location.href='./checkRisk/checkRiskList.jsp'</script>"); 
-		}else{
-			RiskItemListBean riskItemList=new RiskItemListBean();
-			riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(submitterId));
-			session.setAttribute("riskItemList",riskItemList);
-			pw.print("<script>location.href='./checkRisk/checkRiskList.jsp'</script>");
+		/**
+		 * 获取当前的计划id
+		 */
+		int riskAgendaId=Integer.parseInt(request.getParameter("agendaId").trim());
+		String result="";
+		try {
+			result = DaoFactory.getRiskAgendaDao().addRiskItem(riskAgendaId, item);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		RiskItemListBean riskItemList=new RiskItemListBean();
+		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(submitterId));
+		session.setAttribute("riskItemList",riskItemList);
+		pw.print("<script>alert(result);location.href='./checkRisk/checkRiskList.jsp'</script>"); 
+		
 		
 		
 	}
