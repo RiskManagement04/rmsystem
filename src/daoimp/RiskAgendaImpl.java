@@ -76,16 +76,54 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		statement = con.prepareStatement("select * from RiskAgenda where userId=?");
 		statement.setInt(1, userId);
 		result = statement.executeQuery();
-		if(result.next()){
-			int agendaId=result.getInt("agendaId");
-			String agendaName=result.getString("agendaName");
-			Date createTime=result.getDate("createTime");
+		while(result.next()){
+			RiskAgenda agenda=new RiskAgenda();
 			
+			int agendaId=result.getInt("agendaId");
+			agenda.setAgendaId(agendaId);
+			String agendaName=result.getString("agendaName").trim();
+			agenda.setAgendaName(agendaName);
+			Date createTime=result.getDate("createTime");
+			agenda.setCreateTime(createTime);
+			
+			//根据计划编号查找风险条目列表
 			PreparedStatement statement2=null;
 			ResultSet result2=null;
 			ArrayList<RiskItem> risks=new ArrayList<RiskItem>();
-			//根据计划编号查找风险条目列表
-			statement2=con.prepareStatement("select * from RiskAgenda where userId=?");
+			
+			statement2=con.prepareStatement("select * from AgendaToRisk a,RiskItem r where a.agendaId=? and "
+					+ "a.riskItemId=r.riskItemId");
+			statement2.setInt(1, agendaId);
+			result2 = statement2.executeQuery();
+			
+			while(result2.next()){
+				RiskItem item=new RiskItem();
+				int riskItemId=result.getInt("r.riskItemId");
+				item.setRiskItemId(riskItemId);
+				int projectId=result.getInt("r.projectId");
+				item.setProjectId(projectId);
+				int submitterId=result.getInt("r.submitterId");
+				item.setSubmitterId(submitterId);
+				Date createDate=result.getDate("r.createDate");
+				item.setCreateDate(createDate);
+				String riskName=result.getString("r.riskName").trim();
+				item.setRiskName(riskName);
+				String riskContent=result.getString("r.riskContent").trim();
+				item.setRiskContent(riskContent);
+				String trigger=result.getString("r.trigger").trim();
+				item.setTrigger(trigger);
+				int possibility=result.getInt("r.possibility");
+				item.setPossibility(possibility);
+				int impact=result.getInt("r.impact");
+				item.setImpact(impact);
+				String riskStatus=result.getString("r.riskStatus").trim();
+				item.setRiskStatus(item.convertRiskStatusfromString(riskStatus));
+				String measures=result.getString("r.measures").trim();
+				item.setMeasures(measures);
+				String riskType=result.getString("r.riskType").trim();
+				item.setRiskType(item.convertRiskTypefromString(riskType));
+				
+			}
 			
 		}
 		

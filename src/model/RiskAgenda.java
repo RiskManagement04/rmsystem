@@ -18,6 +18,10 @@ public class RiskAgenda implements Serializable{
 	private String userName;
 	private ArrayList<RiskItem> risks=new ArrayList<RiskItem>();
 	
+	public RiskAgenda(){
+		
+	}
+	
 	public RiskAgenda(String agendaName,Date createTime,int userId,String userName){
 		this.agendaName=agendaName;
 		this.createTime=createTime;
