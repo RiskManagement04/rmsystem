@@ -14,7 +14,8 @@ public class RiskTrackingItem implements Serializable{
 	private RiskStatus riskStatus;
 	private String riskContent;
 	private String measures;
-	
+	private int possibility;//1,2,3
+	private int impact;//1,2,3
 	
 	public RiskTrackingItem() {
 		super();
@@ -23,7 +24,7 @@ public class RiskTrackingItem implements Serializable{
 
 	public RiskTrackingItem(int riskTrackingItemId, int riskItemId,
 			int trackerId, Date createTime, String riskStatus,
-			String riskContent, String measures,String riskItemName) {
+			String riskContent, String measures,String riskItemName,int possibility,int impact) {
 		super();
 		this.riskTrackingItemId = riskTrackingItemId;
 		this.riskItemId = riskItemId;
@@ -33,11 +34,13 @@ public class RiskTrackingItem implements Serializable{
 		this.riskContent = riskContent;
 		this.measures = measures;
 		this.riskItemName=riskItemName;
+		this.possibility=possibility;
+		this.impact=impact;
 	}
 	
 	public RiskTrackingItem(int riskTrackingItemId, int riskItemId,
 			int trackerId, Date createTime, RiskStatus riskStatus,
-			String riskContent, String measures,String riskItemName) {
+			String riskContent, String measures,String riskItemName,int possibility,int impact) {
 		super();
 		this.riskTrackingItemId = riskTrackingItemId;
 		this.riskItemId = riskItemId;
@@ -47,6 +50,8 @@ public class RiskTrackingItem implements Serializable{
 		this.riskContent = riskContent;
 		this.measures = measures;
 		this.riskItemName=riskItemName;
+		this.possibility=possibility;
+		this.impact=impact;
 	}
 	
 	private  RiskStatus convertStatus(String strStatus){
@@ -152,6 +157,22 @@ public class RiskTrackingItem implements Serializable{
 
 	public void setRiskItemName(String riskItemName) {
 		this.riskItemName = riskItemName;
+	}
+
+	public int getPossibility() {
+		return possibility;
+	}
+
+	public void setPossibility(int possibility) {
+		this.possibility = possibility;
+	}
+
+	public int getImpact() {
+		return impact;
+	}
+
+	public void setImpact(int impact) {
+		this.impact = impact;
 	}
 	
 	
