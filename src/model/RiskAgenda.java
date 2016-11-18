@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class RiskAgenda implements Serializable{
 
@@ -15,6 +16,7 @@ public class RiskAgenda implements Serializable{
 	private Date createTime;
 	private int userId;
 	private String userName;
+	private ArrayList<RiskItem> risks=new ArrayList<RiskItem>();
 	
 	public RiskAgenda(String agendaName,Date createTime,int userId,String userName){
 		this.agendaName=agendaName;
@@ -52,6 +54,14 @@ public class RiskAgenda implements Serializable{
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public ArrayList<RiskItem> getRisks() {
+		return risks;
+	}
+
+	public void setRisks(ArrayList<RiskItem> risks) {
+		this.risks = risks;
 	}
 	
 	
