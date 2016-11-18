@@ -72,34 +72,41 @@ public class UserDaoImpl implements UserDao{
 			result = statement.executeQuery();
 			
 			if(result.next()){
-				return false;
+				isSuccess=false;
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		daoHelper.closeResult(result);
-		daoHelper.closePreparedStatement(statement);
-	
-		try {
-			statement=con.prepareStatement("insert into User(trueName,nickName,password,identity) values(?,?,?,?)");
-			
-			statement.setString(1, user.getTrueName());
-			statement.setString(2,user.getNickName());
-			statement.setString(3, user.getPassword());
-			statement.setString(4, user.getIdentityString());
-			isSuccess=statement.execute();
-						
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally{
-			daoHelper.closeConnection(con);
-			daoHelper.closePreparedStatement(statement);
-			
+			daoHelper.closeResult(result);
+			daoHelper.closePreparedStatement(statement);			
 		}
-		return isSuccess;
-	}
 
+		
+		if(isSuccess==false){
+			return false;
+		}else{
+			try {
+				statement=con.prepareStatement("insert into User(trueName,nickName,password,identity) values(?,?,?,?)");
+				
+				statement.setString(1, user.getTrueName());
+				statement.setString(2,user.getNickName());
+				statement.setString(3, user.getPassword());
+				statement.setString(4, user.getIdentityString());
+				isSuccess=statement.execute();
+							
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				isSuccess=false;
+			}finally{
+				daoHelper.closeConnection(con);
+				daoHelper.closePreparedStatement(statement);
+				
+			}
+			return isSuccess;
+		}
+		
+	}
 
 }
