@@ -81,8 +81,7 @@ public class ProjectDaoImpl implements ProjectDao{
 			daoHelper.closeConnection(con);
 			daoHelper.closePreparedStatement(statement);
 		}
-		
-		
+			
 		return isSuccess;
 	}
 
