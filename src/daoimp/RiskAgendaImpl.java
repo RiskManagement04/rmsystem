@@ -216,4 +216,13 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		
 	}
 
+	@Override
+	public boolean deleteRiskItem(int riskAgendaId, int riskItemId) {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement statement=null;
+		
+		
+		return false;
+	}
+
 }

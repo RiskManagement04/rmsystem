@@ -13,5 +13,7 @@ public interface RiskAgendaDao {
 	public List findRiskAgendaByUser(int userId) throws SQLException;//获取用户的风险计划列表
 	
 	public String addRiskItem(int riskAgendaId,RiskItem riskItem) throws SQLException;//在计划中添加风险条目
+	
+	public boolean deleteRiskItem(int riskAgendaId,int riskItemId);
 
 }

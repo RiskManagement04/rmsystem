@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class RiskItem implements Serializable{
 
@@ -24,13 +25,14 @@ public class RiskItem implements Serializable{
 	private RiskStatus riskStatus;
 	private String measures;
 	private RiskType riskType;
+	private ArrayList<User> trackers;
 	
 	public RiskItem(){
 		
 	}
 	
 	public RiskItem(int riskItemId,int projectId,int submitterId,Date createDate,String riskName,String riskContent,String trigger,
-			int possibility,int impact,String riskStatus,String projectName,String measures,String riskType){
+			int possibility,int impact,String riskStatus,String projectName,String measures,String riskType,ArrayList<User> trackers){
 		this.riskItemId=riskItemId;
 	    this.projectId=projectId;
 	    this.submitterId=submitterId;
@@ -53,6 +55,8 @@ public class RiskItem implements Serializable{
 	    
 	    this.measures=measures;
 	    this.riskType=this.convertRiskTypefromString(riskType.trim());
+	    
+	    this.setTrackers(trackers);
 	    
 	}
 	
@@ -260,6 +264,14 @@ public class RiskItem implements Serializable{
 		
 		
 		return type;
+	}
+
+	public ArrayList<User> getTrackers() {
+		return trackers;
+	}
+
+	public void setTrackers(ArrayList<User> trackers) {
+		this.trackers = trackers;
 	}
 
 }
