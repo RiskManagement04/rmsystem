@@ -27,10 +27,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public List<Project> getProjectByUser(int userId) {
 		// TODO Auto-generated method stub
+		List<Project> list=new ArrayList<Project>();
+		/*
 		Connection con=daoHelper.getConnection();
 		PreparedStatement stmt=null;
 		ResultSet result=null;
-		List<Project> list=new ArrayList<Project>();
 		
 		try {
 			stmt = con.prepareStatement("select * from Developing d,Project p where d.userId=? and d.projectId=p.projectId");
@@ -54,14 +55,34 @@ public class ProjectDaoImpl implements ProjectDao{
 			daoHelper.closePreparedStatement(stmt);
 			daoHelper.closeResult(result);
 		}
-		
+		*/
 		return list;
 	}
 
 	@Override
 	public boolean addProject(Project project) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection con=daoHelper.getConnection();
+		PreparedStatement statement=null;
+		boolean isSuccess=true;
+		
+		try {
+			statement=con.prepareStatement("insert into Project(projectName,projectContent,managerId) values(?,?,?)");
+			statement.setString(1, project.getProjectName());
+			statement.setString(2, project.getProjectContent());
+			statement.setInt(3, project.getManagerId());
+			
+			statement.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			isSuccess=false;
+		}finally{
+			daoHelper.closeConnection(con);
+			daoHelper.closePreparedStatement(statement);
+		}
+		
+		return isSuccess;
 	}
 
 }
