@@ -15,6 +15,14 @@ public class RiskAgenda implements Serializable{
 	private Date createTime;
 	private int userId;
 	private String userName;
+	
+	public RiskAgenda(String agendaName,Date createTime,int userId,String userName){
+		this.agendaName=agendaName;
+		this.createTime=createTime;
+		this.userId=userId;
+		this.userName=userName;
+	}
+	
 	public int getAgendaId() {
 		return agendaId;
 	}
