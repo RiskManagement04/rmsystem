@@ -62,8 +62,31 @@ public class AddRiskTrackingServlet extends HttpServlet {
 		
 		String riskContent=request.getParameter("riskContent").trim();
 		String measures=request.getParameter("measures").trim();
-		
-		RiskTrackingItem item=new RiskTrackingItem(riskTrackingItemId,riskItemId,trackerId,createDate,riskStatus,riskContent,measures,riskItemName);
+		/**
+		 * 新增风险跟踪时，增加风险可能性
+		 */
+		int possibility=0;
+		String strPossibility=request.getParameter("possibility").trim();
+		if(strPossibility.equals("high")){
+			possibility=3;
+		}else if(strPossibility.equals("middle")){
+			possibility=2;
+		}else{
+			possibility=1;
+		}
+		/**
+		 * 新增风险跟踪时，增加风险影响
+		 */
+		int impact=0;
+		String strImpact=request.getParameter("impact").trim();
+		if(strImpact.equals("high")){
+			impact=3;
+		}else if(strImpact.equals("middle")){
+			impact=2;
+		}else{
+			impact=1;
+		}
+		RiskTrackingItem item=new RiskTrackingItem(riskTrackingItemId,riskItemId,trackerId,createDate,riskStatus,riskContent,measures,riskItemName, possibility, impact);
 		boolean isSuccess=DaoFactory.getRiskTrackingItemDao().addRiskTrackingItem(item);
 		
 		if(!isSuccess){

@@ -49,6 +49,10 @@ public class AddRiskItemServlet extends HttpServlet {
 		int submitterId=(Integer)session.getAttribute("LoginId");
 		String submitterName=null;
 		java.sql.Date createDate=new java.sql.Date(System.currentTimeMillis());
+		/*
+		 * 新增风险类别*/
+		String riskType=request.getParameter("riskType").trim();
+		
 		String riskName=request.getParameter("riskName").trim();
 		String riskContent=request.getParameter("riskContent").trim();
 		String trigger=request.getParameter("trigger").trim();
@@ -70,20 +74,24 @@ public class AddRiskItemServlet extends HttpServlet {
 			impact=1;
 		}		
 		
-		RiskStatus riskStatus=null;
-		if(request.getParameter("riskStatus").trim().equals("predicted")){
-			riskStatus=RiskStatus.PREDICTED;
-		}else if(request.getParameter("riskStatus").trim().equals("happened")){
-			riskStatus=RiskStatus.HAPPENED;
-		}else if(request.getParameter("riskStatus").trim().equals("solved")){
-			riskStatus=RiskStatus.SOLVED;
-		}
+//		RiskStatus riskStatus=null;
+//		if(request.getParameter("riskStatus").trim().equals("predicted")){
+//			riskStatus=RiskStatus.PREDICTED;
+//		}else if(request.getParameter("riskStatus").trim().equals("happened")){
+//			riskStatus=RiskStatus.HAPPENED;
+//		}else if(request.getParameter("riskStatus").trim().equals("solved")){
+//			riskStatus=RiskStatus.SOLVED;
+//		}
+		String riskStatus=request.getParameter("riskStatus").trim();
 		
 		String projectName="";
+		/*
+		 * 风险措施*/
+		String measures="";
 		RiskItem item=new RiskItem(riskItemId,projectId,submitterId,createDate,riskName,riskContent,trigger,
-				possibility,impact,riskStatus,projectName);
+				possibility,impact,riskStatus,projectName, measures, riskType);
 		
-		//����
+		//����
 		boolean isSuccess=DaoFactory.getRiskItemDao().addRiskItem(item);
 		if(!isSuccess){
 			pw.print("<script>location.href='./checkRisk/checkRiskList.jsp'</script>"); 
