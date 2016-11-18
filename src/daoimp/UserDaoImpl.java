@@ -93,7 +93,7 @@ public class UserDaoImpl implements UserDao{
 				statement.setString(2,user.getNickName());
 				statement.setString(3, user.getPassword());
 				statement.setString(4, user.getIdentityString());
-				isSuccess=statement.execute();
+				statement.execute();
 							
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

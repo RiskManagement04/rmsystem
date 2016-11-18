@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import model.RiskAgenda;
@@ -7,7 +8,7 @@ import model.RiskItem;
 
 public interface RiskAgendaDao {
 	
-	public boolean addRiskAgenda(RiskAgenda risk);//新建风险管理计划
+	public boolean addRiskAgenda(RiskAgenda risk) throws SQLException;//新建风险管理计划
 	
 	public List findRiskAgendaByUser(int userId);//获取用户的风险计划列表
 	
