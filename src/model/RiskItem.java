@@ -248,6 +248,7 @@ public class RiskItem implements Serializable{
 			type="SocialEnvironment_Risk";
 		}
 		
+		
 		return type;
 	}
 
