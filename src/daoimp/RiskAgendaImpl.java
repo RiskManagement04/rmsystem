@@ -1,9 +1,11 @@
 package daoimp;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.DaoHelper;
@@ -64,9 +66,30 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 	}
 
 	@Override
-	public List findRiskAgendaByUser(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List findRiskAgendaByUser(int userId) throws SQLException {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement statement=null;
+		ResultSet result=null;
+		List agendaList=new ArrayList();
+		
+		//查找用户的计划列表
+		statement = con.prepareStatement("select * from RiskAgenda where userId=?");
+		statement.setInt(1, userId);
+		result = statement.executeQuery();
+		if(result.next()){
+			int agendaId=result.getInt("agendaId");
+			String agendaName=result.getString("agendaName");
+			Date createTime=result.getDate("createTime");
+			
+			PreparedStatement statement2=null;
+			ResultSet result2=null;
+			ArrayList<RiskItem> risks=new ArrayList<RiskItem>();
+			//根据计划编号查找风险条目列表
+			statement2=con.prepareStatement("select * from RiskAgenda where userId=?");
+			
+		}
+		
+		return agendaList;
 	}
 
 	@Override
