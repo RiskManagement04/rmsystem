@@ -10,6 +10,7 @@ import java.util.List;
 import dao.DaoHelper;
 import dao.ProjectDao;
 import model.Project;
+import model.User;
 
 public class ProjectDaoImpl implements ProjectDao{
 	
@@ -59,12 +60,14 @@ public class ProjectDaoImpl implements ProjectDao{
 		return list;
 	}
 
+	//新建一个项目
 	@Override
 	public boolean addProject(Project project) {
 		Connection con=daoHelper.getConnection();
 		PreparedStatement statement=null;
 		boolean isSuccess=true;
 		
+		//插入项目信息
 		try {
 			statement=con.prepareStatement("insert into Project(projectName,projectContent,managerId) values(?,?,?)");
 			statement.setString(1, project.getProjectName());
@@ -78,10 +81,61 @@ public class ProjectDaoImpl implements ProjectDao{
 			e.printStackTrace();
 			isSuccess=false;
 		}finally{
-			daoHelper.closeConnection(con);
 			daoHelper.closePreparedStatement(statement);
 		}
+				
+		if(isSuccess==false){
+			return isSuccess;
+		}
+		
+		//得到项目编号
+		ResultSet result=null;
+		int projectId=0;
+		try {
+			statement = con.prepareStatement("select * from Project p where p.projectName=?");
+			statement.setString(1,project.getProjectName());
+			result = statement.executeQuery();
 			
+			if(result.next()){
+				projectId=result.getInt("p.projectId");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			isSuccess=false;
+		} finally{
+			daoHelper.closePreparedStatement(statement);
+			daoHelper.closeResult(result);
+		}
+		
+		if(isSuccess==false){
+			return isSuccess;
+		}
+
+		//插入项目与用户关系
+		ArrayList<User> users=project.getUsers();
+		try {
+			statement=con.prepareStatement("insert into Developing values(?,?)");
+			
+			for(int i=0;i<users.size();i++){
+				User user=users.get(i);
+				statement.setInt(1, projectId);
+				statement.setInt(2, user.getUserId());
+				
+				statement.addBatch();
+			}
+			
+			statement.executeBatch();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			isSuccess=false;
+		}finally{
+			daoHelper.closePreparedStatement(statement);
+			daoHelper.closeConnection(con);
+		}
+		
 		return isSuccess;
 	}
 

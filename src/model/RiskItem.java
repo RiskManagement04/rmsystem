@@ -42,6 +42,7 @@ public class RiskItem implements Serializable{
 	    this.impact=impact;
 	    this.projectName=projectName;
 	    
+	    riskStatus=riskStatus.trim();
 	    if(riskStatus.equals("PREDICTED")){
 	    	this.riskStatus=RiskStatus.PREDICTED;
 	    }else if(riskStatus.equals("HAPPENED")){
