@@ -15,7 +15,7 @@ public interface RiskAgendaDao {
 	
 	public String addRiskItem(int riskAgendaId,RiskItem riskItem) throws SQLException;//在计划中添加风险条目
 	
-	public String addRiskItem(int riskAgendaId,ArrayList<Integer> riskItemList);//在计划中添加多条风险条目
+	public boolean addRiskItem(int riskAgendaId,ArrayList<Integer> riskItemList);//在计划中添加多条风险条目
 	
 	public boolean deleteRiskItem(int riskAgendaId,int riskItemId) throws SQLException;//删除风险条目
 

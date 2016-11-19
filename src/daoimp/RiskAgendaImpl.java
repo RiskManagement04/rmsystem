@@ -280,9 +280,9 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 	}
 
 	@Override
-	public String addRiskItem(int riskAgendaId, ArrayList<Integer> riskItemList) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean addRiskItem(int riskAgendaId, ArrayList<Integer> riskItemList) {
+		
+		return false;
 	}
 
 }
