@@ -12,6 +12,7 @@ import dao.DaoHelper;
 import dao.RiskItemDao;
 import model.RiskItem;
 import model.RiskStatus;
+import model.RiskType;
 import model.User;
 
 public class RiskItemDaoImpl implements RiskItemDao{
@@ -148,7 +149,31 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		}
 		return isSuccess;
 	}
-*/	
+*/
+
+	@Override
+	public List findRiskItemTypeByCreatingMost(Date startDate, Date finishDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List findRiskItemByCreatingMost(Date startDate, Date finishDate, RiskType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List findRiskItemTypeByHappeningMost(Date startDate, Date finishDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List findRiskItemByHappeningMost(Date startDate, Date finishDate, RiskType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 	
 /*
 	@Override
@@ -178,22 +203,6 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		return isSuccess;
 	}
 */
-	@Override
-	public List findRiskItemByCreatingMost(Date startDate, Date finishDate) {
-		Connection con=daoHelper.getConnection();
-		PreparedStatement stmt=null;
-		ResultSet result=null;
-		ArrayList riskItemList=new ArrayList();
-		
-		
-		
-		return riskItemList;
-	}
 
-	@Override
-	public List findRiskItemByHappeningMost(Date startDate, Date finishDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
