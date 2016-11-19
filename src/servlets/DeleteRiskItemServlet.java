@@ -48,7 +48,7 @@ public class DeleteRiskItemServlet extends HttpServlet {
 		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem());
 		session.setAttribute("riskItemList",riskItemList);
 		
-		pw.print("<script>location.href='./checkRisk/checkRiskList.jsp'</script>"); 
+		pw.print(" <script>location.href='./checkRisk/checkRiskList.jsp'</script>"); 
 	}
 
 	/**
