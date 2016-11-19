@@ -25,7 +25,7 @@
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li class="home focus"><i></i><a href='<%=request.getContextPath()+"/CheckRiskItemServlet"%>'>风险列表</a></li>
+			<li class="home "><i></i><a href='<%=request.getContextPath()+"/CheckRiskListServlet"%>'>风险列表</a></li>
 			<li class="schedule "><i></i><a href='<%=request.getContextPath()+"/CheckRiskAgendaServlet"%>' style="color: #f4f4f4;background-color: #4a90e2;">计划列表</a></li>			
 	</ul>
 </div>
@@ -65,7 +65,7 @@
 		</div>
 	
 		<div  class="iwk-table-wrap">
-			<div class="edit-buttons" style="margin-left:60px; margin-top:25px;">
+			<div style="margin-left:60px; margin-top:25px;">
 			
 				 开始时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
                	 结束时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
