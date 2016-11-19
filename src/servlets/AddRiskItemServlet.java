@@ -108,7 +108,7 @@ public class AddRiskItemServlet extends HttpServlet {
 		}
 		
 		RiskItemListBean riskItemList=new RiskItemListBean();
-		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(submitterId));
+		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem());
 		session.setAttribute("riskItemList",riskItemList);
 		pw.print("<script>alert(result);location.href='./checkRisk/checkRiskList.jsp'</script>"); 
 		

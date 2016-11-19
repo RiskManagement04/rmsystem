@@ -41,11 +41,11 @@ public class DeleteRiskItemServlet extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		
 		int deleteRiskItemId=Integer.parseInt(request.getParameter("deleteRiskItemId"));
-		DaoFactory.getRiskItemDao().deleteRiskItem(deleteRiskItemId);
+//		DaoFactory.getRiskAgendaDao().deleteRiskItem(riskAgendaId, deleteRiskItemId);
 		
 		int userId=(Integer)session.getAttribute("LoginId");
 		RiskItemListBean riskItemList=new RiskItemListBean();
-		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem(userId));
+		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem());
 		session.setAttribute("riskItemList",riskItemList);
 		
 		pw.print("<script>location.href='./checkRisk/checkRiskList.jsp'</script>"); 

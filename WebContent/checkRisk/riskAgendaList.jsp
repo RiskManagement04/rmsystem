@@ -18,10 +18,10 @@
 
 </head>
 <body>
-	<jsp:useBean id="riskItemList"
+	<jsp:useBean id="agendaList"
 		type="bean.RiskAgendaListBean"
 		scope="session"></jsp:useBean>
-	<jsp:useBean id="riskItem" class="model.RiskItem"
+	<jsp:useBean id="riskAgenda" class="model.RiskAgenda"
 		scope="page"></jsp:useBean>
 		
 <div class="guideList">

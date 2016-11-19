@@ -59,7 +59,7 @@ public class CheckAgendaListServlet extends HttpServlet {
 		
 		RiskAgendaListBean agendaListBean=new RiskAgendaListBean();
 		agendaListBean.setRiskAgendaList(riskAgendaList);
-		session.setAttribute("RiskAgendaList", agendaListBean);
+		session.setAttribute("agendaList", agendaListBean);
 		
 		/**
 		 * 跳转到查看计划下风险的jsp页面
