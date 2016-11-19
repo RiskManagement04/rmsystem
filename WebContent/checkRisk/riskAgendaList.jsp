@@ -30,7 +30,7 @@
 	
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li class="home"><i></i><a href='<%=request.getContextPath()+"/CheckRiskItemServlet"%>' >风险列表</a></li>
+			<li class="home"><i></i><a href='<%=request.getContextPath()+"/CheckRiskListServlet"%>' >风险列表</a></li>
 			<li class="schedule focus"><i></i><a href="<%=request.getContextPath()+"/CheckAgendaListServlet"%>" onclick="" class="apps/schedule" style="color: #f4f4f4;background-color: #4a90e2;">计划列表</a></li>
 
 	</ul>

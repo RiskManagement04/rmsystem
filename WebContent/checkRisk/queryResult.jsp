@@ -123,8 +123,13 @@
 					<canvas id="myChart" width="600" height="400"></canvas>
 					<script type="text/javascript">
 						var ctx = document.getElementById("myChart").getContext("2d");
+						var a=' <%=request.getAttribute("")%> ';
+						
+						var eLabels=new Array();
+						var edata=new Array();
+						
 						var data = {
-								labels : ["January","February","March","April","May","June","July"],
+								labels : eLabels,
 								datasets : [
 									
 									{
@@ -132,7 +137,7 @@
 										strokeColor : "rgba(151,187,205,1)",
 										pointColor : "rgba(151,187,205,1)",
 										pointStrokeColor : "#fff",
-										data : [1000,8765,11083,8000,6975,8743,5679]
+										data : edata
 									}
 								]
 						}
