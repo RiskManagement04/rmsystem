@@ -169,6 +169,7 @@
 			</div>
 				<table class="table table-striped" style="margin-left:50px">
 				<thead>
+				
 					<tr>
 						<%
 						if(user.getIdentity()==UserType.MANAGER){
