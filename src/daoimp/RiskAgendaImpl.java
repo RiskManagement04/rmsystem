@@ -280,9 +280,23 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 	}
 
 	@Override
-	public boolean addRiskItem(int riskAgendaId, ArrayList<Integer> riskItemList) {
+	public boolean addRiskItem(int riskAgendaId, ArrayList<Integer> riskItemList) throws SQLException {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement statement=null;
 		
-		return false;
+		statement=con.prepareStatement("insert into AgendaToRisk values(?,?)");
+		for(int i=0;i<riskItemList.size();i++){
+			statement.setInt(1, riskAgendaId);
+			statement.setInt(2, riskItemList.get(i));
+			
+			statement.addBatch();
+		}
+		statement.executeBatch();
+		
+		daoHelper.closePreparedStatement(statement);
+		daoHelper.closeConnection(con);		
+		
+		return true;
 	}
 
 }
