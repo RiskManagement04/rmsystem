@@ -44,7 +44,7 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
-		int agendaId=Integer.parseInt(request.getParameter("agendaId").trim());
+		int agendaId=Integer.parseInt(request.getParameter("riskAgendaListId").trim());
 		session.setAttribute("agendaId", agendaId);
 		
 		int userId=(Integer)session.getAttribute("LoginId");
@@ -72,7 +72,7 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 		 * 跳转到查看计划下风险的jsp页面
 		 */
 		try {
-			context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
+			context.getRequestDispatcher("/checkRisk/AgendaRiskItemList.jsp").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,6 +84,7 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doGet(request,response);
 	}
 
 }
