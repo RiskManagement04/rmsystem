@@ -85,7 +85,7 @@ public class AddRiskItemServlet extends HttpServlet {
 //		}else if(request.getParameter("riskStatus").trim().equals("solved")){
 //			riskStatus=RiskStatus.SOLVED;
 //		}
-		String riskStatus=request.getParameter("riskStatus").trim();
+		String  riskStatus=request.getParameter("riskStatus").trim();
 		
 		String projectName="";
 		/*

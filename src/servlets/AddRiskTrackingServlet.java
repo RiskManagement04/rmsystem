@@ -33,7 +33,7 @@ public class AddRiskTrackingServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see  HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -63,7 +63,7 @@ public class AddRiskTrackingServlet extends HttpServlet {
 		String riskContent=request.getParameter("riskContent").trim();
 		String measures=request.getParameter("measures").trim();
 		/**
-		 * 新增风险跟踪时，增加风险可能性
+		 * 鏂板椋庨櫓璺熻釜鏃讹紝澧炲姞椋庨櫓鍙兘鎬�
 		 */
 		int possibility=0;
 		String strPossibility=request.getParameter("possibility").trim();
@@ -75,7 +75,7 @@ public class AddRiskTrackingServlet extends HttpServlet {
 			possibility=1;
 		}
 		/**
-		 * 新增风险跟踪时，增加风险影响
+		 * 鏂板椋庨櫓璺熻釜鏃讹紝澧炲姞椋庨櫓褰卞搷
 		 */
 		int impact=0;
 		String strImpact=request.getParameter("impact").trim();
