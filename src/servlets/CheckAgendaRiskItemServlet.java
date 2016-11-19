@@ -44,7 +44,7 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
-		int agendaId=Integer.parseInt(request.getParameter("agendaId").trim());
+		int  agendaId=Integer.parseInt(request.getParameter("agendaId").trim());
 		session.setAttribute("agendaId", agendaId);
 		
 		int userId=(Integer)session.getAttribute("LoginId");

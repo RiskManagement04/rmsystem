@@ -43,7 +43,7 @@ public class CheckAgendaListServlet extends HttpServlet {
 		ServletContext context = getServletContext();
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
-		PrintWriter pw=response.getWriter();
+		PrintWriter  pw=response.getWriter();
 		
 		
 		int userId=(Integer)session.getAttribute("LoginId");
