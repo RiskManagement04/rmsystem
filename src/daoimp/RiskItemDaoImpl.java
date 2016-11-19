@@ -1,6 +1,7 @@
 package daoimp;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -140,6 +141,18 @@ public class RiskItemDaoImpl implements RiskItemDao{
 			
 		}
 		return isSuccess;
+	}
+
+	@Override
+	public List findRiskItemByCreatingMost(Date startDate, Date finishDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List findRiskItemByHappeningMost(Date startDate, Date finishDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

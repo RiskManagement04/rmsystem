@@ -129,14 +129,14 @@ public class RiskTrackingItemDaoImpl implements RiskTrackingItemDao{
 	}
 	
 	@Override
-	public boolean deleteRiskTrackingItem(int riskItemId) {
+	public boolean deleteRiskTrackingItem(int riskTrackingItemId) {
 		java.sql.Connection con=daoHelper.getConnection();
 		java.sql.PreparedStatement statement=null;
 
 		boolean isSuccess=true;
 		try {
 			statement=con.prepareStatement("delete from RiskTrackingItem where riskItemId=?");
-			statement.setInt(1,riskItemId);
+			statement.setInt(1,riskTrackingItemId);
 		
 			
 			isSuccess=statement.execute();
