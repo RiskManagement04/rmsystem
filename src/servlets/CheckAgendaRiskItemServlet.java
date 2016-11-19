@@ -55,17 +55,17 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();
+		ArrayList<RiskItem> risksList=new ArrayList<RiskItem>();
 		for(int i=0;i<riskAgendaList.size();i++){
 			RiskAgenda riskAgenda=(RiskAgenda)riskAgendaList.get(i);
 			if(riskAgenda.getAgendaId()==agendaId){
-				riskItemList=riskAgenda.getRisks();
+				risksList=riskAgenda.getRisks();
 				break;
 			}
 		}
-		RiskItemListBean riskItemListBean=new RiskItemListBean();
-		riskItemListBean.setRiskItemList(riskItemList);
-		session.setAttribute("RiskItemList", riskItemListBean);
+		RiskItemListBean riskItemList=new RiskItemListBean();
+		riskItemList.setRiskItemList(risksList);
+		session.setAttribute("agendaRiskItemList", riskItemList);
 		
 		/**
 		 * 跳转到查看计划下风险的jsp页面

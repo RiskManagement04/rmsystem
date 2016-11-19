@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import bean.RiskItemListBean;
 import factory.DaoFactory;
 import model.RiskItem;
 import model.RiskStatus;
+import model.User;
 
 /**
  * Servlet implementation class AddRiskItemServlet
@@ -89,8 +91,9 @@ public class AddRiskItemServlet extends HttpServlet {
 		/*
 		 * 风险措施*/
 		String measures="";
+		ArrayList<User> trackers=new ArrayList<User>();
 		RiskItem item=new RiskItem(riskItemId,projectId,submitterId,createDate,riskName,riskContent,trigger,
-				possibility,impact,riskStatus,projectName, measures, riskType);
+				possibility,impact,riskStatus,projectName, measures, riskType, null);
 		
 		/**
 		 * 获取当前的计划id
