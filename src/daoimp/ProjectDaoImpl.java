@@ -139,4 +139,42 @@ public class ProjectDaoImpl implements ProjectDao{
 		return isSuccess;
 	}
 
+	@Override
+	public List<Project> getProjects() {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement stmt=null;
+		ResultSet result=null;
+		List<Project> list=new ArrayList<Project>();
+		
+		try {
+			stmt = con.prepareStatement("select * from Project");
+			result = stmt.executeQuery();
+			
+			while(result.next()){
+				Project p=new Project();
+				int projectId=result.getInt("projectId");
+				p.setProjectId(projectId);
+				String projectName=result.getString("projectName");
+				p.setProjectName(projectName);
+				String projectContent=result.getString("projectContent");
+				p.setProjectContent(projectContent);
+				int managerId=result.getInt("managerId");
+				p.setManagerId(managerId);
+				
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+						
+			daoHelper.closeResult(result);
+			daoHelper.closePreparedStatement(stmt);
+			daoHelper.closeConnection(con);
+		}
+		
+		return list;
+	}
+
 }
