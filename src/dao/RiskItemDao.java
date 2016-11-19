@@ -7,10 +7,10 @@ import model.RiskItem;
 
 public interface RiskItemDao {
 
-	public List findAllRiskItem(int userId);
+	public List findAllRiskItem();
 	//public List findAllRiskItem();
 	//public boolean addRiskItem(RiskItem riskItem);
-	public boolean deleteRiskItem(int riskItemId);
+	//public boolean deleteRiskItem(int riskItemId);
 	
 	public List findRiskItemByCreatingMost(Date startDate,Date finishDate);//特定时间段被识别最多的风险
 	

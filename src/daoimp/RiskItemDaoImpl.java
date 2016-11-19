@@ -12,6 +12,7 @@ import dao.DaoHelper;
 import dao.RiskItemDao;
 import model.RiskItem;
 import model.RiskStatus;
+import model.User;
 
 public class RiskItemDaoImpl implements RiskItemDao{
 	
@@ -27,32 +28,29 @@ public class RiskItemDaoImpl implements RiskItemDao{
 	}
 
 	@Override
-	public List findAllRiskItem(int userId) {
+	public List findAllRiskItem() {
 		Connection con=daoHelper.getConnection();
 		PreparedStatement stmt=null;
 		ResultSet result=null;
 		ArrayList riskItemList=new ArrayList();
 		
-		try {
-			
-
-						
-			stmt = con.prepareStatement("select * from Developing d,RiskItem r,User u,Project p where d.userId=? and d.projectId=r.projectId and"
-					+ " r.submitterId=u.userId and d.projectId=p.projectId");
-			stmt.setInt(1,userId);
+		try {			
+			stmt = con.prepareStatement("select * from RiskItem r,Project p,User u where r.projectId=p.projectId "
+					+ "and r.submitterId=u.userId");
 			result = stmt.executeQuery();
 			
 			while(result.next()){
 				RiskItem item=new RiskItem();
-				item.setCreateDate(result.getDate("createDate"));
-				item.setImpact(result.getInt("impact"));
-				item.setPossibility(result.getInt("possibility"));
+				int riskItemId=result.getInt("r.riskItemId");
+				item.setCreateDate(result.getDate("r.createDate"));
+				item.setImpact(result.getInt("r.impact"));
+				item.setPossibility(result.getInt("r.possibility"));
 				item.setProjectId(result.getInt("r.projectId"));
-				item.setRiskContent(result.getString("riskContent").trim());
-				item.setRiskItemId(result.getInt("riskItemId"));
-				item.setRiskName(result.getString("riskName").trim());
+				item.setRiskContent(result.getString("r.riskContent").trim());
+				item.setRiskItemId(riskItemId);
+				item.setRiskName(result.getString("r.riskName").trim());
 				
-				String status=result.getString("riskStatus").trim();				
+				String status=result.getString("r.riskStatus").trim();				
 				
 				if(status.equals("PREDICTED")){
 					item.setRiskStatus(RiskStatus.PREDICTED);	
@@ -62,11 +60,46 @@ public class RiskItemDaoImpl implements RiskItemDao{
 					item.setRiskStatus(RiskStatus.SOLVED);	
 				}
 							
-				item.setSubmitterId(result.getInt("submitterId"));
-				item.setTrigger(result.getString("trigger").trim());
+				item.setSubmitterId(result.getInt("r.submitterId"));
+				item.setTrigger(result.getString("r.trigger").trim());
 				item.setSubmitterName(result.getString("u.trueName").trim());
 				
 				item.setProjectName(result.getString("p.projectName").trim());
+				item.setMeasures(result.getString("r.measures").trim());
+				
+				String riskType=result.getString("r.riskType").trim();
+				item.setRiskType(item.convertRiskTypefromString(riskType));
+				
+				//获取风险条目中的追踪者列表
+				PreparedStatement statement3=null;
+				ResultSet result3=null;
+				ArrayList<User> trackers=new ArrayList<User>();
+				statement3=con.prepareStatement("select * from Tracking t,User u where t.riskItemId=? and "
+						+ "t.userId=u.userId");
+				
+				statement3.setInt(1, riskItemId);				
+				result3 = statement3.executeQuery();
+				
+				while(result3.next()){
+					User user=new User();
+					int trackerId=result3.getInt("u.userId");
+					user.setUserId(trackerId);
+					String trueName=result3.getString("u.trueName").trim();
+					user.setTrueName(trueName);
+					String nickName=result3.getString("u.nickName").trim();
+					user.setNickName(nickName);
+					String password=result3.getString("u.password").trim();
+					user.setPassword(password);
+					String identity=result3.getString("u.identity").trim();
+					user.setIdentity(user.convertIdentityFromString(identity));
+					
+					trackers.add(user);
+				}
+				
+				daoHelper.closeResult(result3);
+				daoHelper.closePreparedStatement(statement3);
+				
+				item.setTrackers(trackers);
 
 				riskItemList.add(item);
 			}
@@ -116,6 +149,8 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		return isSuccess;
 	}
 */	
+	
+/*
 	@Override
 	public boolean deleteRiskItem(int riskItemId) {
 		java.sql.Connection con=daoHelper.getConnection();
@@ -142,11 +177,17 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		}
 		return isSuccess;
 	}
-
+*/
 	@Override
 	public List findRiskItemByCreatingMost(Date startDate, Date finishDate) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con=daoHelper.getConnection();
+		PreparedStatement stmt=null;
+		ResultSet result=null;
+		ArrayList riskItemList=new ArrayList();
+		
+		
+		
+		return riskItemList;
 	}
 
 	@Override
