@@ -5,10 +5,10 @@ import java.util.List;
 import model.RiskTrackingItem;
 
 public interface RiskTrackingItemDao {
-//鏌ユ壘椋庨櫓璺熻釜鏉＄洰   澧炲姞
-	public List findRiskTrackingItem(int riskItemId);
+
+	public List findRiskTrackingItem(int riskItemId);//查找风险条目中的风险跟踪列表
 	
-	public boolean addRiskTrackingItem(RiskTrackingItem item);
+	public boolean addRiskTrackingItem(RiskTrackingItem item);//增加风险跟踪条目
 	
 	public boolean deleteRiskTrackingItem(int riskItemId);
 }
