@@ -51,7 +51,7 @@ public class ImportRiskServlet extends HttpServlet {
 		if(!isSuccess){
 			pw.print("<script>alert('µº»Î ß∞‹!');location.href='./login/login.jsp'</script>"); 
 		}else{
-			context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
+			 context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
 		}
 		
 	}
