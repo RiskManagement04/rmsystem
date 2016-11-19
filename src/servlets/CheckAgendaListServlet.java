@@ -23,7 +23,7 @@ import factory.DaoFactory;
 /**
  * Servlet implementation class CheckRiskAgendaServlet
  */
-@WebServlet("/CheckRiskAgendaServlet")
+@WebServlet("/CheckAgendaListServlet")
 public class CheckAgendaListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -59,7 +59,7 @@ public class CheckAgendaListServlet extends HttpServlet {
 		
 		RiskAgendaListBean agendaListBean=new RiskAgendaListBean();
 		agendaListBean.setRiskAgendaList(riskAgendaList);
-		session.setAttribute("agendaList", agendaListBean);
+		session.setAttribute("riskAgendaList", agendaListBean);
 		
 		/**
 		 * 跳转到查看计划下风险的jsp页面

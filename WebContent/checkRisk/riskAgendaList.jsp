@@ -14,11 +14,11 @@
 
 		<script src='<%=request.getContextPath()+"/styles/bootstrap/jquery-1.11.3.js"%>'></script>
 		<script src='<%=request.getContextPath()+"/styles/bootstrap/js/bootstrap.min.js"%>'></script>
-<title>风险列表</title>
+<title>计划列表</title>
 
 </head>
 <body>
-	<jsp:useBean id="agendaList"
+	<jsp:useBean id="riskAgendaList"
 		type="bean.RiskAgendaListBean"
 		scope="session"></jsp:useBean>
 	<jsp:useBean id="riskAgenda" class="model.RiskAgenda"
@@ -70,19 +70,8 @@
 			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 计划列表</label>
 		</div>
 		<div  class="iwk-table-wrap">
-			<div class="edit-buttons" style="margin-left:60px; margin-top:25px;">
-				
-                
-               	开始时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
-               	 结束时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
-                <select class="txt" style="width:120px; margin-left:15px;margin-right:15px;">
-                    <option value="被识别最多" selected="selected">被识别最多</option>
-                    <option value="演变成问题最多">演变成问题最多</option>
-                </select>
-                <input class="btn" type="button" name="check" value="查询" style="width:80px; margin-top:-12px;margin-left:10px;margin-right:15px;" />
-                
-            
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:-2px; margin-bottom:10px;float:right;width:50px;">新增</a>			
+			<div class="edit-buttons" style="margin-left:60px; margin-top:25px;">				                              
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:-2px; margin-bottom:10px;float:right;width:60px;">新增计划</a>			
 				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
@@ -99,14 +88,11 @@
 										<div class="control-group" style="text-align:center">
 											 <label class="control-label" for="inputPassword" style="float:left">计划名称</label>
 											 <div class="controls">
-												<input id="inputEmail" type="text" name="riskName"/>
+												<input id="inputEmail" type="text" name="agendaName"/>
 											 </div>
-										</div>
-										
-										
-																													
-								
+										</div>																																																								
 							</div>
+							
 							<div class="modal-footer">
 								 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
 								 <button type="submit" class="btn btn-primary">保存</button>
@@ -118,13 +104,42 @@
 					
 				</div>
 			
-		
-		
-		</div>
-		
+			</div>
+				<table class="table table-striped" style="margin-left:50px">
+				<thead>
+					<tr>					
+						<th>序号</th>						
+						<th>计划名称</th>
+						<th>创建时间</th>		
+						<th>风险列表</th>
+					</tr>
+				</thead>
+				<tbody>
+				<%
+					for(int i=0;i<riskAgendaList.getRiskAgendaList().size();i++){
+						pageContext.setAttribute("riskAgenda", riskAgendaList.getRiskAgenda(i));
+				%>
+					<tr style="font-weight:normal;">					
+						<th style="font-weight:normal;"><%=i+1 %></th>
+						
+						<th style="font-weight:normal;"><jsp:getProperty name="riskAgenda" property="agendaName"/></th>
+						
+						<th style="font-weight:normal;"><jsp:getProperty name="riskAgenda" property="createTime"/></th>
+						
+						<th style="margin-right:60px;font-weight:normal">
+							<form method='POST' action="<%=request.getContextPath()+"/CheckAgendaRiskItemServlet"%>">
+								<input type="hidden" name="riskAgendaListId" value="<%=riskAgendaList.getRiskAgenda(i).getAgendaId()%>"/>
+								<input type="submit" class="btn" value='打开'/>
+							</form>
+						</th>
+					</tr>
+				<%
+					}
+				%>
+				</tbody>
+			</table>
 		</div>
 	</div>
-	
 	
 </div>
 

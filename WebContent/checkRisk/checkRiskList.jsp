@@ -29,8 +29,8 @@
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li class="home focus"><i></i><a href='<%=request.getContextPath()+"/CheckRiskItemServlet"%>' style="color: #f4f4f4;background-color: #4a90e2;">风险列表</a></li>
-			<li class="schedule "><i></i><a href='<%=request.getContextPath()+"/CheckRiskAgendaServlet"%>'>计划列表</a></li>
+			<li class="home focus"><i></i><a href='<%=request.getContextPath()+"/CheckRiskListServlet"%>' style="color: #f4f4f4;background-color: #4a90e2;">风险列表</a></li>
+			<li class="schedule "><i></i><a href='<%=request.getContextPath()+"/CheckAgendaListServlet"%>'>计划列表</a></li>
 			
 			
 	</ul>

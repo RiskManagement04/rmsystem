@@ -20,7 +20,7 @@ import model.RiskAgenda;
 /**
  * Servlet implementation class AddRiskAgenda
  */
-@WebServlet("/AddRiskAgenda")
+@WebServlet("/AddRiskAgendaServlet")
 public class AddRiskAgendaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

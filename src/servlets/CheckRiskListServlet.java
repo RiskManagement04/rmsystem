@@ -20,7 +20,7 @@ import factory.DaoFactory;
 /**
  * Servlet implementation class CheckRiskItemServlet
  */
-@WebServlet("/CheckRiskItemServlet")
+@WebServlet("/CheckRiskListServlet")
 public class CheckRiskListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
