@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.RiskItem;
 import model.RiskType;
 import model.RiskTypeRank;
 import factory.DaoFactory;
@@ -65,30 +66,40 @@ public class SearchRiskServlet extends HttpServlet {
 		
 		String str=request.getParameter("condition").trim();
 		List riskItemList=new ArrayList<>();
-		List<RiskTypeRank> riskTypeLst=new ArrayList<RiskTypeRank>();
+		List<RiskTypeRank> riskTypeRankLst=new ArrayList<RiskTypeRank>();
 		try{
 			if(str.equals("识别最多")){
 				
-				riskTypeLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);
+				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);
 				
-				RiskTypeRank typeRank=riskTypeLst.get(0);
+				RiskTypeRank typeRank=riskTypeRankLst.get(0);
 				RiskType type=typeRank.getRiskType();
 				riskItemList=DaoFactory.getRiskItemDao().findRiskItemByCreatingMost(startDate, endDate, type);
 			}else{
-				riskTypeLst=DaoFactory.getRiskItemDao().findRiskItemTypeByHappeningMost(startDate, endDate);
-				RiskTypeRank typeRank=riskTypeLst.get(0);
+				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByHappeningMost(startDate, endDate);
+				RiskTypeRank typeRank=riskTypeRankLst.get(0);
 				RiskType type=typeRank.getRiskType();
 				riskItemList=DaoFactory.getRiskItemDao().findRiskItemByHappeningMost(startDate, endDate, type);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+		ArrayList<String> riskTypeList=new ArrayList<String>();
+		ArrayList<Integer> riskAmountList=new ArrayList<Integer>();
 		
-		
+		for(int i=0;i<riskTypeRankLst.size();i++){
+			
+			RiskType riskType=riskTypeRankLst.get(i).getRiskType();
+			String type=((RiskItem)riskItemList.get(0)).convertRiskTypeToString(riskType);
+			riskTypeList.add(i, type);
+			riskAmountList.add(i, riskTypeRankLst.get(i).getAmount());
+		}
+		request.setAttribute("riskType", riskTypeList);
+		request.setAttribute("riskRank", riskAmountList);
 		session.setAttribute("riskItemList",riskItemList);
-		session.setAttribute("riskTypeRank", riskTypeLst);
+		session.setAttribute("riskTypeRank", riskTypeRankLst);
 		try {
-			context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
+			context.getRequestDispatcher("/checkRisk/queryResult.jsp").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
