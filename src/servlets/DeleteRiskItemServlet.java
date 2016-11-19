@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -41,7 +42,15 @@ public class DeleteRiskItemServlet extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		
 		int deleteRiskItemId=Integer.parseInt(request.getParameter("deleteRiskItemId"));
-//		DaoFactory.getRiskAgendaDao().deleteRiskItem(riskAgendaId, deleteRiskItemId);
+		int agendaId=(Integer)session.getAttribute("agendaId");
+		boolean isSuccess=false;
+		try {
+			isSuccess=DaoFactory.getRiskAgendaDao().deleteRiskItem(agendaId, deleteRiskItemId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		int userId=(Integer)session.getAttribute("LoginId");
 		RiskItemListBean riskItemList=new RiskItemListBean();
