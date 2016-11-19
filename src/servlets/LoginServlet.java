@@ -63,15 +63,15 @@ public class LoginServlet extends HttpServlet {
 		User user=DaoFactory.getUserDao().findUser(userId,password);
 			
 		if(user==null){
-			pw.print("<script>alert('用户名或密码错误！');location.href='./login/login.jsp'</script>"); 
+			pw.print("<script>alert('鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒锛�);location.href='./login/login.jsp'</script>"); 
 		}else{
 			
-			if(cookieFound){//cookie閻庢稒锚濠�锟�
+			if(cookieFound){//cookie闁诲孩绋掗敋婵狅拷閿燂拷
 				if(!cookie.getValue().trim().equals(userId.trim())){//cookie
 					cookie.setValue(userId.trim());
 					response.addCookie(cookie);								
 				}	
-			}else{//cookie濞戞挸绉撮悺銊╁捶閿燂拷
+			}else{//cookie婵炴垶鎸哥粔鎾偤閵娾晛鎹堕柨鐕傛嫹
 				cookie = new Cookie("LoginCookie",userId.trim());
 				cookie.setMaxAge(Integer.MAX_VALUE);
 				response.addCookie(cookie);
