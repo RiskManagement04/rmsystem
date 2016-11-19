@@ -27,6 +27,7 @@
 <div class="guideList">
 	<div class="network_logo">
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
+	
 	</div>
 	<ul class="nav nohover auto_overflow">
 			<li class="home"><i></i><a href='<%=request.getContextPath()+"/CheckRiskItemServlet"%>' >风险列表</a></li>
