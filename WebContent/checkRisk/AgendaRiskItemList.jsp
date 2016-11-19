@@ -194,54 +194,62 @@
 				<table class="table table-striped" style="margin-left:50px">
 				<thead>
 					<tr>
-						<%
-						if(user.getIdentity()==UserType.MANAGER){
-						%>
 						<th>删除</th>
-						<%
-						}
-						%>
-						<th>序号</th>
 						<th>项目</th>
 						<th>风险名称</th>
 						<th>风险描述</th>
-						<th>可能性</th>
-						<th>影响程度</th>
+						<th>风险类别</th>
 						<th>触发器</th>
-						<th>提交者</th>
 						<th>风险状态</th>
-						<th>创建时间</th>
+						<th>解决方案</th>
+						<th>可能性</th>
+						<th>影响程度</th>						
 						<th style="padding-right:60px">跟踪目录</th>
 					</tr>
 				</thead>
 				<tbody>
 				<%
-					for(int i=0;i<riskItemList.getRiskItemList().size();i++){
-						pageContext.setAttribute("riskItem", riskItemList.getRiskItem(i));
+					for(int i=0;i<agendaRiskItemList.getRiskItemList().size();i++){
+						pageContext.setAttribute("riskItem", agendaRiskItemList.getRiskItem(i));
 				%>
 					<tr style="font-weight:normal;">
-						<%
-						if(user.getIdentity()==UserType.MANAGER){
-						%>
 						<th>
 						<form action="<%=request.getContextPath()+"/DeleteRiskItemServlet"%>" method="post">		
-							<input type="hidden" value='<%=riskItemList.getRiskItem(i).getRiskItemId() %>' name="deleteRiskItemId"/>				
+							<input type="hidden" value='<%=agendaRiskItemList.getRiskItem(i).getRiskItemId() %>' name="deleteRiskItemId"/>				
 							<input type="submit" class="btn btn-default btn-sm bg" value='删除' src="/img/delete_icon.jpg"/>
 						</form>
 						</th>
-						<%
-						}
-						%>
-						<th style="font-weight:normal;"><%=i+1 %></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="projectName"/></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskName"/></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskContent"/></th>
 					<%
-						if(riskItemList.getRiskItem(i).getPossibility()==1){
+						RiskType riskType=agendaRiskItemList.getRiskItem(i).getRiskType();
+						String type=agendaRiskItemList.getRiskItem(i).convertRiskTypeToString(riskType);
+					%>
+						<th style="font-weight:normal;"><%=type %></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>	
+					<%
+						if(agendaRiskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.PREDICTED){
+					%>
+						<th style="font-weight:normal;">未发生</th>
+					<%
+						}else if(agendaRiskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.HAPPENED){
+					%>
+						<th style="font-weight:normal;">已发生</th>
+					<%
+						}else{
+					%>
+						<th style="font-weight:normal;">已解决</th>
+					<%
+						}
+					%>		
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="measures"/></th>			
+					<%
+						if(agendaRiskItemList.getRiskItem(i).getPossibility()==1){
 					%>
 						<th style="font-weight:normal;">低</th>
 					<%
-						}else if(riskItemList.getRiskItem(i).getPossibility()==2){
+						}else if(agendaRiskItemList.getRiskItem(i).getPossibility()==2){
 					%>
 						<th style="font-weight:normal;">中</th>
 					<%
@@ -253,11 +261,11 @@
 					%>
 					
 					<%
-						if(riskItemList.getRiskItem(i).getImpact()==1){
+						if(agendaRiskItemList.getRiskItem(i).getImpact()==1){
 					%>
 						<th style="font-weight:normal;">低</th>
 					<%
-						}else if(riskItemList.getRiskItem(i).getImpact()==2){
+						}else if(agendaRiskItemList.getRiskItem(i).getImpact()==2){
 					%>
 						<th style="font-weight:normal;">中</th>
 					<%
@@ -267,28 +275,11 @@
 					<%
 						}
 					%>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="submitterName"/></th>
-						
-					<%
-						if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.PREDICTED){
-					%>
-						<th style="font-weight:normal;">未发生</th>
-					<%
-						}else if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.HAPPENED){
-					%>
-						<th style="font-weight:normal;">已发生</th>
-					<%
-						}else{
-					%>
-						<th style="font-weight:normal;">已解决</th>
-					<%
-						}
-					%>											
+										
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="createDate"/></th>
 						<th style="margin-right:60px;font-weight:normal">
 							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
-								<input type="hidden" name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
+								<input type="hidden" name="riskItemId" value="<%=agendaRiskItemList.getRiskItem(i).getRiskItemId()%>"/>
 								<input type="submit" class="btn" value='详细'/>
 							</form>
 						</th>
