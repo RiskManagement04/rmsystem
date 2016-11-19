@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
@@ -47,7 +48,13 @@ public class ImportRiskServlet extends HttpServlet {
 			chosedRiskIdLst.add(Integer.parseInt(values[i]));
 		}
 		
-		boolean isSuccess=DaoFactory.getRiskAgendaDao().addRiskItem(agendaId, chosedRiskIdLst);
+		boolean isSuccess=false;
+		try {
+			isSuccess = DaoFactory.getRiskAgendaDao().addRiskItem(agendaId, chosedRiskIdLst);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(!isSuccess){
 			pw.print("<script>alert('µº»Î ß∞‹!');location.href='./login/login.jsp'</script>"); 
 		}else{

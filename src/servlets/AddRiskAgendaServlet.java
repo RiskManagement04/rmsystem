@@ -57,7 +57,7 @@ public class AddRiskAgendaServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(!isSuccess){
-			pw.print("<script>location.href='./checkRisk/checkRiskAgendaList.jsp'</script>"); 
+			pw.print("<script>location.href='./checkRisk/riskAgendaList.jsp'</script>"); 
 		}else{
 			RiskAgendaListBean riskAgendaList=new RiskAgendaListBean();
 			try {
@@ -67,7 +67,7 @@ public class AddRiskAgendaServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			session.setAttribute("riskAgendaList",riskAgendaList);
-			pw.print("<script>location.href='./checkRisk/checkRiskAgendaList.jsp'</script>");
+			pw.print("<script>location.href='./checkRisk/riskAgendaList.jsp'</script>");
 		}
 	}
 

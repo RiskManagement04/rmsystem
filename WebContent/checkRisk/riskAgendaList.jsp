@@ -69,7 +69,8 @@
 		<div class="header">
 			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 计划列表</label>
 		</div>
-		<div class="edit-buttons" style="margin-left:60px; margin-top:25px;">
+		<div  class="iwk-table-wrap">
+			<div class="edit-buttons" style="margin-left:60px; margin-top:25px;">
 				
                 
                	开始时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
@@ -88,79 +89,22 @@
 							<div class="modal-header">
 								 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 								<h4 class="modal-title" id="myModalLabel">
-									风险条目
+									计划条目
 								</h4>
 							</div>
-							<%
-								int userId=(Integer)session.getAttribute("LoginId");
-								List<Project> projectList=DaoFactory.getProjectDao().getProjectByUser(userId);
-							%>
-							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
+						
+							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskAgendaServlet"%>" method="post">
 							<div class="modal-body">
 								
 										<div class="control-group" style="text-align:center">
-											 <label class="control-label" for="inputPassword" style="float:left">项目名称</label>
-											<div class="controls">
-												<select class="selectpicker" name="projectName">
-												<%
-												for(int i=0;i<projectList.size();i++){
-												%>
-													<option value='<%=projectList.get(i).getProjectId()%>'><%=projectList.get(i).getProjectName() %></option>
-												<%
-												}
-												%>
-												</select>
-											</div>
+											 <label class="control-label" for="inputPassword" style="float:left">计划名称</label>
+											 <div class="controls">
+												<input id="inputEmail" type="text" name="riskName"/>
+											 </div>
 										</div>
 										
-										<div class="control-group" style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputEmail"style="float:left">风险名称              </label>
-											<div class="controls">
-												<input id="inputEmail" type="text" name="riskName"/>
-											</div>
-										</div>
-										<div class="control-group" style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">风险内容    </label>
-											<div class="controls">
-												<input id="inputPassword" type="text" name="riskContent"/>
-											</div>
-										</div>
-										<div class="control-group"style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">风险触发器</label>
-											<div class="controls">
-												<input id="inputPassword" type="text" name="trigger"/>
-											</div>
-										</div>
-										<div class="control-group"style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">可能性 </label>
-											<div class="controls">
-												<select class="selectpicker" name="possibility">
-												  <option value="high">高</option>
-												  <option value="middle">中</option>
-												  <option value="low">低</option>
-												</select>
-											</div>
-										</div>
-										<div class="control-group"style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">影响程度</label>
-											<div class="controls">
-												<select class="selectpicker"name="impact">
-													<option value="high">高</option>
-												  <option value="middle">中</option>
-												  <option value="low">低</option>
-												</select>
-											</div>
-										</div>
-										<div class="control-group"style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">风险状态</label>
-											<div class="controls">
-												<select class="selectpicker" name="riskStatus">
-												  <option value="predicted">未发生</option>
-												  <option value="happened">已发生</option>
-												  <option value="solved">已解决</option>
-												</select>
-											</div>
-										</div>																				
+										
+																													
 								
 							</div>
 							<div class="modal-footer">
@@ -174,9 +118,13 @@
 					
 				</div>
 			
+		
+		
 		</div>
 		
+		</div>
 	</div>
+	
 	
 </div>
 

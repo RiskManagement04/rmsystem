@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -65,17 +66,24 @@ public class SearchRiskServlet extends HttpServlet {
 		String str=request.getParameter("condition").trim();
 		List riskItemList=new ArrayList<>();
 		List<RiskTypeRank> riskTypeLst=new ArrayList<RiskTypeRank>();
-		if(str.equals("识别最多")){
-			riskTypeLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);
-			RiskTypeRank typeRank=riskTypeLst.get(0);
-			RiskType type=typeRank.getRiskType();
-			riskItemList=DaoFactory.getRiskItemDao().findRiskItemByCreatingMost(startDate, endDate, type);
-		}else{
-			riskTypeLst=DaoFactory.getRiskItemDao().findRiskItemTypeByHappeningMost(startDate, endDate);
-			RiskTypeRank typeRank=riskTypeLst.get(0);
-			RiskType type=typeRank.getRiskType();
-			riskItemList=DaoFactory.getRiskItemDao().findRiskItemByHappeningMost(startDate, endDate, type);
+		try{
+			if(str.equals("识别最多")){
+				
+				riskTypeLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);
+				
+				RiskTypeRank typeRank=riskTypeLst.get(0);
+				RiskType type=typeRank.getRiskType();
+				riskItemList=DaoFactory.getRiskItemDao().findRiskItemByCreatingMost(startDate, endDate, type);
+			}else{
+				riskTypeLst=DaoFactory.getRiskItemDao().findRiskItemTypeByHappeningMost(startDate, endDate);
+				RiskTypeRank typeRank=riskTypeLst.get(0);
+				RiskType type=typeRank.getRiskType();
+				riskItemList=DaoFactory.getRiskItemDao().findRiskItemByHappeningMost(startDate, endDate, type);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
 		}
+		
 		
 		session.setAttribute("riskItemList",riskItemList);
 		session.setAttribute("riskTypeRank", riskTypeLst);
