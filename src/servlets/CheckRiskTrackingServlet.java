@@ -52,9 +52,9 @@ public class CheckRiskTrackingServlet extends HttpServlet {
 		session.setAttribute("riskItemIdOfDetails", riskItemId);
 		
 		try {
-			 context.getRequestDispatcher("/checkRisk/followRisk.jsp").forward(request, response);
+			context.getRequestDispatcher("/checkRisk/followRisk.jsp").forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
+			// TODO  Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -64,7 +64,7 @@ public class CheckRiskTrackingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		 doGet(request, response);
 	}
 
 }
