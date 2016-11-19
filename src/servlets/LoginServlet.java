@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 				context.getRequestDispatcher("/checkRisk/checkRiskList.jsp").forward(request, response);
 			} catch (ServletException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				 e.printStackTrace();
 			}
 			
 		}			
