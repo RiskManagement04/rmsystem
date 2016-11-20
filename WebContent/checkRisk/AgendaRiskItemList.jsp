@@ -69,16 +69,17 @@
 	
 		<div  class="iwk-table-wrap">
 			<div style="margin-left:60px; margin-top:25px;">
-			
+                <form method="post" action='<%=request.getContextPath()+"/SearchRisk"%>'>			
 				 开始时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
                	 结束时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
                 <select class="txt" style="width:120px; margin-left:15px;margin-right:15px;">
                     <option value="被识别最多" selected="selected">被识别最多</option>
                     <option value="演变成问题最多">演变成问题最多</option>
                 </select>
-                <input class="btn" type="button" name="check" value="查询" style="width:80px; margin-top:-12px;margin-left:10px;margin-right:15px;" />
 
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:60px;margin-top:-2px;float:right">新增风险</a>			
+                <input class="btn" type="submit" name="check" value="查询" style="width:80px; margin-top:-12px;margin-left:10px;margin-right:15px" />
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:60px;margin-top:-2px;float:right">新增风险</a>	
+				</form>		
 				<div class="modal fade hide in" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
@@ -202,21 +203,14 @@
 				                                	<%
 				                                		ArrayList<User> users=DaoFactory.getUserDao().findAllUsers();
 				                                		for(int i=0;i<users.size();i++){
+				                                			User u=users.get(i);
+				                                			if(u.getUserId()!=user.getUserId()){
 				                                	%>
-				                                		<option value='<%%>'>苹果</option>
-				                                	<%
+				                                		<option value='<%=u.getUserId()%>'><%=u.getTrueName() %></option>
+				                                	<%	
+				                                			}
 				                                		}
 				                                	%>
-				                                        <option value="0">苹果</option>
-				                                        <option value="1">菠萝</option>
-				                                        <option value="2">香蕉</option>
-				                                        <option value="3">火龙果</option>
-				                                        <option value="4">梨子</option>
-				                                        <option value="5">草莓</option>
-				                                        <option value="6">哈密瓜</option>
-				                                        <option value="7">椰子</option>
-				                                        <option value="8">猕猴桃</option>
-				                                        <option value="9">桃子</option>
 				                                </select>
 											</div>
 										</div>																		
