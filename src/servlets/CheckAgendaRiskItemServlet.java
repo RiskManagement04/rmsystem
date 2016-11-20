@@ -44,29 +44,24 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
-		int agendaId=Integer.parseInt(request.getParameter("riskAgendaListId").trim());
-		session.setAttribute("agendaId", agendaId);
+		int agendaId=0;
+		if(request.getParameter("riskAgendaListId")==null){
+			agendaId=(Integer)session.getAttribute("agendaId");
+		}else{
+			agendaId=Integer.parseInt(request.getParameter("riskAgendaListId").trim());
+			session.setAttribute("agendaId", agendaId);
+		}
 		
-		int userId=(Integer)session.getAttribute("LoginId");
-		List riskAgendaList=new ArrayList<>();
+		ArrayList<RiskItem> risksList;
 		try {
-			riskAgendaList = DaoFactory.getRiskAgendaDao().findRiskAgendaByUser(userId);
+			risksList = DaoFactory.getRiskAgendaDao().findRiskItemByAgenda(agendaId);
+			RiskItemListBean riskItemList=new RiskItemListBean();
+			riskItemList.setRiskItemList(risksList);
+			session.setAttribute("agendaRiskItemList", riskItemList);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		ArrayList<RiskItem> risksList=new ArrayList<RiskItem>();
-		for(int i=0;i<riskAgendaList.size();i++){
-			RiskAgenda riskAgenda=(RiskAgenda)riskAgendaList.get(i);
-			if(riskAgenda.getAgendaId()==agendaId){
-				risksList=riskAgenda.getRisks();
-				break;
-			}
-		}
-		RiskItemListBean riskItemList=new RiskItemListBean();
-		riskItemList.setRiskItemList(risksList);
-		session.setAttribute("agendaRiskItemList", riskItemList);
 		
 		/**
 		 * 跳转到查看计划下风险的jsp页面

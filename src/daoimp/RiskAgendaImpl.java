@@ -299,4 +299,56 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		return true;
 	}
 
+	@Override
+	public ArrayList<RiskItem> findRiskItemByAgenda(int riskAgendaId) throws SQLException {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement statement=null;
+		ResultSet result=null;
+		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();
+		
+		statement = con.prepareStatement("select * from AgendaToRisk a,RiskItem r,Project p,User u "
+				+ "where a.agendaId=? and a.riskItemId=r.riskItemId and r.projectId=p.projectId and r.submitterId=u.userId");
+		statement.setInt(1, riskAgendaId);
+		result = statement.executeQuery();		
+		
+		while(result.next()){
+			RiskItem item=new RiskItem();
+			Date createDate=result.getDate("r.createDate");
+			item.setCreateDate(createDate);
+			int impact=result.getInt("r.impact");
+			item.setImpact(impact);
+			String measures=result.getString("r.measures").trim();
+			item.setMeasures(measures);
+			int possibility=result.getInt("r.possibility");
+			item.setPossibility(possibility);
+			int projectId=result.getInt("r.projectId");
+			item.setProjectId(projectId);
+			String projectName=result.getString("p.projectName").trim();
+			item.setProjectName(projectName);
+			String riskContent=result.getString("r.riskContent").trim();
+			item.setRiskContent(riskContent);
+			int riskItemId=result.getInt("r.riskItemId");
+			item.setRiskItemId(riskItemId);
+			String riskName=result.getString("r.riskName").trim();
+			item.setRiskName(riskName);
+			String status=result.getString("r.riskStatus").trim();
+			item.setRiskStatus(item.convertRiskStatusfromString(status));
+			String riskType=result.getString("r.riskType").trim();
+			item.setRiskType(item.convertRiskTypefromString(riskType));
+			int submitterId=result.getInt("r.submitterId");
+			item.setSubmitterId(submitterId);
+			String submitterName=result.getString("u.trueName").trim();
+			item.setSubmitterName(submitterName);
+			String trigger=result.getString("r.trigger").trim();
+			item.setTrigger(trigger);
+			
+			riskItemList.add(item);
+		}
+		
+		daoHelper.closeResult(result);
+		daoHelper.closePreparedStatement(statement);
+		daoHelper.closeConnection(con);
+		return riskItemList;
+	}
+
 }
