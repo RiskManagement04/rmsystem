@@ -65,18 +65,32 @@ public class SearchRiskServlet extends HttpServlet {
 		List riskItemList=new ArrayList<>();
 		List<RiskTypeRank> riskTypeRankLst=new ArrayList<RiskTypeRank>();
 		try{
-			if(str.equals("识别最多")){
+			if(str.equals("被识别最多")){
 				
 				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);
 				
-				RiskTypeRank typeRank=riskTypeRankLst.get(0);
-				RiskType type=typeRank.getRiskType();
-				riskItemList=DaoFactory.getRiskItemDao().findRiskItemByCreatingMost(startDate, endDate, type);
+				if(riskTypeRankLst.size()==0){
+					System.out.println("try");
+					pw.print("<script>alert('查询结果为空！');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>"); 
+					return;
+
+				}else{
+					RiskTypeRank typeRank=riskTypeRankLst.get(0);
+					RiskType type=typeRank.getRiskType();
+					riskItemList=DaoFactory.getRiskItemDao().findRiskItemByCreatingMost(startDate, endDate, type);
+				}
+			
 			}else{
 				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByHappeningMost(startDate, endDate);
-				RiskTypeRank typeRank=riskTypeRankLst.get(0);
-				RiskType type=typeRank.getRiskType();
-				riskItemList=DaoFactory.getRiskItemDao().findRiskItemByHappeningMost(startDate, endDate, type);
+				if(riskTypeRankLst.size()==0){
+					pw.print("<script>alert('查询结果为空！');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>");
+					return;
+				}else{
+					RiskTypeRank typeRank=riskTypeRankLst.get(0);
+					RiskType type=typeRank.getRiskType();
+					riskItemList=DaoFactory.getRiskItemDao().findRiskItemByHappeningMost(startDate, endDate, type);
+				}
+				
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
