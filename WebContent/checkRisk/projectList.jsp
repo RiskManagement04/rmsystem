@@ -103,12 +103,20 @@
 											</div>
 										</div>
 										<div class="control-group"style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">风险状态</label>
+											 <label class="control-label" style="float:left">选择成员</label>
 											<div class="controls">
-												<select class="selectpicker" name="riskStatus">
-												  <option value="predicted">未发生</option>
-												  <option value="happened">已发生</option>
-												  <option value="solved">已解决</option>
+												<select class="selectpicker" multiple="multiple" name="usersOfProject">
+				                                	<%
+				                                		ArrayList<User> users=DaoFactory.getUserDao().findAllDevelopers();
+				                                		for(int i=0;i<users.size();i++){
+				                                			User u=users.get(i);
+				                                			if(u.getUserId()!=user.getUserId()){
+				                                	%>
+				                                		<option value='<%=u.getUserId()%>'><%=u.getTrueName() %></option>
+				                                	<%	
+				                                			}
+				                                		}
+				                                	%>
 												</select>
 											</div>
 										</div>																												
@@ -147,10 +155,10 @@
 						<th style="font-weight:normal;"><%=p.getProjectContent() %></th>
 						<th style="margin-right:60px;font-weight:normal">
 						<%
-						ArrayList<User> users=p.getUsers();
-						for(int j=0;j<users.size();j++){
+						ArrayList<User> userList=p.getUsers();
+						for(int j=0;j<userList.size();j++){
 						%>
-						<p><%=users.get(j).getTrueName() %></p>
+						<p><%=userList.get(j).getTrueName() %></p>
 						<%
 						}
 						%>

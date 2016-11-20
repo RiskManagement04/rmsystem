@@ -152,4 +152,46 @@ public class UserDaoImpl implements UserDao{
 		return users;
 	}
 
+	@Override
+	public ArrayList<User> findAllDevelopers() {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement stmt=null;
+		ResultSet result=null;
+		ArrayList<User> users=new ArrayList<User>();
+		
+		try {
+			stmt = con.prepareStatement("select * from User where identity=?");
+			stmt.setString(1, "DEVELOPER");
+			result = stmt.executeQuery();	
+			
+			while(result.next()){
+				User user=new User();
+				int userId=result.getInt("userId");
+				user.setUserId(userId);
+				String trueName=result.getString("trueName").trim();
+				user.setTrueName(trueName);
+				String nickName=result.getString("nickName").trim();
+				user.setNickName(nickName);
+				String password=result.getString("password").trim();
+				user.setPassword(password);
+				String userType=result.getString("identity").trim();
+				UserType identity=user.convertIdentityFromString(userType);
+				user.setIdentity(identity);
+				
+				users.add(user);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeConnection(con);
+			daoHelper.closePreparedStatement(stmt);
+			daoHelper.closeResult(result);
+			
+		}		
+					
+		return users;
+	}
+
 }

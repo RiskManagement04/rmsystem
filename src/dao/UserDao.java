@@ -11,5 +11,7 @@ public interface UserDao {
 	public boolean addUser(User user); 
 	
 	public ArrayList<User> findAllUsers();//查询所有用户
+	
+	public ArrayList<User> findAllDevelopers();
 
 }
