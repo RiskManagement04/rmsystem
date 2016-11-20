@@ -266,7 +266,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		Connection con=daoHelper.getConnection();
 		PreparedStatement stmt=null;
 		ResultSet result=null;
-		ArrayList riskTypeRankList=new ArrayList();
+		ArrayList riskTypeRankList=new  ArrayList();
 		
 	
 		
