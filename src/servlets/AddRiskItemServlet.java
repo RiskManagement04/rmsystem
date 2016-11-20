@@ -110,7 +110,7 @@ public class AddRiskItemServlet extends HttpServlet {
 		}
 
 		riskItem.setTrackers(trackers);
-		int riskAgendaId=Integer.parseInt((String)session.getAttribute("agendaId"));
+		int riskAgendaId=(Integer)session.getAttribute("agendaId");
 		
 		String result="";
 		try {
@@ -121,12 +121,15 @@ public class AddRiskItemServlet extends HttpServlet {
 		}
 		
 		RiskItemListBean riskItemList=new RiskItemListBean();
-		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem());
-		session.setAttribute("riskItemList",riskItemList);
-		String print="<script>alert('"+result+"');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>";
-		pw.print(print); 
-		
-		
+		try {
+			riskItemList.setRiskItemList(DaoFactory.getRiskAgendaDao().findRiskItemByAgenda(riskAgendaId));
+			session.setAttribute("agendaRiskItemList",riskItemList);
+			String print="<script>alert('"+result+"');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>";
+			pw.print(print); 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -204,6 +204,8 @@ public class RiskItem implements Serializable{
 	}
 	
 	public RiskStatus convertRiskStatusfromString(String status){
+		
+		status=status.trim();
 		if(status.equals("PREDICTED")){
 			return RiskStatus.PREDICTED;
 		}else if(status.equals("HAPPENED")){
