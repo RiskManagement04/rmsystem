@@ -268,8 +268,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		ResultSet result=null;
 		ArrayList riskTypeRankList=new ArrayList();
 		
-		System.out.println(startDate.toString());
-		System.out.println(finishDate.toString());
+	
 		
 		stmt=con.prepareStatement("select r.riskType,count(DISTINCT t.riskItemId) as c"
 				+ "from RiskTrackingItem t,RiskItem r "
