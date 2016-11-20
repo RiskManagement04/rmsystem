@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dao.DaoHelper;
 import dao.UserDao;
 import model.User;
+import model.UserType;
 
 public class UserDaoImpl implements UserDao{
 	
@@ -107,6 +109,47 @@ public class UserDaoImpl implements UserDao{
 			return isSuccess;
 		}
 		
+	}
+
+	@Override
+	public ArrayList<User> findAllUsers() {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement stmt=null;
+		ResultSet result=null;
+		ArrayList<User> users=new ArrayList<User>();
+		
+		try {
+			stmt = con.prepareStatement("select * from User");
+			result = stmt.executeQuery();	
+			
+			while(result.next()){
+				User user=new User();
+				int userId=result.getInt("userId");
+				user.setUserId(userId);
+				String trueName=result.getString("trueName").trim();
+				user.setTrueName(trueName);
+				String nickName=result.getString("nickName").trim();
+				user.setNickName(nickName);
+				String password=result.getString("password").trim();
+				user.setPassword(password);
+				String userType=result.getString("identity").trim();
+				UserType identity=user.convertIdentityFromString(userType);
+				user.setIdentity(identity);
+				
+				users.add(user);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeConnection(con);
+			daoHelper.closePreparedStatement(stmt);
+			daoHelper.closeResult(result);
+			
+		}		
+					
+		return users;
 	}
 
 }

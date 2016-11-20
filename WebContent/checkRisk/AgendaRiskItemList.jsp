@@ -1,4 +1,4 @@
-<%@page import="model.*,factory.DaoFactory,java.util.List"%>
+<%@page import="model.*,factory.DaoFactory,java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,6 +17,9 @@
 	<jsp:useBean id="agendaRiskItemList"
 		type="bean.RiskItemListBean"
 		scope="session"></jsp:useBean>
+	<jsp:useBean id="riskAgendaList"
+			type="bean.RiskAgendaListBean"
+		scope="session"></jsp:useBean>
 	<jsp:useBean id="riskItem" class="model.RiskItem"
 		scope="page"></jsp:useBean>
 		
@@ -26,7 +29,7 @@
 	</div>
 	<ul class="nav nohover auto_overflow">
 			<li class="home "><i></i><a href='<%=request.getContextPath()+"/CheckRiskListServlet"%>'>风险列表</a></li>
-			<li class="schedule "><i></i><a href='<%=request.getContextPath()+"/CheckRiskAgendaServlet"%>' style="color: #f4f4f4;background-color: #4a90e2;">计划列表</a></li>			
+			<li class="schedule "><i></i><a href='<%=request.getContextPath()+"/CheckAgendaListServlet"%>' style="color: #f4f4f4;background-color: #4a90e2;">计划列表</a></li>			
 	</ul>
 </div>
 
@@ -75,8 +78,8 @@
                 </select>
                 <input class="btn" type="button" name="check" value="查询" style="width:80px; margin-top:-12px;margin-left:10px;margin-right:15px;" />
 
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:10px; margin-bottom:10px;float:right;">新增</a>			
-				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:60px;margin-top:-2px;float:right">新增风险</a>			
+				<div class="modal fade hide in" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
 							<div class="modal-header">
@@ -91,6 +94,21 @@
 							%>
 							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
 							<div class="modal-body">
+							
+										<div class="control-group" style="text-align:center">
+											 <label class="control-label" for="inputPassword" style="float:left">计划名称</label>
+											<div class="controls">
+												<select class="selectpicker" name="agendaName">
+												<%
+												for(int i=0;i<riskAgendaList.getRiskAgendaList().size();i++){
+												%>
+													<option value='<%=riskAgendaList.getRiskAgenda(i).getAgendaId()%>'><%=riskAgendaList.getRiskAgenda(i).getAgendaName() %></option>
+												<%
+												}
+												%>
+												</select>
+											</div>
+										</div>
 								
 										<div class="control-group" style="text-align:center">
 											 <label class="control-label" for="inputPassword" style="float:left">项目名称</label>
@@ -126,25 +144,25 @@
 										<div class="control-group" style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputEmail"style="float:left">风险名称              </label>
 											<div class="controls">
-												<input id="inputEmail" type="text" name="riskName"/>
-											</div>
-										</div>
-										<div class="control-group" style="margin-top:5px;text-align:center">
-											 <label class="control-label" for="inputPassword"style="float:left">风险内容    </label>
-											<div class="controls">
-												<input id="inputPassword" type="text" name="riskContent"/>
+												<input id="inputEmail" type="text" name="riskName" required/>
 											</div>
 										</div>
 										<div class="control-group"style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险触发器</label>
 											<div class="controls">
-												<input id="inputPassword" type="text" name="trigger"/>
+												<input id="inputPassword" type="text" name="trigger" required/>
+											</div>
+										</div>
+										<div class="control-group" style="margin-top:5px;text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">风险内容    </label>
+											<div class="controls">
+												<textarea class="form-control" rows="3" name="riskContent"></textarea>
 											</div>
 										</div>
 										<div class="control-group"style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">解决方案</label>
 											<div class="controls">
-												<input id="inputPassword" type="text" name="measures"/>
+												<textarea class="form-control" rows="3" name="measures"></textarea>
 											</div>
 										</div>
 										<div class="control-group"style="margin-top:5px;text-align:center">
@@ -176,7 +194,32 @@
 												  <option value="solved">已解决</option>
 												</select>
 											</div>
-										</div>																				
+										</div>		
+										<div class="control-group" style="margin-top:5px;text-align:center">
+											 <label class="control-label" style="float:left">指定跟踪者</label>
+											<div class="controls">
+				                                <select class="selectpicker" multiple="multiple" name="trackres">
+				                                	<%
+				                                		ArrayList<User> users=DaoFactory.getUserDao().findAllUsers();
+				                                		for(int i=0;i<users.size();i++){
+				                                	%>
+				                                		<option value='<%%>'>苹果</option>
+				                                	<%
+				                                		}
+				                                	%>
+				                                        <option value="0">苹果</option>
+				                                        <option value="1">菠萝</option>
+				                                        <option value="2">香蕉</option>
+				                                        <option value="3">火龙果</option>
+				                                        <option value="4">梨子</option>
+				                                        <option value="5">草莓</option>
+				                                        <option value="6">哈密瓜</option>
+				                                        <option value="7">椰子</option>
+				                                        <option value="8">猕猴桃</option>
+				                                        <option value="9">桃子</option>
+				                                </select>
+											</div>
+										</div>																		
 								
 							</div>
 							<div class="modal-footer">
