@@ -95,20 +95,29 @@ public class SearchRiskServlet extends HttpServlet {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		ArrayList<String> riskTypeList=new ArrayList<String>();
-		ArrayList<Integer> riskAmountList=new ArrayList<Integer>();
-		
+		String riskTypeStr="";
+		String riskAmountStr="";
+		String temp=",";
 		for(int i=0;i<riskTypeRankLst.size();i++){
 			
 			RiskType riskType=riskTypeRankLst.get(i).getRiskType();
 			String type=((RiskItem)riskItemList.get(0)).convertRiskTypeToString(riskType);
-			riskTypeList.add(i, type);
-			riskAmountList.add(i, riskTypeRankLst.get(i).getAmount());
+			
+			riskTypeStr+=type;
+			
+			int amount=riskTypeRankLst.get(i).getAmount();
+			riskAmountStr+=String.valueOf(amount);
+			if(i!=riskTypeRankLst.size()-1){
+				riskTypeStr+= temp;
+				riskAmountStr+=temp;
+			}
+			
 		}
-		request.setAttribute("riskType", riskTypeList);
-		System.out.println("riskTypeList"+riskTypeList.toString());
-		request.setAttribute("riskRank", riskAmountList);
-		System.out.println("riskRankList"+riskAmountList.toString());
+		System.out.print("Type"+riskTypeStr);
+		request.setAttribute("riskType", riskTypeStr);
+		
+		request.setAttribute("riskRank", riskAmountStr);
+		
 		session.setAttribute("riskItemList",riskItemList);
 		session.setAttribute("riskTypeRank", riskTypeRankLst);
 		try {
