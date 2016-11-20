@@ -52,7 +52,7 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 			session.setAttribute("agendaId", agendaId);
 		}
 		
-		ArrayList<RiskItem> risksList;
+		ArrayList<RiskItem> risksList=new ArrayList<RiskItem>();
 		try {
 			risksList = DaoFactory.getRiskAgendaDao().findRiskItemByAgenda(agendaId);
 			RiskItemListBean riskItemList=new RiskItemListBean();
