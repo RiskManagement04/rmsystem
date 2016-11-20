@@ -283,13 +283,37 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 	public boolean addRiskItem(int riskAgendaId, ArrayList<Integer> riskItemList) throws SQLException {
 		Connection con=daoHelper.getConnection();
 		PreparedStatement statement=null;
+		ResultSet result=null;
+		
+		ArrayList<Integer> existRisk=new ArrayList<Integer>();
+		statement = con.prepareStatement("select * from AgendaToRisk where agendaId=?");
+		statement.setInt(1, riskAgendaId);
+		result = statement.executeQuery();
+		while(result.next()){
+			int risk=result.getInt("riskItemId");
+			existRisk.add(risk);
+		}
+		daoHelper.closePreparedStatement(statement);
+		daoHelper.closeResult(result);
 		
 		statement=con.prepareStatement("insert into AgendaToRisk values(?,?)");
 		for(int i=0;i<riskItemList.size();i++){
-			statement.setInt(1, riskAgendaId);
-			statement.setInt(2, riskItemList.get(i));
+			int riskId=riskItemList.get(i);
+			boolean isExist=false;
+			for(int j=0;j<existRisk.size();j++){
+				if(existRisk.get(j)==riskId){
+					isExist=true;
+					break;
+				}
+			}
 			
-			statement.addBatch();
+			if(!isExist){
+				statement.setInt(1, riskAgendaId);
+				statement.setInt(2, riskItemList.get(i));
+				
+				statement.addBatch();				
+			}
+
 		}
 		statement.executeBatch();
 		
