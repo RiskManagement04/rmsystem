@@ -78,8 +78,7 @@
 			<div style="margin-left:50px; margin-top:20px; width:85%;">
 					<canvas id="myChart" style="margin-left:50px;width:400px; height:200px;"></canvas>
 					<script type="text/javascript">
-						var ctx = document.getElementById("myChart").getContext("2d");
-						
+						var ctx = document.getElementById("myChart").getContext("2d");			
 						var elabel=' <%=request.getAttribute("riskType")%> ';
 						elabel=elabel.split(',');
 						
