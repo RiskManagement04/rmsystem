@@ -73,8 +73,8 @@
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
 
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:10px; margin-bottom:10px;float:right;">新增</a>			
-				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
+				
+				<div class="modal fade hide in" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
 							<div class="modal-header">
