@@ -406,4 +406,32 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		return riskItemList;
 	}
 
+	@Override
+	public String getAgendaName(int agendaId) {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement statement=null;
+		ResultSet result=null;
+		String name="";
+		
+		try {
+			statement = con.prepareStatement("select * from RiskAgenda r "
+					+ "where r.agendaId=?");
+			statement.setInt(1, agendaId);
+			result = statement.executeQuery();	
+			
+			if(result.next()){
+				name=result.getString("r.agendaName").trim();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeResult(result);
+			daoHelper.closePreparedStatement(statement);							
+			daoHelper.closeConnection(con);			
+		}		
+		
+		return name;
+	}
+
 }

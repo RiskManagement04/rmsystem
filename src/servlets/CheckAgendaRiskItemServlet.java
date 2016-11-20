@@ -58,6 +58,8 @@ public class CheckAgendaRiskItemServlet extends HttpServlet {
 			RiskItemListBean riskItemList=new RiskItemListBean();
 			riskItemList.setRiskItemList(risksList);
 			session.setAttribute("agendaRiskItemList", riskItemList);
+			
+			
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

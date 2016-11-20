@@ -20,5 +20,7 @@ public interface RiskAgendaDao {
 	public boolean deleteRiskItem(int riskAgendaId,int riskItemId) throws SQLException;//删除风险条目
 	
 	public ArrayList<RiskItem> findRiskItemByAgenda(int riskAgendaId) throws SQLException;//根据计划编号查找其中的风险条目
+	
+	public String getAgendaName(int agendaId);
 
 }

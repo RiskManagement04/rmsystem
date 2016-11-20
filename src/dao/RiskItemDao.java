@@ -21,4 +21,6 @@ public interface RiskItemDao {
 	public List findRiskItemTypeByHappeningMost(Date startDate,Date finishDate) throws SQLException;//特定时间演变成问题最多的风险类别
 	
 	public List findRiskItemByHappeningMost(Date startDate,Date finishDate,RiskType type) throws SQLException;//返回演变成问题最多的风险列表
+	
+	public String getRiskName(int riskItemId);
 }

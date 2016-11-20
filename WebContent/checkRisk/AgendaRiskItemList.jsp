@@ -61,7 +61,11 @@
 	
 	<div class="project-warp">
 		<div class="header">
-			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 风险列表</label>
+			<%
+			int agendaId=(Integer)session.getAttribute("agendaId");
+			String agendaName=DaoFactory.getRiskAgendaDao().getAgendaName(agendaId);
+			%>
+			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> <%=agendaName %> 风险列表</label>
 		</div>
 	
 		<div  class="iwk-table-wrap">

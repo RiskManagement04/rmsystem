@@ -1,3 +1,4 @@
+<%@page import="model.*,factory.DaoFactory,java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,7 +24,8 @@
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li><i></i><a href="#" style="color: #f4f4f4;background-color: #4a90e2;">首页</a></li>
+			<li class="home "><i></i><a href='<%=request.getContextPath()+"/CheckRiskListServlet"%>'>风险列表</a></li>
+			<li class="schedule "><i></i><a href='<%=request.getContextPath()+"/CheckAgendaListServlet"%>' style="color: #f4f4f4;background-color: #4a90e2;">计划列表</a></li>	
 	</ul>
 </div>
 
@@ -43,7 +45,11 @@
 	</div>	
 	<div class="project-warp">
 		<div class="header">
-			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 风险跟踪列表</label>
+			<%
+			int riskItemId=(Integer)session.getAttribute("riskItemIdOfDetails");
+			String riskName=DaoFactory.getRiskItemDao().getRiskName(riskItemId);
+			%>
+			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> <%=riskName %> 跟踪列表</label>
 		</div>
 	
 		<div  class="iwk-table-wrap">
@@ -106,7 +112,10 @@
 						<th>跟踪者名称</th>
 						<th>修改时间</th>
 						<th>风险状态</th>
+						<th>风险内容</th>
 						<th>风险描述</th>
+						<th>可能性</th>
+						<th>影响</th>
 						<th style="padding-right:60px">应对措施</th>						
 					</tr>
 				</thead>

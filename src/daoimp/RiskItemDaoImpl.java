@@ -314,6 +314,35 @@ public class RiskItemDaoImpl implements RiskItemDao{
 	public List findRiskItemByHappeningMost(Date startDate, Date finishDate, RiskType type) throws SQLException {
 		
 		return this.findRiskItemByCreatingMost(startDate, finishDate, type);
+	}
+
+	@Override
+	public String getRiskName(int riskItemId){
+		Connection con=daoHelper.getConnection();
+		PreparedStatement stmt=null;
+		ResultSet result=null;
+		String name="";
+		
+		try {
+			stmt=con.prepareStatement("select * from RiskItem "
+					+ "where riskItemId=?");
+			stmt.setInt(1, riskItemId);
+			result = stmt.executeQuery();	
+			
+			if(result.next()){
+				name=result.getString("riskName").trim();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeResult(result);
+			daoHelper.closePreparedStatement(stmt);	
+			daoHelper.closeConnection(con);
+		}
+	
+		
+		return name;
 	}	
 	
 /*
