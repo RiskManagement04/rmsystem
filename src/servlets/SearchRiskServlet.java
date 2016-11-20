@@ -51,18 +51,14 @@ public class SearchRiskServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 		
-		SimpleDateFormat sf=new SimpleDateFormat("yyyy-mm-dd");
+		
 		Date startDate=null;
 		Date endDate=null;
 		String startTime=request.getParameter("startDate").trim();
 		String endTime=request.getParameter("endDate").trim();
-		try {
-			startDate=(Date) sf.parse(startTime);
-			endDate=(Date) sf.parse(endTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		startDate=SearchRiskServlet.strToDate(startTime);
+		endDate=SearchRiskServlet.strToDate(endTime);
 		
 		String str=request.getParameter("condition").trim();
 		List riskItemList=new ArrayList<>();
@@ -114,5 +110,20 @@ public class SearchRiskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
+	private static java.sql.Date strToDate(String strDate) {  
+        String str = strDate;  
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");  
+        java.util.Date d = null;  
+        try {  
+            d = format.parse(str);  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        java.sql.Date date = new java.sql.Date(d.getTime());  
+        return date;  
+    }  
+
+
 
 }

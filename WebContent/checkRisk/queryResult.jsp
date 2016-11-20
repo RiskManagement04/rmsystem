@@ -19,10 +19,8 @@
 
 </head>
 <body>
-	<jsp:useBean id="agendaList"
-		type="bean.RiskAgendaListBean"
-		scope="session"></jsp:useBean>
-	<jsp:useBean id="riskTypeRank" class="model.RiskTypeRank"
+	
+	<jsp:useBean id="riskItem" class="model.RiskItem"
 		scope="page"></jsp:useBean>
 		
 <div class="guideList">
@@ -146,6 +144,110 @@
 						var myNewChart=new Chart(ctx).Line(data,options);
 
 					</script>
+			</div>
+		
+			<div>
+			<table class="table table-striped" style="margin-left:50px">
+				<thead>
+					<tr>
+						
+						<th>项目</th>
+						<th>风险名称</th>
+						<th>风险描述</th>
+						<th>风险类别</th>
+						<th>触发器</th>
+						<th>风险状态</th>
+						<th>解决方案</th>
+						<th>可能性</th>
+						<th>影响程度</th>						
+						<th style="padding-right:60px">跟踪目录</th>
+						<td>
+            				<input type="checkbox" name="myTextEditBox" value="checked" /> checkbox
+        				</td>
+					</tr>
+				</thead>
+				<tbody>
+				<%
+					List riskItemList=(List)session.getAttribute("riskItemList");
+					for(int i=0;i<riskItemList.size();i++){
+						pageContext.setAttribute("riskItem", riskItemList.get(i));
+				%>
+					<tr style="font-weight:normal;">
+						
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="projectName"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskName"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskContent"/></th>
+					<%
+						RiskType riskType=((RiskItem)riskItemList.get(i)).getRiskType();
+						String type=((RiskItem)riskItemList.get(i)).convertRiskTypeToString(riskType);
+					%>
+						<th style="font-weight:normal;"><%=type %></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>	
+					<%
+						if(((RiskItem)riskItemList.get(i)).getRiskStatus()==RiskStatus.PREDICTED){
+					%>
+						<th style="font-weight:normal;">未发生</th>
+					<%
+						}else if(((RiskItem)riskItemList.get(i)).getRiskStatus()==RiskStatus.HAPPENED){
+					%>
+						<th style="font-weight:normal;">已发生</th>
+					<%
+						}else{
+					%>
+						<th style="font-weight:normal;">已解决</th>
+					<%
+						}
+					%>		
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="measures"/></th>			
+					<%
+						if(((RiskItem)riskItemList.get(i)).getPossibility()==1){
+					%>
+						<th style="font-weight:normal;">低</th>
+					<%
+						}else if(((RiskItem)riskItemList.get(i)).getPossibility()==2){
+					%>
+						<th style="font-weight:normal;">中</th>
+					<%
+						}else{
+					%>
+						<th style="font-weight:normal;">高</th>
+					<%
+						}
+					%>
+					
+					<%
+						if(((RiskItem)riskItemList.get(i)).getImpact()==1){
+					%>
+						<th style="font-weight:normal;">低</th>
+					<%
+						}else if(((RiskItem)riskItemList.get(i)).getImpact()==2){
+					%>
+						<th style="font-weight:normal;">中</th>
+					<%
+						}else{
+					%>
+						<th style="font-weight:normal;">高</th>
+					<%
+						}
+					%>
+										
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="createDate"/></th>
+						<th style="margin-right:60px;font-weight:normal">
+							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
+								<input type="hidden" name="riskItemId" value="<%=((RiskItem)riskItemList.get(i)).getRiskItemId() %>"/>
+								<input type="submit" class="btn" value='详细'/>
+							</form>
+						</th>
+						
+						<th>
+						
+						</th>
+					</tr>
+				<%
+					}
+				%>
+				</tbody>
+			</table>
 			</div>
 		
 		</div>
