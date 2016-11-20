@@ -147,7 +147,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		List<Project> list=new ArrayList<Project>();
 		
 		try {
-			stmt = con.prepareStatement("select * from project");
+			stmt = con.prepareStatement("select * from Project");
 			result = stmt.executeQuery();
 			
 			while(result.next()){

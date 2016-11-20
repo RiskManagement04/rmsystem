@@ -73,42 +73,8 @@
 				
                 
               
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:-20px; margin-bottom:10px;float:right;width:50px;">新增</a>			
-				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
-					<div>
-						<div>
-							<div class="modal-header">
-								 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								<h4 class="modal-title" id="myModalLabel">
-									计划条目
-								</h4>
-							</div>
-						
-							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskAgendaServlet"%>" method="post">
-							<div class="modal-body">
-								
-										<div class="control-group" style="text-align:center">
-											 <label class="control-label" for="inputPassword" style="float:left">计划名称</label>
-											 <div class="controls">
-												<input id="inputEmail" type="text" name="riskName"/>
-											 </div>
-										</div>
-										
-										
-																													
-								
-							</div>
-							<div class="modal-footer">
-								 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
-								 <button type="submit" class="btn btn-primary">保存</button>
-							</div>
-							</form>
-						</div>
-						
-					</div>
-					
-				</div>
-			</div>
+				<a href="<%=request.getContextPath()+"/CheckAgendaRiskItemServlet"%>" role="button" class="btn" style="margin-right:45px;margin-top:-20px; margin-bottom:10px;float:right;width:50px;">返回</a>			
+				
 			<div style="margin-left:50px; margin-top:20px; width:85%;">
 					<canvas id="myChart" style="margin-left:50px;width:400px; height:200px;"></canvas>
 					<script type="text/javascript">
@@ -239,7 +205,7 @@
 			</table>
 			</div>
 			
-			<input  role="button" type="submit"class="btn" style="margin-right:45px;margin-top:20px; margin-bottom:10px;float:right;width:50px;"/>导入		
+			<input  role="button" type="submit"class="btn"  value="导入" style="margin-right:45px;margin-top:20px; margin-bottom:10px;float:right;width:50px;"/>		
 			</form>
 		</div>
 	</div>
