@@ -87,7 +87,7 @@
 								int userId=(Integer)session.getAttribute("LoginId");
 								List<Project> projectList=DaoFactory.getProjectDao().getProjectByUser(userId);
 							%>
-							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
+							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddProjectServlet"%>" method="post">
 							<div class="modal-body">
 								
 										<div class="control-group" style="margin-top:5px;text-align:center">
