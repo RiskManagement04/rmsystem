@@ -106,7 +106,9 @@ public class SearchRiskServlet extends HttpServlet {
 			riskAmountList.add(i, riskTypeRankLst.get(i).getAmount());
 		}
 		request.setAttribute("riskType", riskTypeList);
+		System.out.println("riskTypeList"+riskTypeList.toString());
 		request.setAttribute("riskRank", riskAmountList);
+		System.out.println("riskRankList"+riskAmountList.toString());
 		session.setAttribute("riskItemList",riskItemList);
 		session.setAttribute("riskTypeRank", riskTypeRankLst);
 		try {
