@@ -93,7 +93,7 @@
 										<div class="control-group" style="margin-top:5px;text-align:center">
 											 <label class="control-label" for="inputEmail"style="float:left">项目名称 </label>
 											<div class="controls">
-												<input id="inputEmail" type="text" name="projectName"/>
+												<input id="inputEmail" type="text" name="projectName" required/>
 											</div>
 										</div>
 										<div class="control-group" style="margin-top:5px;text-align:center">
