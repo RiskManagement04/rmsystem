@@ -116,6 +116,10 @@ public class ProjectDaoImpl implements ProjectDao{
 		ArrayList<User> users=project.getUsers();
 		try {
 			statement=con.prepareStatement("insert into Developing values(?,?)");
+
+			statement.setInt(1, projectId);
+			statement.setInt(2, project.getManagerId());
+			statement.addBatch();
 			
 			for(int i=0;i<users.size();i++){
 				User user=users.get(i);
