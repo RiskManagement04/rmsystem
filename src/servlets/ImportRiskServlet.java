@@ -39,7 +39,7 @@ public class ImportRiskServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
-		
+		System.out.println("biubiu");
 		int agendaId=(Integer)session.getAttribute("agendaId");
 		
 		String[] values=request.getParameterValues("isChoosed");
