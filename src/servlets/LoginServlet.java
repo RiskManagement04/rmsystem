@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 		User user=DaoFactory.getUserDao().findUser(userId,password);
 			
 		if(user==null){
-			pw.print("<script>alert('用户名或密码错误！');location.href='./login/login.jsp'</script>"); 
+			pw.print("<script>alert('Nickname or password is incorrect!');location.href='./login/login.jsp'</script>"); 
 		}else{
 			
 			if(cookieFound){//cookie闁诲孩绋掗敋婵狅拷閿燂拷

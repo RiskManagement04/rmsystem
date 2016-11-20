@@ -71,7 +71,7 @@ public class SearchRiskServlet extends HttpServlet {
 				
 				if(riskTypeRankLst.size()==0){
 					System.out.println("try");
-					pw.print("<script>alert('查询结果为空！');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>"); 
+					pw.print("<script>alert('There is no riskitem!');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>"); 
 					return;
 
 				}else{
@@ -83,7 +83,7 @@ public class SearchRiskServlet extends HttpServlet {
 			}else{
 				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByHappeningMost(startDate, endDate);
 				if(riskTypeRankLst.size()==0){
-					pw.print("<script>alert('查询结果为空！');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>");
+					pw.print("<script>alert('There is no riskitem!');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>");
 					return;
 				}else{
 					RiskTypeRank typeRank=riskTypeRankLst.get(0);

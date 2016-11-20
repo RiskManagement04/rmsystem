@@ -196,7 +196,7 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		
 		if(!isSuccess){
 			daoHelper.closeConnection(con);
-			return "风险条目名称已存在！";
+			return "The name has already existed!";
 		}else{
 			//插入到风险条目表
 			statement=con.prepareStatement("insert into RiskItem(projectId,submitterId,createDate,riskName,riskContent,"
@@ -233,7 +233,7 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 			}else{
 				daoHelper.closeResult(result);
 				daoHelper.closePreparedStatement(statement);
-				return "新增风险条目失败！";
+				return "Failed!";
 			}
 			
 			//插入到风险计划和条目关系表
@@ -259,7 +259,7 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 			
 			daoHelper.closePreparedStatement(statement);
 			daoHelper.closeConnection(con);
-			return "新增风险条目成功！";
+			return "Success!";
 		}
 		
 	}
