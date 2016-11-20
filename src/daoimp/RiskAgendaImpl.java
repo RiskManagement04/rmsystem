@@ -346,7 +346,7 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 		}
 		
 		daoHelper.closeResult(result);
-		daoHelper.closePreparedStatement(statement);
+		daoHelper.closePreparedStatement(statement);							
 		daoHelper.closeConnection(con);
 		return riskItemList;
 	}
