@@ -55,7 +55,7 @@
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
 	
-				<a id="modal-188393" href="<%=request.getContextPath()+"/checkRisk/checkRiskList.jsp"%>" role="button" class="btn" style="margin-right:60px;margin-top:10px; margin-bottom:10px;float:right;color:black">返回</a>			
+				<a id="modal-188393" href="<%=request.getContextPath()+"/CheckAgendaRiskItemServlet"%>" role="button" class="btn" style="margin-right:60px;margin-top:10px; margin-bottom:10px;float:right;color:black">返回</a>			
 				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:60px;margin-top:10px;margin-bottom:10px;float:right">新增</a>	
 					
 				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
@@ -108,15 +108,13 @@
 				<thead>
 					<tr>
 						<th>序号</th>
-						<th>风险名称</th>
-						<th>跟踪者名称</th>
-						<th>修改时间</th>
 						<th>风险状态</th>
-						<th>风险内容</th>
 						<th>风险描述</th>
+						<th>解决方案</th>
 						<th>可能性</th>
 						<th>影响</th>
-						<th style="padding-right:60px">应对措施</th>						
+						<th>跟踪者名称</th>
+						<th style="padding-right:60px">修改时间</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -126,9 +124,6 @@
 				%>
 					<tr>
 						<th style="font-weight:normal;"><%=i+1 %></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="riskItemName"/></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
 						<%
 						if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.PREDICTED){							
 						%>
@@ -144,8 +139,44 @@
 						<%
 						}
 						%>
+						
 						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="riskContent"/></th>
-						<th style="padding-right:60px;font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
+						
+												<%
+						if(riskTrackingList.getriskTrackingItem(i).getPossibility()==1){							
+						%>
+						<th style="font-weight:normal;">低</th>
+						<%
+						}else if(riskTrackingList.getriskTrackingItem(i).getPossibility()==2){
+						%>
+						<th style="font-weight:normal;">中</th>
+						<%
+						}else{
+						%>
+						<th style="font-weight:normal;">高</th>
+						<%
+						}
+						%>
+						
+												<%
+						if(riskTrackingList.getriskTrackingItem(i).getImpact()==1){							
+						%>
+						<th style="font-weight:normal;">低</th>
+						<%
+						}else if(riskTrackingList.getriskTrackingItem(i).getImpact()==2){
+						%>
+						<th style="font-weight:normal;">中</th>
+						<%
+						}else{
+						%>
+						<th style="font-weight:normal;">高</th>
+						<%
+						}
+						%>
+						
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
+						<th style="padding-right:60px;font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
 					
 					</tr>
 				<%
