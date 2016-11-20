@@ -28,8 +28,8 @@
 		<img alt="" src="https://www.iworker.cn/i/avatars/thumbs2/company_avatar.png">
 	</div>
 	<ul class="nav nohover auto_overflow">
-			<li class="home"><i></i><a href='<%=request.getContextPath()+"/CheckRiskItemServlet"%>' >风险列表</a></li>
-			<li class="schedule focus"><i></i><a href="<%=request.getContextPath()+"/CheckAgendaListServlet"%>" onclick="" class="apps/schedule">计划列表</a></li>
+			<li class="home"><i></i><a href='<%=request.getContextPath()+"/CheckRiskListServlet"%>' >风险列表</a></li>
+			<li class="schedule focus"><i></i><a href="<%=request.getContextPath()+"/CheckAgendaListServlet"%>" style="color: #f4f4f4;background-color: #4a90e2;" class="apps/schedule">计划列表</a></li>
 
 	</ul>
 </div>
@@ -137,7 +137,7 @@
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskContent"/></th>
 					<%
 						RiskType riskType=((RiskItem)riskItemList.get(i)).getRiskType();
-						String type=((RiskItem)riskItemList.get(i)).convertRiskTypeToString(riskType);
+						String type=((RiskItem)riskItemList.get(i)).convertRiskTypeToShow(riskType);
 					%>
 						<th style="font-weight:normal;"><%=type %></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>	

@@ -268,8 +268,6 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		ResultSet result=null;
 		ArrayList riskTypeRankList=new  ArrayList();
 		
-	
-		
 		stmt=con.prepareStatement("select r.riskType,count(DISTINCT t.riskItemId) as c "
 				+ "from RiskTrackingItem t,RiskItem r "
 				+ "where t.createTime between ? and ? and t.riskStatus=? and t.riskItemId=r.riskItemId "
@@ -292,6 +290,21 @@ public class RiskItemDaoImpl implements RiskItemDao{
 				
 		daoHelper.closeResult(result);
 		daoHelper.closePreparedStatement(stmt);
+		
+		stmt=con.prepareStatement("select * from RiskItem r "
+				+ "where r.createTime between ? and ? and r.riskStatus=?");		
+		stmt.setDate(1, startDate);
+		stmt.setDate(2, finishDate);
+		stmt.setString(3, "HAPPENED");
+		result = stmt.executeQuery();
+		ArrayList tmpList=riskTypeRankList;
+		while(result.next()){
+			for(int i=0;i<tmpList.size();i++){
+				
+			}
+		}
+		
+		
 		daoHelper.closeConnection(con);
 		
 		return riskTypeRankList;

@@ -366,6 +366,37 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 			String trigger=result.getString("r.trigger").trim();
 			item.setTrigger(trigger);
 			
+			
+			//根据riskItem的编号查找跟踪者
+			PreparedStatement statement3=null;
+			ResultSet result3=null;
+			ArrayList<User> trackers=new ArrayList<User>();
+			statement3=con.prepareStatement("select * from Tracking t,User u where t.riskItemId=? and "
+					+ "t.userId=u.userId");
+			
+			statement3.setInt(1, riskItemId);				
+			result3 = statement3.executeQuery();
+			
+			while(result3.next()){
+				User user=new User();
+				int trackerId=result3.getInt("u.userId");
+				user.setUserId(trackerId);
+				String trueName=result3.getString("u.trueName").trim();
+				user.setTrueName(trueName);
+				String nickName=result3.getString("u.nickName").trim();
+				user.setNickName(nickName);
+				String password=result3.getString("u.password").trim();
+				user.setPassword(password);
+				String identity=result3.getString("u.identity").trim();
+				user.setIdentity(user.convertIdentityFromString(identity));
+				
+				trackers.add(user);
+			}
+			
+			daoHelper.closeResult(result3);
+			daoHelper.closePreparedStatement(statement3);
+			
+			item.setTrackers(trackers);						
 			riskItemList.add(item);
 		}
 		

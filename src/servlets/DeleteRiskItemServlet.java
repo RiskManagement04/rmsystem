@@ -51,13 +51,16 @@ public class DeleteRiskItemServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
-		int userId=(Integer)session.getAttribute("LoginId");
 		RiskItemListBean riskItemList=new RiskItemListBean();
-		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem());
-		session.setAttribute("riskItemList",riskItemList);
+		try {
+			riskItemList.setRiskItemList(DaoFactory.getRiskAgendaDao().findRiskItemByAgenda(agendaId));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		session.setAttribute("agendaRiskItemList",riskItemList);
 		
-		pw.print(" <script>location.href='./checkRisk/checkRiskList.jsp'</script>"); 
+		pw.print(" <script>location.href='./checkRisk/AgendaRiskItemList.jsp'</script>"); 
 	}
 
 	/**

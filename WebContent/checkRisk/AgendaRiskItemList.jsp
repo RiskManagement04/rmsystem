@@ -222,7 +222,8 @@
 						<th>风险状态</th>
 						<th>解决方案</th>
 						<th>可能性</th>
-						<th>影响程度</th>						
+						<th>影响程度</th>	
+						<th>跟踪者</th>					
 						<th style="padding-right:60px">跟踪目录</th>
 					</tr>
 				</thead>
@@ -294,7 +295,21 @@
 					<%
 						}
 					%>
-										
+					
+					<%
+						ArrayList<User> trackers=agendaRiskItemList.getRiskItem(i).getTrackers();
+					%>
+						<th>
+						<%
+						for(int j=0;j<trackers.size();j++){
+							User t=trackers.get(j);
+							String name=t.getTrueName();
+						%>
+						<p><%=name %></p>
+						<%
+						}
+						%>
+						</th>										
 						<th style="margin-right:60px;font-weight:normal">
 							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
 								<input type="hidden" name="riskItemId" value="<%=agendaRiskItemList.getRiskItem(i).getRiskItemId()%>"/>
