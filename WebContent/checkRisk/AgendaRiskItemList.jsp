@@ -17,9 +17,6 @@
 	<jsp:useBean id="agendaRiskItemList"
 		type="bean.RiskItemListBean"
 		scope="session"></jsp:useBean>
-	<jsp:useBean id="riskAgendaList"
-			type="bean.RiskAgendaListBean"
-		scope="session"></jsp:useBean>
 	<jsp:useBean id="riskItem" class="model.RiskItem"
 		scope="page"></jsp:useBean>
 		
@@ -95,21 +92,6 @@
 							%>
 							<form class="form-horizontal" action="<%=request.getContextPath()+"/AddRiskItemServlet"%>" method="post">
 							<div class="modal-body">
-							
-										<div class="control-group" style="text-align:center">
-											 <label class="control-label" for="inputPassword" style="float:left">计划名称</label>
-											<div class="controls">
-												<select class="selectpicker" name="agendaName">
-												<%
-												for(int i=0;i<riskAgendaList.getRiskAgendaList().size();i++){
-												%>
-													<option value='<%=riskAgendaList.getRiskAgenda(i).getAgendaId()%>'><%=riskAgendaList.getRiskAgenda(i).getAgendaName() %></option>
-												<%
-												}
-												%>
-												</select>
-											</div>
-										</div>
 								
 										<div class="control-group" style="text-align:center">
 											 <label class="control-label" for="inputPassword" style="float:left">项目名称</label>
@@ -313,7 +295,6 @@
 						}
 					%>
 										
-						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="createDate"/></th>
 						<th style="margin-right:60px;font-weight:normal">
 							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
 								<input type="hidden" name="riskItemId" value="<%=agendaRiskItemList.getRiskItem(i).getRiskItemId()%>"/>

@@ -18,6 +18,7 @@ import bean.RiskItemListBean;
 import factory.DaoFactory;
 import model.RiskItem;
 import model.RiskStatus;
+import model.RiskType;
 import model.User;
 
 /**
@@ -47,18 +48,23 @@ public class AddRiskItemServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter pw=response.getWriter();
 			
+		RiskItem riskItem=new RiskItem();
 		int riskItemId=0;
+		//int agendaId=Integer.parseInt(request.getParameter("agendaName"));
 		int projectId=Integer.parseInt(request.getParameter("projectName"));
-		int submitterId=(Integer)session.getAttribute("LoginId");
-		String submitterName=null;
-		java.sql.Date createDate=new java.sql.Date(System.currentTimeMillis());
-		/*
-		 * 鏂板椋庨櫓绫诲埆*/
+		riskItem.setProjectId(projectId);
 		String riskType=request.getParameter("riskType").trim();
+		RiskType type=riskItem.convertRiskTypefromString(riskType);
+		riskItem.setRiskType(type);
 		
 		String riskName=request.getParameter("riskName").trim();
-		String riskContent=request.getParameter("riskContent").trim();
+		riskItem.setRiskName(riskName);
 		String trigger=request.getParameter("trigger").trim();
+		riskItem.setTrigger(trigger);
+		String riskContent=request.getParameter("riskContent").trim();
+		riskItem.setRiskContent(riskContent);
+		String measures=request.getParameter("measures").trim();
+		riskItem.setMeasures(measures);
 		int possibility=0;
 		if(request.getParameter("possibility").trim().equals("high")){
 			possibility=3;
@@ -67,6 +73,7 @@ public class AddRiskItemServlet extends HttpServlet {
 		}else if(request.getParameter("possibility").trim().equals("low")){
 			possibility=1;
 		}
+		riskItem.setPossibility(possibility);
 		
 		int impact=0;
 		if(request.getParameter("impact").trim().equals("high")){
@@ -75,33 +82,39 @@ public class AddRiskItemServlet extends HttpServlet {
 			impact=2;
 		}else if(request.getParameter("impact").trim().equals("low")){
 			impact=1;
-		}		
+		}	
+		riskItem.setImpact(impact);
 		
-//		RiskStatus riskStatus=null;
-//		if(request.getParameter("riskStatus").trim().equals("predicted")){
-//			riskStatus=RiskStatus.PREDICTED;
-//		}else if(request.getParameter("riskStatus").trim().equals("happened")){
-//			riskStatus=RiskStatus.HAPPENED;
-//		}else if(request.getParameter("riskStatus").trim().equals("solved")){
-//			riskStatus=RiskStatus.SOLVED;
-//		}
 		String  riskStatus=request.getParameter("riskStatus").trim();
+		RiskStatus status=riskItem.convertRiskStatusfromString(riskStatus);
+		riskItem.setRiskStatus(status);
 		
-		String projectName="";
-		/*
-		 * 椋庨櫓鎺柦*/
-		String measures="";
+		int submitterId=(Integer)session.getAttribute("LoginId");
+		riskItem.setSubmitterId(submitterId);
+		java.sql.Date createDate=new java.sql.Date(System.currentTimeMillis());
+		riskItem.setCreateDate(createDate);
+		
+		String[] trackersId=request.getParameterValues("trackres");
+		
 		ArrayList<User> trackers=new ArrayList<User>();
-		RiskItem item=new RiskItem(riskItemId,projectId,submitterId,createDate,riskName,riskContent,trigger,
-				possibility,impact,riskStatus,projectName, measures, riskType, null);
+		User user=new User();//创建风险条目的用户
+		user.setUserId(submitterId);
+		trackers.add(user);
+		if(trackersId.length>0){
+			for(int i=0;i<trackersId.length;i++){
+				int trackerId=Integer.parseInt(trackersId[i]);
+				User u=new User();
+				u.setUserId(trackerId);
+				trackers.add(u);
+			}			
+		}
+
+		riskItem.setTrackers(trackers);
+		int riskAgendaId=Integer.parseInt((String)session.getAttribute("agendaId"));
 		
-		/**
-		 * 鑾峰彇褰撳墠鐨勮鍒抜d
-		 */
-		int riskAgendaId=Integer.parseInt(request.getParameter("agendaId").trim());
 		String result="";
 		try {
-			result = DaoFactory.getRiskAgendaDao().addRiskItem(riskAgendaId, item);
+			result = DaoFactory.getRiskAgendaDao().addRiskItem(riskAgendaId, riskItem);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,7 +123,8 @@ public class AddRiskItemServlet extends HttpServlet {
 		RiskItemListBean riskItemList=new RiskItemListBean();
 		riskItemList.setRiskItemList(DaoFactory.getRiskItemDao().findAllRiskItem());
 		session.setAttribute("riskItemList",riskItemList);
-		pw.print("<script>alert(result);location.href='./checkRisk/checkRiskList.jsp'</script>"); 
+		String print="<script>alert('"+result+"');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>";
+		pw.print(print); 
 		
 		
 		
