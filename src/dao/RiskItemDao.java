@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.RiskItem;
@@ -23,4 +24,6 @@ public interface RiskItemDao {
 	public List findRiskItemByHappeningMost(Date startDate,Date finishDate,RiskType type) throws SQLException;//返回演变成问题最多的风险列表
 	
 	public String getRiskName(int riskItemId);
+	
+	public ArrayList<Integer> getTrackers(int riskItemId);//根据风险条目的编号获得相应的追踪者
 }

@@ -79,7 +79,8 @@
                 </select>
 
                 <input class="btn" type="submit" name="check" value="查询" style="width:80px; margin-top:-12px;margin-left:10px;margin-right:15px" />
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:60px;margin-top:-2px;float:right">新增风险</a>	
+                <a id="modal-188393" href="<%=request.getContextPath()+"/CheckAgendaListServlet"%>" role="button" class="btn" style="margin-right:50px;margin-top:-2px; margin-bottom:10px;float:right;color:black">返回</a>	
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:50px;margin-top:-2px;float:right">新增风险</a>	
 				</form>		
 				<div class="modal fade hide in" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
@@ -303,7 +304,7 @@
 					<%
 						ArrayList<User> trackers=agendaRiskItemList.getRiskItem(i).getTrackers();
 					%>
-						<th>
+						<th style="font-weight:normal;">
 						<%
 						for(int j=0;j<trackers.size();j++){
 							User t=trackers.get(j);

@@ -171,13 +171,6 @@
 				<thead>
 				
 					<tr>
-						<%
-						if(user.getIdentity()==UserType.MANAGER){
-						%>
-						<th>删除</th>
-						<%
-						}
-						%>
 						<th>序号</th>
 						<th>项目</th>
 						<th>风险名称</th>
@@ -197,18 +190,6 @@
 						pageContext.setAttribute("riskItem", riskItemList.getRiskItem(i));
 				%>
 					<tr style="font-weight:normal;">
-						<%
-						if(user.getIdentity()==UserType.MANAGER){
-						%>
-						<th>
-						<form action="<%=request.getContextPath()+"/DeleteRiskItemServlet"%>" method="post">		
-							<input type="hidden" value='<%=riskItemList.getRiskItem(i).getRiskItemId() %>' name="deleteRiskItemId"/>				
-							<input type="submit" class="btn btn-default btn-sm bg" value='删除' src="/img/delete_icon.jpg"/>
-						</form>
-						</th>
-						<%
-						}
-						%>
 						<th style="font-weight:normal;"><%=i+1 %></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="projectName"/></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskName"/></th>

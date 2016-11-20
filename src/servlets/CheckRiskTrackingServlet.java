@@ -48,6 +48,7 @@ public class CheckRiskTrackingServlet extends HttpServlet {
 		List riskTrackingList=DaoFactory.getRiskTrackingItemDao().findRiskTrackingItem(riskItemId);
 		RiskTrackingItemListBean riskTrackingItemList=new RiskTrackingItemListBean();
 		riskTrackingItemList.setRiskTrackingItemList(riskTrackingList);
+		
 		session.setAttribute("riskTrackingList",riskTrackingItemList);
 		session.setAttribute("riskItemIdOfDetails", riskItemId);
 		

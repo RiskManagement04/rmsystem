@@ -1,4 +1,4 @@
-<%@page import="model.*,factory.DaoFactory,java.util.List"%>
+<%@page import="model.*,factory.DaoFactory,java.util.*,bean.RiskItemListBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,9 +39,26 @@
 			  <ul class="dropdown-menu dropdown-menu-left" id="cname_list" style="width:250px;">		   
 			  </ul>		  
 			</div>	
-		<div style="float: right;margin-right:20px">
-			<a href='<%=request.getContextPath()+"/login/login.jsp"%>' style="float: right;margin-right:20px">退出</a>
-		</div>						
+					<div style="float: right;margin-right:20px">
+				<a href='<%=request.getContextPath()+"/login/login.jsp"%>' style="float: right;margin-right:20px">退出</a>
+			</div>	
+			<div style="float: right;margin-right:40px;font-size: 14pt; color: #4a90e2">
+				<%
+				User user=(User)session.getAttribute("LoginUser");
+				if(user.getIdentity()==UserType.DEVELOPER){
+				%>
+					<small>开发人员：</small>
+				<%
+				}else{
+				%>
+					<small>项目经理：</small>
+				<%
+				}
+				%>
+				
+				<small><%=user.getTrueName() %></small>
+			</div>	
+					
 	</div>	
 	<div class="project-warp">
 		<div class="header">
@@ -55,10 +72,22 @@
 		<div  class="iwk-table-wrap">
 			<div class="edit-buttons">
 	
-				<a id="modal-188393" href="<%=request.getContextPath()+"/checkRisk/checkRiskList.jsp"%>" role="button" class="btn" style="margin-right:60px;margin-top:10px; margin-bottom:10px;float:right;color:black">返回</a>			
+				<a id="modal-188393" href="<%=request.getContextPath()+"/CheckAgendaRiskItemServlet"%>" role="button" class="btn" style="margin-right:60px;margin-top:10px; margin-bottom:10px;float:right;color:black">返回</a>	
+				<%
+				ArrayList<Integer> trackers=DaoFactory.getRiskItemDao().getTrackers(riskItemId);
+				int userId=(Integer)session.getAttribute("LoginId");
+				for(int i=0;i<trackers.size();i++){
+					if(trackers.get(i)==userId){
+				%>
 				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:60px;margin-top:10px;margin-bottom:10px;float:right">新增</a>	
+				
+				<%		
+						break;
+					}
+				}
+				%>		
 					
-				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
+				<div class="modal fade hide in" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
 							<div class="modal-header">
@@ -79,14 +108,34 @@
 												</select>
 											</div>
 										</div>	
+										<div class="control-group"style="text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">可能性</label>
+											<div class="controls">
+												<select class="selectpicker" name="possibility">
+												  <option value="high">高</option>
+												  <option value="middle">中</option>
+												  <option value="low">低</option>
+												</select>
+											</div>
+										</div>	
+										<div class="control-group"style="text-align:center">
+											 <label class="control-label" for="inputPassword"style="float:left">影响</label>
+											<div class="controls">
+												<select class="selectpicker" name="impact">
+												  <option value="high">高</option>
+												  <option value="middle">中</option>
+												  <option value="low">低</option>
+												</select>
+											</div>
+										</div>	
 										<div class="control-group" style="margin-top:10px;text-align:center">
 											 <label class="control-label" for="inputPassword"style="float:left">风险描述    </label>
 											<div class="controls">
-												<input id="inputPassword" type="text" name="riskContent"/>
+												<textarea class="form-control" rows="5" name="riskContent"></textarea>
 											</div>
 										</div>	
 										<div class="form-group" style="margin-top:10px;text-align:center">
-											 <label class="control-label" for="name" style="float:left">采取措施   </label>
+											 <label class="control-label" for="name" style="float:left">解决方案   </label>
 											<div class="controls">
 												<textarea class="form-control" rows="5" name="measures"></textarea>
 											</div>
@@ -108,15 +157,13 @@
 				<thead>
 					<tr>
 						<th>序号</th>
-						<th>风险名称</th>
-						<th>跟踪者名称</th>
-						<th>修改时间</th>
 						<th>风险状态</th>
-						<th>风险内容</th>
 						<th>风险描述</th>
+						<th>解决方案</th>
 						<th>可能性</th>
 						<th>影响</th>
-						<th style="padding-right:60px">应对措施</th>						
+						<th>跟踪者名称</th>
+						<th style="padding-right:60px">修改时间</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -126,9 +173,6 @@
 				%>
 					<tr>
 						<th style="font-weight:normal;"><%=i+1 %></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="riskItemName"/></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
 						<%
 						if(riskTrackingList.getriskTrackingItem(i).getRiskStatus()==model.RiskStatus.PREDICTED){							
 						%>
@@ -144,8 +188,44 @@
 						<%
 						}
 						%>
+						
 						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="riskContent"/></th>
-						<th style="padding-right:60px;font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="measures"/></th>
+						
+												<%
+						if(riskTrackingList.getriskTrackingItem(i).getPossibility()==1){							
+						%>
+						<th style="font-weight:normal;">低</th>
+						<%
+						}else if(riskTrackingList.getriskTrackingItem(i).getPossibility()==2){
+						%>
+						<th style="font-weight:normal;">中</th>
+						<%
+						}else{
+						%>
+						<th style="font-weight:normal;">高</th>
+						<%
+						}
+						%>
+						
+												<%
+						if(riskTrackingList.getriskTrackingItem(i).getImpact()==1){							
+						%>
+						<th style="font-weight:normal;">低</th>
+						<%
+						}else if(riskTrackingList.getriskTrackingItem(i).getImpact()==2){
+						%>
+						<th style="font-weight:normal;">中</th>
+						<%
+						}else{
+						%>
+						<th style="font-weight:normal;">高</th>
+						<%
+						}
+						%>
+						
+						<th style="font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="trackerName"/></th>
+						<th style="padding-right:60px;font-weight:normal;"><jsp:getProperty name="riskTrackingItem" property="createTime"/></th>
 					
 					</tr>
 				<%
