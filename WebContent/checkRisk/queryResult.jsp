@@ -88,9 +88,7 @@
 						var ctx = document.getElementById("myChart").getContext("2d");			
 						var elabel=' <%=request.getAttribute("riskType")%> ';
 						elabel=elabel.split(',');
-						
-						alert(elabel);
-						
+				
 						var edata=' <%=request.getAttribute("riskRank")%> ';
 						edata=edata.split(',');
 						var data = {
