@@ -103,7 +103,7 @@
 											</div>
 										</div>
 										<div class="control-group"style="margin-top:5px;text-align:center">
-											 <label class="control-label" style="float:left">选择成员</label>
+											 <label class="control-label" style="float:left" >选择成员</label>
 											<div class="controls">
 												<select class="selectpicker" multiple="multiple" name="usersOfProject">
 				                                	<%
