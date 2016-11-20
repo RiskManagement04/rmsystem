@@ -113,7 +113,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		}
 
 		//插入项目与用户关系
-		ArrayList<User> users=project.getUsers();
+		ArrayList<User> users=project.getUsers(); 
 		try {
 			statement=con.prepareStatement("insert into Developing values(?,?)");
 
