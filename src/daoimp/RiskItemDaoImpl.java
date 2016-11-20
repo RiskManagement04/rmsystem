@@ -270,9 +270,9 @@ public class RiskItemDaoImpl implements RiskItemDao{
 		
 	
 		
-		stmt=con.prepareStatement("select r.riskType,count(DISTINCT t.riskItemId) as c"
+		stmt=con.prepareStatement("select r.riskType,count(DISTINCT t.riskItemId) as c "
 				+ "from RiskTrackingItem t,RiskItem r "
-				+ "where t.createTime between ? and ? and t.riskStatus=? and t.riskItemId=r.riskItemId"
+				+ "where t.createTime between ? and ? and t.riskStatus=? and t.riskItemId=r.riskItemId "
 				+ "group by r.riskType order by c desc");
 		stmt.setDate(1, startDate);
 		stmt.setDate(2, finishDate);
