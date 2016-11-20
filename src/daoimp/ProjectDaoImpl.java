@@ -174,7 +174,64 @@ public class ProjectDaoImpl implements ProjectDao{
 			daoHelper.closeConnection(con);
 		}
 		
-		System.out.println("大小："+list.size());
+		return list;
+	}
+
+	@Override
+	public ArrayList<Project> getProjectByManager(int userId) {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement stmt=null;
+		ResultSet result=null;
+		ArrayList<Project> list=new ArrayList<Project>();
+		
+		try {
+			stmt = con.prepareStatement("select * from Project where managerId=?");
+			stmt.setInt(1, userId);
+			result = stmt.executeQuery();
+			
+			while(result.next()){
+				Project p=new Project();
+				int projectId=result.getInt("projectId");
+				p.setProjectId(projectId);
+				String projectName=result.getString("projectName");
+				p.setProjectName(projectName);
+				String projectContent=result.getString("projectContent");
+				p.setProjectContent(projectContent);
+				p.setManagerId(userId);
+				
+				//获取项目组内的成员
+				PreparedStatement stmt2=con.prepareStatement("select * from Developing d,User u where d.projectId=? and d.userId=u.userId");
+				ResultSet result2=null;
+				stmt2.setInt(1, projectId);
+				result2=stmt2.executeQuery();
+				ArrayList<User> users=new ArrayList<User>();
+				while(result2.next()){
+					User u=new User();
+					int uId=result2.getInt("u.userId");
+					u.setUserId(uId);
+					String nickName=result2.getString("u.nickName").trim();
+					u.setNickName(nickName);
+					String trueName=result2.getString("u.trueName").trim();
+					u.setTrueName(trueName);
+					
+					users.add(u);
+				}
+				
+				p.setUsers(users);
+				
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+						
+			daoHelper.closeResult(result);
+			daoHelper.closePreparedStatement(stmt);
+			daoHelper.closeConnection(con);
+		}
+		
 		return list;
 	}
 

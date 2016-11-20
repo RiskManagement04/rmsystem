@@ -32,6 +32,14 @@
 	<ul class="nav nohover auto_overflow">
 			<li class="home"><i></i><a href='<%=request.getContextPath()+"/CheckRiskListServlet"%>' >风险列表</a></li>
 			<li class="schedule focus"><i></i><a href="<%=request.getContextPath()+"/CheckAgendaListServlet"%>" onclick="" class="apps/schedule" style="color: #f4f4f4;background-color: #4a90e2;">计划列表</a></li>
+			<%
+			User user=(User)session.getAttribute("LoginUser");
+			if(user.getIdentity()==UserType.MANAGER){
+			%>
+			<li class="home"><i></i><a href='<%=request.getContextPath()+"/CheckProjectListServlet"%>' >项目列表</a></li>
+			<%
+			}
+			%>
 
 	</ul>
 </div>
@@ -49,7 +57,7 @@
 			</div>	
 			<div style="float: right;margin-right:40px;font-size: 14pt; color: #4a90e2">
 				<%
-				User user=(User)session.getAttribute("LoginUser");
+				
 				if(user.getIdentity()==UserType.DEVELOPER){
 				%>
 					<small>开发人员：</small>
