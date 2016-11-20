@@ -68,20 +68,12 @@
 		<div class="header">
 			<label style="margin-left:50px; margin-top:20px;  font-size:26px;"> 计划列表</label>
 		</div>
-		<div  class="iwk-table-wrap">
-			<div class="edit-buttons" style="margin-left:60px; margin-top:25px;">
+		<div >
+			<div class="edit-buttons">
 				
                 
-               	开始时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
-               	 结束时间<input class="txt" type="date" value="" style="width:120px; margin-left:15px;margin-right:15px;"/>
-                <select class="txt" style="width:120px; margin-left:15px;margin-right:15px;">
-                    <option value="被识别最多" selected="selected">被识别最多</option>
-                    <option value="演变成问题最多">演变成问题最多</option>
-                </select>
-                <input class="btn" type="button" name="check" value="查询" style="width:80px; margin-top:-12px;margin-left:10px;margin-right:15px;" />
-                
-            
-				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:-2px; margin-bottom:10px;float:right;width:50px;">新增</a>			
+              
+				<a id="modal-188393" href="#modal-container-188393" role="button" class="btn" data-toggle="modal" style="margin-right:45px;margin-top:-20px; margin-bottom:10px;float:right;width:50px;">新增</a>			
 				<div class="modal fade" id="modal-container-188393" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:-10px">
 					<div>
 						<div>
@@ -117,17 +109,17 @@
 					
 				</div>
 			</div>
-			<div class="span12">
-					<canvas id="myChart" width="600" height="400"></canvas>
+			<div style="margin-left:50px; margin-top:20px; width:85%;">
+					<canvas id="myChart" style="margin-left:50px;width:400px; height:200px;"></canvas>
 					<script type="text/javascript">
 						var ctx = document.getElementById("myChart").getContext("2d");
-						var a=' <%=request.getAttribute("")%> ';
+						var elabel=' <%=request.getAttribute("riskType")%> ';
 						
-						var eLabels=new Array();
-						var edata=new Array();
+						
+						var edata=' <%=request.getAttribute("riskRank")%> ';;
 						
 						var data = {
-								labels : eLabels,
+								labels :elabel,
 								datasets : [
 									
 									{
@@ -135,7 +127,7 @@
 										strokeColor : "rgba(151,187,205,1)",
 										pointColor : "rgba(151,187,205,1)",
 										pointStrokeColor : "#fff",
-										data : edata
+										data :edata
 									}
 								]
 						}
@@ -145,8 +137,8 @@
 
 					</script>
 			</div>
-		
-			<div>
+			<form class="form-horizontal" action="<%=request.getContextPath()+"/ImportRiskServlet"%>" method="post">
+			<div style="margin-top:10px;overflow-y: auto; overflow-x:hidden;height:300px;  width:95%;">
 			<table class="table table-striped" style="margin-left:50px">
 				<thead>
 					<tr>
@@ -160,10 +152,10 @@
 						<th>解决方案</th>
 						<th>可能性</th>
 						<th>影响程度</th>						
-						<th style="padding-right:60px">跟踪目录</th>
-						<td>
-            				<input type="checkbox" name="myTextEditBox" value="checked" /> checkbox
-        				</td>
+						<th >跟踪目录</th>
+						<th>
+            				<input type="checkbox" name="myTextEditBox" value="checked" style="padding-right:60px"/>是否选中
+        				</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -232,12 +224,9 @@
 					%>
 										
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="createDate"/></th>
-						<th style="margin-right:60px;font-weight:normal">
-							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
-								<input type="hidden" name="riskItemId" value="<%=((RiskItem)riskItemList.get(i)).getRiskItemId() %>"/>
-								<input type="submit" class="btn" value='详细'/>
-							</form>
-						</th>
+						<th>
+            				<input type="checkbox" name="isChoosed" value='<%=((RiskItem)riskItemList.get(i)).getRiskItemId() %>'  style="padding-right:60px"/>
+        				</th>
 						
 						<th>
 						
@@ -249,7 +238,9 @@
 				</tbody>
 			</table>
 			</div>
-		
+			
+			<input  role="button" type="submit"class="btn" style="margin-right:45px;margin-top:20px; margin-bottom:10px;float:right;width:50px;"/>导入		
+			</form>
 		</div>
 	</div>
 	
