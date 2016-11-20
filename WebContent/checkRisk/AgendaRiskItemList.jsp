@@ -304,7 +304,7 @@
 					<%
 						ArrayList<User> trackers=agendaRiskItemList.getRiskItem(i).getTrackers();
 					%>
-						<th>
+						<th style="font-weight:normal;">
 						<%
 						for(int j=0;j<trackers.size();j++){
 							User t=trackers.get(j);

@@ -290,7 +290,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 				
 		daoHelper.closeResult(result);
 		daoHelper.closePreparedStatement(stmt);
-		
+/*	
 		stmt=con.prepareStatement("select * from RiskItem r "
 				+ "where r.createTime between ? and ? and r.riskStatus=?");		
 		stmt.setDate(1, startDate);
@@ -303,7 +303,7 @@ public class RiskItemDaoImpl implements RiskItemDao{
 				
 			}
 		}
-		
+*/		
 		
 		daoHelper.closeConnection(con);
 		
@@ -343,6 +343,36 @@ public class RiskItemDaoImpl implements RiskItemDao{
 	
 		
 		return name;
+	}
+
+	@Override
+	public ArrayList<Integer> getTrackers(int riskItemId) {
+		Connection con=daoHelper.getConnection();
+		PreparedStatement stmt=null;
+		ResultSet result=null;
+		ArrayList<Integer> trackers=new ArrayList<Integer>();
+		
+		try {
+			stmt=con.prepareStatement("select * from Tracking "
+					+ "where riskItemId=?");
+			stmt.setInt(1, riskItemId);
+			result = stmt.executeQuery();	
+			
+			while(result.next()){
+				
+				int tracker=result.getInt("userId");
+				trackers.add(tracker);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			daoHelper.closeResult(result);
+			daoHelper.closePreparedStatement(stmt);	
+			daoHelper.closeConnection(con);
+		}		
+		
+		return trackers;
 	}	
 	
 /*
