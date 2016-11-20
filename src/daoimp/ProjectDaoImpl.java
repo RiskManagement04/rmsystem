@@ -147,7 +147,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		List<Project> list=new ArrayList<Project>();
 		
 		try {
-			stmt = con.prepareStatement("select * from Project");
+			stmt = con.prepareStatement("select * from project");
 			result = stmt.executeQuery();
 			
 			while(result.next()){
@@ -174,6 +174,7 @@ public class ProjectDaoImpl implements ProjectDao{
 			daoHelper.closeConnection(con);
 		}
 		
+		System.out.println("ด๓ะกฃบ"+list.size());
 		return list;
 	}
 
