@@ -69,7 +69,7 @@
                 <form method="post" action='<%=request.getContextPath()+"/SearchRisk"%>'>			
 				 开始时间<input class="txt" type="date" value="" name="startDate" style="width:130px; margin-left:15px;margin-right:15px;" required/>
                	 结束时间<input class="txt" type="date" value="" name="endDate" style="width:130px; margin-left:15px;margin-right:15px;" required/>
-                <select class="txt"  name="condition" style="width:120px; margin-left:15px;margin-right:15px;">
+                <select class="txt"  name="condition" style="width:140px; margin-left:15px;margin-right:15px;">
                     <option value="被识别最多" selected="selected">被识别最多</option>
                     <option value="演变成问题最多">演变成问题最多</option>
                 </select>
