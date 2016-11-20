@@ -309,7 +309,7 @@ public class RiskAgendaImpl implements RiskAgendaDao{
 			
 			if(!isExist){
 				statement.setInt(1, riskAgendaId);
-				statement.setInt(2, riskItemList.get(i));
+				statement.setInt(2, riskItemList.get(i)); 
 				
 				statement.addBatch();				
 			}
