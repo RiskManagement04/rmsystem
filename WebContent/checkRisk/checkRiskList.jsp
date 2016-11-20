@@ -1,4 +1,4 @@
-<%@page import="model.*,factory.DaoFactory,java.util.List"%>
+<%@page import="model.*,factory.DaoFactory,java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -171,16 +171,18 @@
 				<thead>
 				
 					<tr>
-						<th>序号</th>
+						
 						<th>项目</th>
 						<th>风险名称</th>
 						<th>风险描述</th>
-						<th>可能性</th>
-						<th>影响程度</th>
+						<th>风险类别</th>
 						<th>触发器</th>
-						<th>提交者</th>
 						<th>风险状态</th>
-						<th>创建时间</th>
+						<th>解决方案</th>
+						<th>可能性</th>
+						<th>影响程度</th>						
+						<th>跟踪者</th>
+
 						<th style="padding-right:60px">跟踪目录</th>
 					</tr>
 				</thead>
@@ -190,10 +192,33 @@
 						pageContext.setAttribute("riskItem", riskItemList.getRiskItem(i));
 				%>
 					<tr style="font-weight:normal;">
-						<th style="font-weight:normal;"><%=i+1 %></th>
+						
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="projectName"/></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskName"/></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskContent"/></th>
+					<%
+						RiskType riskType=riskItemList.getRiskItem(i).getRiskType();
+						String type=riskItemList.getRiskItem(i).convertRiskTypeToShow(riskType);
+					%>
+						<th style="font-weight:normal;"><%=type %></th>	
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>	
+					<%
+						if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.PREDICTED){
+					%>
+						<th style="font-weight:normal;">未发生</th>
+					<%
+						}else if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.HAPPENED){
+					%>
+						<th style="font-weight:normal;">已发生</th>
+					<%
+						}else{
+					%>
+						<th style="font-weight:normal;">已解决</th>
+					<%
+						}
+					%>		
+						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="measures"/></th>			
+							
 					<%
 						if(riskItemList.getRiskItem(i).getPossibility()==1){
 					%>
@@ -225,25 +250,23 @@
 					<%
 						}
 					%>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>
-						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="submitterName"/></th>
 						
+					
 					<%
-						if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.PREDICTED){
+						ArrayList<User> trackers=riskItemList.getRiskItem(i).getTrackers();
 					%>
-						<th style="font-weight:normal;">未发生</th>
-					<%
-						}else if(riskItemList.getRiskItem(i).getRiskStatus()==RiskStatus.HAPPENED){
-					%>
-						<th style="font-weight:normal;">已发生</th>
-					<%
-						}else{
-					%>
-						<th style="font-weight:normal;">已解决</th>
-					<%
+						<th style="font-weight:normal;">
+						<%
+						for(int j=0;j<trackers.size();j++){
+							User t=trackers.get(j);
+							String name=t.getTrueName();
+						%>
+						<p><%=name %></p>
+						<%
 						}
-					%>											
-						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="createDate"/></th>
+						%>
+						</th>									
+						
 						<th style="margin-right:60px;font-weight:normal">
 							<form method='POST' action="<%=request.getContextPath()+"/CheckRiskTrackingServlet"%>">
 								<input type="hidden" name="riskItemId" value="<%=riskItemList.getRiskItem(i).getRiskItemId()%>"/>
