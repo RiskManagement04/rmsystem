@@ -243,7 +243,7 @@
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="riskContent"/></th>
 					<%
 						RiskType riskType=agendaRiskItemList.getRiskItem(i).getRiskType();
-						String type=agendaRiskItemList.getRiskItem(i).convertRiskTypeToString(riskType);
+						String type=agendaRiskItemList.getRiskItem(i).convertRiskTypeToShow(riskType);
 					%>
 						<th style="font-weight:normal;"><%=type %></th>
 						<th style="font-weight:normal;"><jsp:getProperty name="riskItem" property="trigger"/></th>	

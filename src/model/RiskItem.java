@@ -265,6 +265,33 @@ public class RiskItem implements Serializable{
 		
 		return type;
 	}
+	
+	public String convertRiskTypeToShow(RiskType riskType){
+		String type=null;
+		
+		if(riskType==RiskType.Scope_Risk){
+			type="范围风险";
+		}else if(riskType==RiskType.Schedule_Risk){
+			type="进度风险";
+		}else if(riskType==RiskType.Cost_Risk){
+			type="成本风险";
+		}else if(riskType==RiskType.Quality_Risk){
+			type="质量风险";
+		}else if(riskType==RiskType.Technology_Risk){
+			type="技术风险";
+		}else if(riskType==RiskType.Management_Risk){
+			type="管理风险";
+		}else if(riskType==RiskType.Commercial_Risk){
+			type="商业风险";
+		}else if(riskType==RiskType.Legal_Risk){
+			type="法律风险";
+		}else if(riskType==RiskType.SocialEnvironment_Risk){
+			type="社会环境风险";
+		}
+		
+		
+		return type;		
+	}
 
 	public ArrayList<User> getTrackers() {
 		return trackers;
