@@ -55,11 +55,12 @@ public class SearchRiskServlet extends HttpServlet {
 		Date startDate=null;
 		Date endDate=null;
 		String startTime=request.getParameter("startDate").trim();
+		System.out.println("before"+startTime);
 		String endTime=request.getParameter("endDate").trim();
 		
 		startDate=SearchRiskServlet.strToDate(startTime);
 		endDate=SearchRiskServlet.strToDate(endTime);
-		
+		System.out.println("after"+startDate.toString());
 		String str=request.getParameter("condition").trim();
 		List riskItemList=new ArrayList<>();
 		List<RiskTypeRank> riskTypeRankLst=new ArrayList<RiskTypeRank>();
@@ -113,13 +114,14 @@ public class SearchRiskServlet extends HttpServlet {
 	
 	private static java.sql.Date strToDate(String strDate) {  
         String str = strDate;  
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");  
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
         java.util.Date d = null;  
         try {  
             d = format.parse(str);  
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
+        System.out.println("middle"+d.toString());
         java.sql.Date date = new java.sql.Date(d.getTime());  
         return date;  
     }  
