@@ -4,4 +4,4 @@
                maxActive="50" maxIdle="30" maxWait="10000" logAbandoned="true" 
                username="sonar" password="sonar" driverClassName="com.mysql.jdbc.Driver"
                url="jdbc:mysql://114.115.223.228:3306/sonar?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
-</Context>
+</Context> 
