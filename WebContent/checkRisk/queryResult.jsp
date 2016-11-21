@@ -100,13 +100,14 @@
 										strokeColor : "rgba(151,187,205,1)",
 										pointColor : "rgba(151,187,205,1)",
 										pointStrokeColor : "#fff",
+										barWidth : 0.5,
 										data :edata
 									}
 								]
 						}
 						var options = {scaleLineColor : "rgba(240,255,240,0.5)",scaleFontColor : "#080808", scaleGridLineColor : "rgba(0,0,0,.2)",};
 
-						var myNewChart=new Chart(ctx).Line(data,options);
+						var myNewChart=new Chart(ctx).Bar(data,options);
 
 					</script>
 			</div>
