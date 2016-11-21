@@ -83,6 +83,7 @@
                 <select class="txt"  name="condition" style="width:140px; margin-left:15px;margin-right:15px;">
                     <option value="identify" selected="selected">被识别最多</option>
                     <option value="演变成问题最多">演变成问题最多</option>
+                    
                 </select>
 
                 <input class="btn" type="submit" name="check" value="查询" style="width:80px; margin-top:-12px;margin-left:10px;margin-right:15px" />

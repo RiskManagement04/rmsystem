@@ -67,8 +67,7 @@ public class SearchRiskServlet extends HttpServlet {
 		try{
 			if(str.equals("identify")){
 				
-				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);
-				
+				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);				
 				if(riskTypeRankLst.size()==0){
 					System.out.println("try");
 					pw.print("<script>alert('There is no riskitem!');location.href='./checkRisk/AgendaRiskItemList.jsp'</script>"); 
