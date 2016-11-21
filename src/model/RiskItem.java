@@ -272,23 +272,23 @@ public class RiskItem implements Serializable{
 		String type=null;
 		
 		if(riskType==RiskType.Scope_Risk){
-			type="·¶Î§·çÏÕ";
+			type="èŒƒå›´é£é™©";
 		}else if(riskType==RiskType.Schedule_Risk){
-			type="½ø¶È·çÏÕ";
+			type="è¿›åº¦é£é™©";
 		}else if(riskType==RiskType.Cost_Risk){
-			type="³É±¾·çÏÕ";
+			type="æˆæœ¬é£é™©";
 		}else if(riskType==RiskType.Quality_Risk){
-			type="ÖÊÁ¿·çÏÕ";
+			type="è´¨é‡é£é™©";
 		}else if(riskType==RiskType.Technology_Risk){
-			type="¼¼Êõ·çÏÕ";
+			type="æŠ€æœ¯é£é™©";
 		}else if(riskType==RiskType.Management_Risk){
-			type="¹ÜÀí·çÏÕ";
+			type="ç®¡ç†é£é™©";
 		}else if(riskType==RiskType.Commercial_Risk){
-			type="ÉÌÒµ·çÏÕ";
+			type="å•†ä¸šé£é™©";
 		}else if(riskType==RiskType.Legal_Risk){
-			type="·¨ÂÉ·çÏÕ";
+			type="æ³•å¾‹é£é™©";
 		}else if(riskType==RiskType.SocialEnvironment_Risk){
-			type="Éç»á»·¾³·çÏÕ";
+			type="ç¤¾ä¼šç¯å¢ƒé£é™©";
 		}
 		
 		
