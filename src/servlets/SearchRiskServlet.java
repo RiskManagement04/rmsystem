@@ -65,7 +65,7 @@ public class SearchRiskServlet extends HttpServlet {
 		List riskItemList=new ArrayList<>();
 		List<RiskTypeRank> riskTypeRankLst=new ArrayList<RiskTypeRank>();
 		try{
-			if(str.equals("被识别最多")){
+			if(str.equals("identify")){
 				
 				riskTypeRankLst=DaoFactory.getRiskItemDao().findRiskItemTypeByCreatingMost(startDate, endDate);
 				
